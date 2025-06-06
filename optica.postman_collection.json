@@ -49,7 +49,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMjMwNjcsImV4cCI6MTc0OTMwOTQ2N30.YPuoAKGsgd2FZ1YvK1x5YU5bfAYazlQ2hOQc9nBYch8",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
 						"type": "text"
 					}
 				],
@@ -112,7 +112,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDMxOTM4NTcsImV4cCI6MTc0MzI4MDI1N30.Ii6NmixZqn4C4nfhQUQh0Nw0vnrUD4so6mrziI9lzkI",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMjM2NjEsImV4cCI6MTc0OTMxMDA2MX0.dFa5UE_hCVBPspNCdfjNSvZr-fg0CuJyRxXEjiYjjRA",
 						"type": "text"
 					}
 				],
@@ -302,6 +302,171 @@
 						"api",
 						"account",
 						"upload-profile-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargos - Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/cargos/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cargos",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargos - Get - id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/cargos/get/adminsitrador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cargos",
+						"get",
+						"adminsitrador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Roles - Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/roles/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Roles - Get - id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/roles/get/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles",
+						"get",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios - Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios - Get - cedula",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/get/25409904",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"get",
+						"25409904"
 					]
 				}
 			},

@@ -7,23 +7,20 @@ const UsuarioController = {
             if (!req.user) {
                 throw { message: "Sesion invalida." };
             }
-            if(!['admin'].includes(req.user.rol.id)) {
-              throw { message: "Modulo exclusivo para admin." };
-            }
 
-            const rol_id = req.params.rol_id;
+            const cedula = req.params.cedula;
             let usuarios = [];
 
-            if (rol_id) {
+            if (cedula) {
                 usuarios = await Usuario.findAll({
-                    where: { rol_id: rol_id },
-                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen'],
-                    include: 'rol'
+                    where: { cedula: cedula },
+                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url'],
+                    include: ['rol','cargo']
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen'],
-                    include: 'rol'
+                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url'],
+                    include: ['rol','cargo']
                 });
             }
 

@@ -6,6 +6,8 @@ const noAuthMiddleware = require('../middlewares/noAuthMiddleware');
 const accountController = require('../controllers/accountController');
 const DateUtils = require('../utils/DateUtils');
 const UsuarioController = require('../controllers/UsuarioController');
+const RolController = require('../controllers/RolController');
+const CargoController = require('../controllers/CargoController');
 
 const router = express.Router();
 
@@ -29,8 +31,12 @@ router.post('/account/change-password--send-otp', authMiddleware, accountControl
 router.post('/account/change-password--verify-otp', authMiddleware, accountController.change_password__verify_otp);
 router.post('/account/change-password--change-password', authMiddleware, accountController.change_password__change_password);
 
+router.get('/roles/get/:id?', authMiddleware, RolController.get);
+
+router.get('/cargos/get/:id?', authMiddleware, CargoController.get);
+
 router.get('/usuarios/get/', authMiddleware, UsuarioController.get);
-router.get('/usuarios/get/:id?', authMiddleware, UsuarioController.get);
+router.get('/usuarios/get/:cedula?', authMiddleware, UsuarioController.get);
 router.get('/usuarios/add/', authMiddleware, UsuarioController.add);
 router.get('/usuarios/update/:id?', authMiddleware, UsuarioController.update);
 router.get('/usuarios/delete/:id?', authMiddleware, UsuarioController.delete);
