@@ -1,0 +1,173 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const HashUtils = require('../utils/HashUtil');
+const VerificationUtils = require('../utils/VerificationUtils');
+const EnvioCorreo = require('./../config/correo');
+const FilesUtils = require('../utils/FilesUtils');
+const path = require('path');
+const Rol = require('./../models/Rol');
+const Usuario = require('../models/Usuario');
+
+const authController = {
+  login: async (req, res) => {
+    try {
+      const { cedula, password } = req.body;
+
+      /**
+       * Validamos los datos
+       */
+      if (cedula.trim().length === 0 || !VerificationUtils.verify_cedula(cedula)) {
+        throw { message: "La cedula no puede estar vacio." };
+      }
+      if (password.trim().length === 0 || !VerificationUtils.verify_clave(password)) {
+        throw { message: "La contraseña debe tener al menos 8 caracteres." };
+      }
+
+      /**
+       * Verificar si el usuario existe
+       */
+      const user = await Usuario.findOne({ where: { cedula: cedula }, include: ['rol','cargo'] });
+      if (!user) {
+        throw { message: "Credenciales inválidas." };
+      }
+
+      /**
+       * Verificar la contraseña
+       */
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        throw { message: "Credenciales inválidas." };
+      }
+
+      /**
+       * Generar un token JWT
+       */
+      const token = jwt.sign({ userCedula: user.cedula }, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+      /**
+       * Fin
+       */
+      res.status(200).json({
+        message: 'ok',
+        token: token,
+        user: {
+          id: user.id,
+          cedula: user.cedula,
+          correo: user.correo,
+          nombre: user.nombre,
+          telefono: user.telefono,
+          fecha_nacimiento: user.fecha_nacimiento,
+          ruta_imagen:  user.ruta_imagen,
+          avatar_url:  user.avatar_url,
+        },
+        rol: {
+          key: user.rol.id,
+          name: user.rol.nombre,
+        },
+        cargo: {
+          key: user.cargo.id,
+          name: user.cargo.nombre,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(400).json(err);
+    }
+  },
+
+  get_data: async (req, res) => {
+    try {
+      if(!req.user) {
+        throw "";
+      }
+
+      const user = req.user;
+
+      res.status(200).json({ user: {
+        id: user._id,
+        cedula: user.cedula,
+        correo: user.correo,
+        nombre: user.nombre,
+        telefono: user.telefono,
+        fecha_nacimiento: user.fecha_nacimiento,
+        ruta_imagen:  user.ruta_imagen,
+        avatar_url:  user.avatar_url,
+      }, rol: {
+        key: user.rol.id,
+        name: user.rol.nombre,
+      },
+      cargo: {
+        key: user.cargo.id,
+        name: user.cargo.nombre,
+      } });
+    } catch(err) {
+      if(err != "") {
+        console.log(err);
+      }
+      res.status(200).json({ user: null });
+    }
+  },
+
+  forgot_password: async (req, res) => {
+    try {
+      const { email: correo } = req.body;
+
+      /**
+       * Validar correo
+       */
+      if (!VerificationUtils.verify_correo(correo)) {
+        throw { message: "El correo no es valido." };
+      }
+
+      /**
+       * Verificar si existe
+       */
+      const user = await Usuario.findOne({ where: { correo: correo } });
+      if(!user) {
+        throw { message: "El correo no esta registrado." };
+      }
+
+      /**
+       * Generar clave aleatoria
+       */
+      const longitud = 8;
+      const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let random_password = '';
+
+      for (let i = 0; i < longitud; i++) {
+          const randomIndex = Math.floor(Math.random() * caracteres.length);
+          random_password += caracteres[randomIndex];
+      }
+      const hashedPassword = await bcrypt.hash(random_password, 10);
+
+      /**
+       * Modificar usuario
+       */
+      user.password = hashedPassword;
+      user.save();
+
+      /**
+       * Enviar correo con la clave temporal
+       */
+      let ruta_template = path.join(__dirname, '..', 'emails', 'templateForgotPassword.html');
+      let contenido = FilesUtils.readfile(ruta_template)
+        .replace('{{username}}', user.nombre)
+        .replace('{{temporal_password}}', random_password)
+      await EnvioCorreo.send(
+        user.correo,
+        'Cambio de contraseña',
+        contenido
+      );
+
+      /**
+       * Fin
+       */
+      res.status(200).json({ message: 'ok' });
+    } catch (err) {
+      console.error(err);
+      res.status(400).json(err);
+    }
+  },
+};
+
+module.exports = authController;

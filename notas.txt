@@ -1,0 +1,81 @@
+===============================================================================================================================================
+
+https://login.optolapp.com/optol/
+
+usuario: 18954728
+clave: M96J
+
+===============================================================================================================================================
+
+1. ALCANCE DEL PROYECTO
+Desarrollo de un sistema de gestión para óptica con funcionalidades locales y web, multi-sede y módulos personalizados según requerimientos.
+
+2. MÓDULOS Y FUNCIONALIDADES
+🔹 Módulo de Configuración (Post-Login)
+•	Creación y gestión de usuarios.
+•	Asignación de roles (administrador, empleado, etc.).
+•	Cambio de datos personales y contraseña.
+🔹 Módulo de Pacientes (Post-Login)
+•	Registro de pacientes
+•	Consulta de pacientes
+•	Historia médica por paciente:
+	Ordenada por fecha
+	Número de control único (Ejemplo: 00001)
+	Validación de menor de edad con información del representante legal
+
+🔹 Módulo de Autenticación (Pre-Login)
+•	Login con usuario y contraseña.
+•	Recuperación de contraseña vía email.
+🔹 Módulo de Productos (Post-Login)
+•	CRUD completo (Crear, Leer, Actualizar, Eliminar).
+•	Gestión de inventario multi-sede.
+🔹 Módulo de Ventas (Post-Login)
+•	Generación de ventas.
+•	Consulta de historial de ventas.
+•	Generación de recibos y presupuestos.
+•	Cierre de caja (reportes diarios/mensuales).
+🔹 Módulo de Órdenes de Trabajo (Post-Login)
+•	Visualización priorizada (órdenes no enviadas a laboratorio).
+•	Filtros personalizados (por fecha, estado, sede, etc.).
+•	Procesar ordenes
+o	Actualizar estatus automáticamente de la orden
+o	Generar el recibo/informe con los datos del paciente que van al laboratorio, un botón para poder visualizarlo. (Modal)
+•	Cancelación de órdenes con:
+o	Devolución automática al inventario.
+o	Eliminación de recibos y registros relacionados.
+o	Validación por código de administrador.
+
+🔹 Multi-Sede
+•	Cada sede maneja su información de forma independiente.
+•	Acceso restringido por ubicación o permisos.
+
+🔹 Modalidad de Operación (Investigación)
+•	Sistema híbrido: Funcionalidad local (offline) y web (online) sincronizada.
+
+===============================================================================================================================================
+
+- Dashboard
+- Pacientes
+- Productos
+- Ventas
+- Pedidos
+- Administracion
+    * Gestionar mi cuenta
+    * Usuarios/Empleados
+    * Cambio de Tasa
+    entonces los roles quedan asi
+
+Roles:
+* Admin
+* Gerente
+* Asesor optico
+
+Cargos:
+asesor optico 1
+asesor optico 2
+gerente
+adminsitrador
+optometrista
+oftalmologo
+
+===============================================================================================================================================

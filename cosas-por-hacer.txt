@@ -1,0 +1,9 @@
+
+Usuarios:
+    Agregar clave extraordinaria, se requeire OTP para asignarla o cambiarla, entre 4-8 digitos, no es aleatoria. Exclusivo del admin.
+
+Configuracion de cuenta:
+    Ajustar todas las apis.
+
+Manejar tasa de cambio (Dolar y Euro)
+    Manual y automatico al BCV

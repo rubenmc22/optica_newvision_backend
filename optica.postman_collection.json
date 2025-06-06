@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "13d265f5-69a2-4816-8319-ed98f3aeef6e",
+		"name": "optica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13401550"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cedula\": \"25409904\",\r\n    \"password\": \"FM677UGZ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener datos de la sesion",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMjMwNjcsImV4cCI6MTc0OTMwOTQ2N30.YPuoAKGsgd2FZ1YvK1x5YU5bfAYazlQ2hOQc9nBYch8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/auth/get_data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"get_data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambio clave pre login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"jeffersonjtorresu@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/forgot-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mi Cuenta - Modificar datos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDMxOTM4NTcsImV4cCI6MTc0MzI4MDI1N30.Ii6NmixZqn4C4nfhQUQh0Nw0vnrUD4so6mrziI9lzkI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"jeffersonjtorresu@gmail.com\",\r\n    \"nombre\": \"Jefferson Torres\",\r\n    \"telefono\": \"04128977574\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/account/edit-profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"edit-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mi Cuenta - Cambiar clave - Enviar OTP",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDM2OTM0NTIsImV4cCI6MTc0Mzc3OTg1Mn0.HTgbldWOqKuNbldwN0RJPdXH1tlb3sXMQRimQ8JAQvM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.apollogroupsport.com/api/account/change-password--send-otp",
+					"protocol": "https",
+					"host": [
+						"api",
+						"apollogroupsport",
+						"com"
+					],
+					"path": [
+						"api",
+						"account",
+						"change-password--send-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mi Cuenta - Cambiar clave - Verificar OTP",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDMxOTIzNTAsImV4cCI6MTc0MzI3ODc1MH0.FT-89nBNl2pQKAXlUqHVLsTIsuhyE583OBmCuo1gUlA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"otp\": \"347839\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/account/change-password--verify-otp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"change-password--verify-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mi Cuenta - Cambiar clave - Cambiar clave",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDMxOTIzNTAsImV4cCI6MTc0MzI3ODc1MH0.FT-89nBNl2pQKAXlUqHVLsTIsuhyE583OBmCuo1gUlA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"otp\": \"347839\",\r\n    \"newPassword\": \"admin123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/account/change-password--change-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"change-password--change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mi Cuenta - Cargar imagen",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDM2MjkwOTUsImV4cCI6MTc0MzcxNTQ5NX0.zvEyZtGS-s8oSVWMPCgw4lIO51oTLNEj9S2-sKWFZb8",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profileImage",
+							"description": "[type: File]",
+							"type": "file",
+							"src": "/C:/Users/Personal/OneDrive/Imágenes/2-25632_m.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.apollogroupsport.com/api/account/upload-profile-image",
+					"protocol": "https",
+					"host": [
+						"api",
+						"apollogroupsport",
+						"com"
+					],
+					"path": [
+						"api",
+						"account",
+						"upload-profile-image"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
