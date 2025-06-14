@@ -21,6 +21,7 @@ const VerificationUtils = {
         // Verifica el formato si hay un valor
         return (/^\d{10,14}$/.test(valor));
     },
+
     verify_fecha(valor) {
         // Si el valor está vacío, nulo o indefinido, es válido (opcional)
         if (!valor || valor.trim() === '') {
@@ -31,26 +32,13 @@ const VerificationUtils = {
         return /^\d{4}-\d{2}-\d{2}$/.test(valor);
     },
 
-
-    verify_altura(valor) {
-        return valor === undefined || valor === null || typeof valor === 'number';
-    },
-
-    verify_peso(valor) {
-        return valor === undefined || valor === null || typeof valor === 'number';
-    },
-
-    verify_nacionalidad(valor) {
-        return valor === undefined || valor === null || (valor.trim && valor.trim().length > 1);
-    },
-
-    verify_genero(valor) {
-        return ['M', 'F'].includes(valor);
-    },
-
     verify_otp(valor) {
         return (/^\d{6}$/.test(valor));
     },
+
+    verify_numero(valor) {
+        return !isNaN(valor) && !isNaN(parseFloat(valor));
+    }
 };
 
 module.exports = VerificationUtils;

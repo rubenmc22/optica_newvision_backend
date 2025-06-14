@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 14-06-2025 a las 03:47:01
+-- Tiempo de generación: 14-06-2025 a las 19:09:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -101,6 +101,44 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tasas`
+--
+
+CREATE TABLE `tasas` (
+  `id` varchar(20) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `simbolo` varchar(3) NOT NULL,
+  `valor` double NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tasas`
+--
+
+INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `created_at`, `updated_at`) VALUES
+('dolar', 'Dolar', '$', 102.157, '2025-06-14 16:18:23', '2025-06-14 17:07:54'),
+('euro', 'Euro', '€', 117.9045, '2025-06-14 16:18:23', '2025-06-14 17:07:54');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tasas_historial`
+--
+
+CREATE TABLE `tasas_historial` (
+  `id` int(11) NOT NULL,
+  `tasa_id` varchar(20) NOT NULL,
+  `valor_nuevo` double NOT NULL,
+  `usu_cedula` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -152,6 +190,20 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tasas`
+--
+ALTER TABLE `tasas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tasas_historial`
+--
+ALTER TABLE `tasas_historial`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tasa_id` (`tasa_id`),
+  ADD KEY `usu_cedula` (`usu_cedula`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -168,6 +220,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `otps`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tasas_historial`
+--
+ALTER TABLE `tasas_historial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
