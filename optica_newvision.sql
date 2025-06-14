@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 06-06-2025 a las 17:29:25
+-- Tiempo de generación: 14-06-2025 a las 03:47:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -37,7 +37,7 @@ CREATE TABLE `cargos` (
 --
 
 INSERT INTO `cargos` (`id`, `nombre`) VALUES
-('adminsitrador', 'Adminsitrador'),
+('administrador', 'Administrador'),
 ('asesor-optico-1', 'Asesor optico 1'),
 ('asesor-optico-2', 'Asesor optico 2'),
 ('gerente', 'Gerente'),
@@ -109,10 +109,10 @@ CREATE TABLE `usuarios` (
   `rol_id` varchar(100) NOT NULL,
   `cargo_id` varchar(50) NOT NULL,
   `cedula` varchar(20) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `correo` varchar(255) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
+  `correo` varchar(255) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `ruta_imagen` text DEFAULT NULL,
   `avatar_url` text DEFAULT NULL,
@@ -126,7 +126,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `rol_id`, `cargo_id`, `cedula`, `nombre`, `password`, `correo`, `telefono`, `fecha_nacimiento`, `ruta_imagen`, `avatar_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'admin', 'gerente', '25409904', 'Jefferson Torres', '$2b$10$cqNHGaRs62yDIJkDfSgAM.7Fr/v6AS3yRdslDr15T3MfHQIaD.oZW', 'jeffersonjtorresu@gmail.com', '04128977574', NULL, NULL, '', '2025-03-28 18:31:30', '2025-06-06 15:27:54', NULL);
+(4, 'admin', 'gerente', '25409904', 'Jefferson Torres', '$2b$10$cqNHGaRs62yDIJkDfSgAM.7Fr/v6AS3yRdslDr15T3MfHQIaD.oZW', 'jeffersonjtorresu@gmail.com', '04128977574', '1996-06-11', NULL, '', '2025-03-28 18:31:30', '2025-06-14 01:44:37', NULL),
+(24, 'gerente', 'gerente', '11554570', 'Heriberto Torres', '$2b$10$7KuJRh76glMvnAPw7l.S9ebE2y6lalWWui7R3Znwyjk4pqStyPnOy', 'heriberto@gmail.com', '04128977574', '1996-06-11', NULL, NULL, '2025-06-14 01:27:46', '2025-06-14 01:45:59', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -172,7 +173,7 @@ ALTER TABLE `otps`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

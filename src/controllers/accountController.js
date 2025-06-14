@@ -60,9 +60,10 @@ const accountController = {
       }
 
       const {
-        correo,
         nombre,
+        correo,
         telefono,
+        fecha_nacimiento,
       } = req.body;
 
       /**
@@ -76,6 +77,9 @@ const accountController = {
       }
       if (!VerificationUtils.verify_telefono(telefono)) {
         throw { message: "El telefono debe contener 11 digitos." };
+      }
+      if (!VerificationUtils.verify_fecha(fecha_nacimiento)) {
+        throw { message: "El formato de la fecha de nacimiento es erroneo." };
       }
 
       /**
@@ -93,9 +97,10 @@ const accountController = {
       if (!user) {
         throw { message: "Usuario no encontrado." };
       }
-      user.correo = correo;
       user.nombre = nombre;
+      user.correo = correo;
       user.telefono = telefono;
+      user.fecha_nacimiento = fecha_nacimiento;
       user.save();
 
       /**

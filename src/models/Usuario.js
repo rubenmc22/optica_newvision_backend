@@ -22,7 +22,7 @@ const Usuario = sequelize.define('Usuario', {
   },
   nombre: {
     type: DataTypes.STRING(255),
-    allowNull: false,
+    allowNull: true,
     collate: 'utf8mb4_general_ci',
   },
   password: {
@@ -32,13 +32,13 @@ const Usuario = sequelize.define('Usuario', {
   },
   correo: {
     type: DataTypes.STRING(255),
-    allowNull: false,
+    allowNull: true,
     collate: 'utf8mb4_general_ci',
     unique: true,
   },
   telefono: {
     type: DataTypes.STRING(20),
-    allowNull: false,
+    allowNull: true,
     collate: 'utf8mb4_general_ci',
   },
   fecha_nacimiento: {

@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cedula\": \"25409904\",\r\n    \"password\": \"FM677UGZ\"\r\n}",
+					"raw": "{\r\n    \"cedula\": \"11554570\",\r\n    \"password\": \"11554570\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -424,7 +424,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
 						"type": "text"
 					}
 				],
@@ -466,6 +466,113 @@
 						"api",
 						"usuarios",
 						"get",
+						"25409904"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios - Add",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "// Registro completo\r\n{\r\n    \"rolId\": \"asesor-optico\",\r\n    \"cargoId\": \"asesor-optico-1\",\r\n    \"representativeId\": \"11554570\",\r\n    \"representativeName\": \"Heriberto Torres\",\r\n    \"representativeEmail\": \"heriberto@gmail.com\",\r\n    \"representativePhone\": \"04241738615\",\r\n    \"representativeDate\": \"1996-06-11\"\r\n}\r\n\r\n// Registro simple\r\n// {\r\n//     \"rolId\": \"asesor-optico\",\r\n//     \"cargoId\": \"asesor-optico-1\",\r\n//     \"representativeId\": \"11554570\",\r\n//     \"representativeName\": \"\",\r\n//     \"representativeEmail\": \"\",\r\n//     \"representativePhone\": \"\",\r\n//     \"representativeDate\": \"\"\r\n// }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios - Update",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rolId\": \"admin\",\r\n    \"cargoId\": \"gerente\",\r\n    \"representativeId\": \"25409904\",\r\n    \"representativeName\": \"Jefferson Torres\",\r\n    \"representativeEmail\": \"jeffersonjtorresu@gmail.com\",\r\n    \"representativePhone\": \"04128977574\",\r\n    \"representativeDate\": \"1996-06-11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/update/25409904",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"update",
+						"25409904"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios - Delete",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/delete/25409904",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"delete",
 						"25409904"
 					]
 				}

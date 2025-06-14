@@ -38,8 +38,8 @@ router.get('/cargos/get/:id?', authMiddleware, CargoController.get);
 router.get('/usuarios/get/', authMiddleware, UsuarioController.get);
 router.get('/usuarios/get/:cedula?', authMiddleware, UsuarioController.get);
 router.get('/usuarios/add/', authMiddleware, UsuarioController.add);
-router.get('/usuarios/update/:id?', authMiddleware, UsuarioController.update);
-router.get('/usuarios/delete/:id?', authMiddleware, UsuarioController.delete);
+router.get('/usuarios/update/:cedula?', authMiddleware, UsuarioController.update);
+router.get('/usuarios/delete/:cedula?', authMiddleware, UsuarioController.delete);
 
 router.get('/home', authMiddleware, (req, res) => {
   res.json({ message: 'Bienvenido a la página de inicio.', user: req.user });
