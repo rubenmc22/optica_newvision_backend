@@ -314,12 +314,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/cargos/get",
+					"raw": "http://localhost:3000/api/cargos-get",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -327,8 +327,7 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"cargos",
-						"get"
+						"cargos-get"
 					]
 				}
 			},
@@ -346,7 +345,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/cargos/get/adminsitrador",
+					"raw": "http://localhost:3000/api/cargos-get/adminsitrador",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -354,8 +353,7 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"cargos",
-						"get",
+						"cargos-get",
 						"adminsitrador"
 					]
 				}
@@ -369,12 +367,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/roles/get",
+					"raw": "http://localhost:3000/api/roles-get",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -382,8 +380,7 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"roles",
-						"get"
+						"roles-get"
 					]
 				}
 			},
@@ -401,7 +398,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/roles/get/admin",
+					"raw": "http://localhost:3000/api/roles-get/admin",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -409,8 +406,7 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"roles",
-						"get",
+						"roles-get",
 						"admin"
 					]
 				}
