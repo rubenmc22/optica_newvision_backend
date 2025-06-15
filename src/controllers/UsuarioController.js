@@ -47,11 +47,11 @@ const UsuarioController = {
             const {
                 rolId: rol_id,
                 cargoId: cargo_id,
-                representativeId: cedula,
-                representativeName: nombre_temp,
-                representativeEmail: correo_temp,
-                representativePhone: telefono_temp,
-                representativeDate: fecha_nacimiento_temp,
+                cedula: cedula,
+                nombre: nombre_temp,
+                email: correo_temp,
+                phone: telefono_temp,
+                fechaRegistro: fecha_nacimiento_temp,
             } = req.body;
 
             const nombre = (nombre_temp == "") ? null : nombre_temp;
@@ -145,15 +145,16 @@ const UsuarioController = {
             const cedula = req.params.cedula;
 
             const {
-                rolId: rol_id,
+                 rolId: rol_id,
                 cargoId: cargo_id,
-                representativeId: nueva_cedula,
-                representativeName: nombre_temp,
-                representativeEmail: correo_temp,
-                representativePhone: telefono_temp,
-                representativeDate: fecha_nacimiento_temp,
+                cedula: nueva_cedula,
+                nombre: nombre_temp,
+                email: correo_temp,
+                phone: telefono_temp,
+                fechaRegistro: fecha_nacimiento_temp,
             } = req.body;
 
+              
             const nombre = (nombre_temp == "") ? null : nombre_temp;
             const correo = (correo_temp == "") ? null : correo_temp;
             const telefono = (telefono_temp == "") ? null : telefono_temp;
