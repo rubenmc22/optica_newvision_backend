@@ -40,6 +40,13 @@ const authController = {
       }
 
       /**
+       * Verificar status
+       */
+      if(!user.activo) {
+        throw { message: "Usuario inactivo." };
+      }
+
+      /**
        * Generar un token JWT
        */
       const token = jwt.sign({ userCedula: user.cedula }, process.env.JWT_SECRET, { expiresIn: '24h' });
@@ -57,8 +64,9 @@ const authController = {
           nombre: user.nombre,
           telefono: user.telefono,
           fecha_nacimiento: user.fecha_nacimiento,
-          ruta_imagen:  user.ruta_imagen,
-          avatar_url:  user.avatar_url,
+          ruta_imagen: user.ruta_imagen,
+          avatar_url: user.avatar_url,
+          activo: user.activo,
         },
         rol: {
           key: user.rol.id,
@@ -90,8 +98,11 @@ const authController = {
         nombre: user.nombre,
         telefono: user.telefono,
         fecha_nacimiento: user.fecha_nacimiento,
-        ruta_imagen:  user.ruta_imagen,
-        avatar_url:  user.avatar_url,
+        ruta_imagen: user.ruta_imagen,
+        avatar_url: user.avatar_url,
+        activo: user.activo,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
       }, rol: {
         key: user.rol.id,
         name: user.rol.nombre,
@@ -125,6 +136,10 @@ const authController = {
       const user = await Usuario.findOne({ where: { correo: correo } });
       if(!user) {
         throw { message: "El correo no esta registrado." };
+      }
+
+      if(!user.activo) {
+        throw { message: "Usuario inactivo." };
       }
 
       /**

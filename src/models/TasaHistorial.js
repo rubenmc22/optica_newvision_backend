@@ -21,6 +21,11 @@ const TasaHistorial = sequelize.define('Usuario', {
     allowNull: false,
     collate: 'utf8mb4_general_ci',
   },
+  tipo_cambio: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    collate: 'utf8mb4_general_ci',
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,

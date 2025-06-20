@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cedula\": \"11554570\",\r\n    \"password\": \"11554570\"\r\n}",
+							"raw": "{\r\n    \"cedula\": \"25409904\",\r\n    \"password\": \"11554570\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,12 +297,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTAzODA5NTUsImV4cCI6MTc1MDQ2NzM1NX0.bg3ujC8FCcTxJWDEpeDQpmxheqBK1Ii17VNQJSjPXtU",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/usuarios/get",
+							"raw": "http://localhost:3000/api/get-usuarios",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -310,8 +310,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"usuarios",
-								"get"
+								"get-usuarios"
 							]
 						}
 					},
@@ -329,7 +328,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/usuarios/get/25409904",
+							"raw": "http://localhost:3000/api/get-usuarios/25409904",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -337,8 +336,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"usuarios",
-								"get",
+								"get-usuarios",
 								"25409904"
 							]
 						}
@@ -366,7 +364,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/usuarios/add",
+							"raw": "http://localhost:3000/api/add-usuarios",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -374,8 +372,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"usuarios",
-								"add"
+								"add-usuarios"
 							]
 						}
 					},
@@ -402,7 +399,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/usuarios/update/25409904",
+							"raw": "http://localhost:3000/api/update-usuarios/25409904",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -410,8 +407,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"usuarios",
-								"update",
+								"update-usuarios",
 								"25409904"
 							]
 						}
@@ -430,7 +426,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/usuarios/delete/25409904",
+							"raw": "http://localhost:3000/api/delete-usuarios/25409904",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -438,9 +434,44 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"usuarios",
-								"delete",
+								"delete-usuarios",
 								"25409904"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios - Activar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTAzODA5NTUsImV4cCI6MTc1MDQ2NzM1NX0.bg3ujC8FCcTxJWDEpeDQpmxheqBK1Ii17VNQJSjPXtU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estatus\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activar-usuarios/11554570",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activar-usuarios",
+								"11554570"
 							]
 						}
 					},
@@ -595,6 +626,34 @@
 					"response": []
 				},
 				{
+					"name": "Tasas - get tasas bcv",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/get-tasa-bcv/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"get-tasa-bcv",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Tasas - Get - ID",
 					"request": {
 						"method": "GET",
@@ -664,42 +723,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"rolId\": \"admin\",\r\n    \"cargoId\": \"gerente\",\r\n    \"representativeId\": \"25409904\",\r\n    \"representativeName\": \"Jefferson Torres\",\r\n    \"representativeEmail\": \"jeffersonjtorresu@gmail.com\",\r\n    \"representativePhone\": \"04128977574\",\r\n    \"representativeDate\": \"1996-06-11\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/tasas-update-with-bcv",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"tasas-update-with-bcv"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Tasas - Actualizar con BCV",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTAzODA5NTUsImV4cCI6MTc1MDQ2NzM1NX0.bg3ujC8FCcTxJWDEpeDQpmxheqBK1Ii17VNQJSjPXtU",
 								"type": "text"
 							}
 						],

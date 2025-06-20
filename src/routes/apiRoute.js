@@ -36,14 +36,16 @@ router.get('/roles-get/:id?', authMiddleware, RolController.get);
 
 router.get('/cargos-get/:id?', authMiddleware, CargoController.get);
 
-router.get('/usuarios/get/:cedula?', authMiddleware, UsuarioController.get);
-router.post('/usuarios/add/', authMiddleware, UsuarioController.add);
-router.put('/usuarios/update/:cedula', authMiddleware, UsuarioController.update);
-router.delete('/usuarios/delete/:cedula', authMiddleware, UsuarioController.delete);
+router.get('/get-usuarios/:cedula?', authMiddleware, UsuarioController.get);
+router.post('/add-usuarios/', authMiddleware, UsuarioController.add);
+router.put('/update-usuarios/:cedula', authMiddleware, UsuarioController.update);
+router.delete('/delete-usuarios/:cedula', authMiddleware, UsuarioController.delete);
+router.put('/activar-usuarios/:cedula', authMiddleware, UsuarioController.activar);
 
 router.get('/tasas/:id?', authMiddleware, TasasController.get);
 router.put('/tasas-update/:id', authMiddleware, TasasController.update);
 router.put('/tasas-update-with-bcv', authMiddleware, TasasController.update_with_bcv);
+router.get('/get-tasa-bcv', TasasController.get_tasa_bcv);
 
 router.get('/home', authMiddleware, (req, res) => {
   res.json({ message: 'Bienvenido a la página de inicio.', user: req.user });

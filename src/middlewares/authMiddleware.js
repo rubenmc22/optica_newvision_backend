@@ -16,6 +16,11 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const data = await MiddlewareUtils.get_data(token);
+
+    if(!data.user.activo) {
+      return res.status(401).json({ message: 'Usuario inactivo.' });
+    }
+
     req.user = data.user;
     req.rol = data.rol;
   } catch (err) {

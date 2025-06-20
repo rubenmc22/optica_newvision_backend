@@ -73,6 +73,7 @@ const TasasController = {
                     tasa_id: id,
                     valor_nuevo: valor,
                     usu_cedula: req.user.cedula,
+                    tipo_cambio: 'manual',
                 });
             }
             
@@ -111,6 +112,7 @@ const TasasController = {
                         tasa_id: objTasa.id,
                         valor_nuevo: objTasa.valor,
                         usu_cedula: req.user.cedula,
+                        tipo_cambio: 'manual con BCV',
                     });
                 }
             }
@@ -119,6 +121,31 @@ const TasasController = {
                 where: { id: { [Op.in]: ['dolar', 'euro'] } },
                 attributes: ['id', 'nombre', 'simbolo', 'valor', 'updated_at']
             });
+
+            res.status(200).json({ message: 'ok', tasa: tasas });
+        } catch (err) {
+            console.error(err);
+            res.status(400).json(err);
+        }
+    },
+
+    get_tasa_bcv: async (req, res) => {
+        try {
+            const tasas_bcv = await obtenerDolarBCV();
+            if(typeof tasas_bcv === 'string') {
+                throw { message: tasas_bcv };
+            }
+
+            let tasas = {
+                dolar: 0,
+                euro: 0
+            };
+            for(const tasa_id of ['dolar', 'euro']) {
+                let valor_numerico = Number(tasas_bcv[tasa_id]);
+                valor_numerico = Number(valor_numerico.toFixed(4));
+
+                tasas[tasa_id] = valor_numerico;
+            }
 
             res.status(200).json({ message: 'ok', tasa: tasas });
         } catch (err) {

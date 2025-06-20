@@ -19,12 +19,12 @@ const UsuarioController = {
             if (cedula) {
                 usuarios = await Usuario.findAll({
                     where: { cedula: cedula },
-                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url'],
+                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url','activo'],
                     include: ['rol','cargo']
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url'],
+                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url','activo'],
                     include: ['rol','cargo']
                 });
             }
@@ -125,6 +125,7 @@ const UsuarioController = {
                 telefono: telefono,
                 fecha_nacimiento: fecha_nacimiento,
                 password: hashedPassword,
+                activo: true,
             });
 
             /**
@@ -256,6 +257,48 @@ const UsuarioController = {
                 throw { message: "Usuario no encontrado." };
             }
             await user.destroy();
+
+            /**
+             * Fin
+             */
+            res.status(200).json({ message: 'ok' });
+        } catch (err) {
+            console.error(err);
+            res.status(400).json(err);
+        }
+    },
+    activar: async (req, res) => {
+        try {
+            if (!req.user) {
+                throw { message: "Sesion invalida." };
+            }
+            
+            const cedula = req.params.cedula;
+
+            const {
+                estatus: activar
+            } = req.body;
+
+            if(req.user.cedula == cedula) {
+                throw { message: "No se puede cambiar el estatus al usuario actual." };
+            }
+
+            /**
+             * Validamos los datos
+             */
+            const user = await Usuario.findOne({ where: { cedula: cedula } });
+            if (!user) {
+                throw { message: "Usuario no encontrado." };
+            }
+            if (typeof activar !== 'boolean') {
+                throw { message: "El valor del estatus debe ser booleano. " };
+            }
+
+            /**
+             * Modificamos los datos
+             */
+            user.activo = activar;
+            user.save();
 
             /**
              * Fin

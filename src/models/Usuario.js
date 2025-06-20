@@ -55,6 +55,17 @@ const Usuario = sequelize.define('Usuario', {
     allowNull: true,
     collate: 'utf8mb4_general_ci',
   },
+  activo: {
+    type: DataTypes.TINYINT(4),
+    allowNull: false,
+    defaultValue: 1,
+    get() {
+      return this.getDataValue('activo') === 1;
+    },
+    set(value) {
+      this.setDataValue('activo', value ? 1 : 0);
+    }
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,
