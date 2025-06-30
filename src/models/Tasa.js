@@ -21,6 +21,17 @@ const Tasa = sequelize.define('Usuario', {
     type: DataTypes.DOUBLE,
     allowNull: false,
   },
+  rastreo_bcv: {
+    type: DataTypes.TINYINT(4),
+    allowNull: false,
+    defaultValue: 0,
+    get() {
+      return this.getDataValue('rastreo_bcv') === 1;
+    },
+    set(value) {
+      this.setDataValue('rastreo_bcv', value ? 1 : 0);
+    }
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,

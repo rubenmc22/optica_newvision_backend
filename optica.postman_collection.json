@@ -605,7 +605,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
 								"type": "text"
 							}
 						],
@@ -723,7 +723,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTAzODA5NTUsImV4cCI6MTc1MDQ2NzM1NX0.bg3ujC8FCcTxJWDEpeDQpmxheqBK1Ii17VNQJSjPXtU",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
 								"type": "text"
 							}
 						],
@@ -746,6 +746,69 @@
 							"path": [
 								"api",
 								"tasas-update-with-bcv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tasas - Get History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/tasas-history/euro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasas-history",
+								"euro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tasas - Rastreo automatico",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rastrear_auto\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tasas-rastreo-automatico/euro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasas-rastreo-automatico",
+								"euro"
 							]
 						}
 					},

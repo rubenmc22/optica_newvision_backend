@@ -4,6 +4,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { Op } = require('sequelize');
 const TasaHistorial = require("../models/TasaHistorial");
+const Usuario = require("../models/Usuario");
 
 const TasasController = {
     get: async (req, res) => {
@@ -21,11 +22,11 @@ const TasasController = {
             if (id) {
                 tasas = await Tasa.findAll({
                     where: { id: id },
-                    attributes: ['id','nombre','simbolo','valor','updated_at']
+                    attributes: ['id','nombre','simbolo','valor','rastreo_bcv','updated_at']
                 });
             } else {
                 tasas = await Tasa.findAll({
-                    attributes: ['id','nombre','simbolo','valor','updated_at']
+                    attributes: ['id','nombre','simbolo','valor','rastreo_bcv','updated_at']
                 });
             }
 
@@ -119,7 +120,7 @@ const TasasController = {
 
             const tasas = await Tasa.findAll({
                 where: { id: { [Op.in]: ['dolar', 'euro'] } },
-                attributes: ['id', 'nombre', 'simbolo', 'valor', 'updated_at']
+                attributes: ['id', 'nombre', 'simbolo', 'valor', 'rastreo_bcv', 'updated_at']
             });
 
             res.status(200).json({ message: 'ok', tasa: tasas });
@@ -153,6 +154,95 @@ const TasasController = {
             res.status(400).json(err);
         }
     },
+
+    get_history: async(req, res) => {
+        try {
+            if (!req.user) {
+                throw { message: "Sesion invalida." };
+            }
+
+            const id = req.params.id;
+            let fecha_inicio = req.params.fecha_inicio;
+            let fecha_final = req.params.fecha_final;
+
+            const objTasa = await Tasa.findOne({ where: { id: id } });
+            if(!objTasa) {
+                throw { message: `La tasa enviada no existe: '${id}'` };
+            }
+
+            let historial = [];
+
+            if(fecha_inicio && fecha_final) {
+                if (!VerificationUtils.verify_fecha(fecha_inicio)) {
+                    throw { message: "La fecha de inicio no tiene el formato correcto." };
+                }
+                if (!VerificationUtils.verify_fecha(fecha_final)) {
+                    throw { message: "La fecha final no tiene el formato correcto." };
+                }
+                if(fecha_inicio > fecha_final) {
+                    throw { message: "La fecha de inicio tiene que ser menor o igual que la fecha final." };
+                }
+
+                fecha_inicio = `${fecha_inicio} 00:00:00`;
+
+                fecha_final = `${fecha_final} 23:59:59`;
+
+                historial = await TasaHistorial.findAll({
+                    where: { tasa_id : objTasa.id, created_at: { [Op.between]: [fecha_inicio, fecha_final] } },
+                    attributes: ['id','valor_nuevo','tipo_cambio','updated_at'],
+                    include: {
+                        model: Usuario,
+                        as: 'usuario',
+                        attributes: ['cedula', 'nombre']
+                    }
+                });
+            } else {
+                historial = await TasaHistorial.findAll({
+                    where: { tasa_id : objTasa.id },
+                    attributes: ['id','valor_nuevo','tipo_cambio','updated_at'],
+                    include: {
+                        model: Usuario,
+                        as: 'usuario',
+                        attributes: ['cedula', 'nombre']
+                    }
+                });
+            }
+            
+            res.status(200).json({ message: 'ok', historial: historial});
+        } catch (err) {
+            console.error(err);
+            res.status(400).json(err);
+        }
+    },
+
+    rastreo_automatico: async(req, res) => {
+        try {
+            if (!req.user) {
+                throw { message: "Sesion invalida." };
+            }
+
+            const id = req.params.id;
+            const {
+                rastrear_auto: activar,
+            } = req.body;
+
+            const objTasa = await Tasa.findOne({ where: { id: id } });
+            if(!objTasa) {
+                throw { message: `La tasa enviada no existe: '${id}'` };
+            }
+            if (typeof activar !== 'boolean') {
+                throw { message: "El valor del rastreo debe ser booleano. " };
+            }
+
+            objTasa.rastreo_bcv = activar;
+            await objTasa.save();
+            
+            res.status(200).json({ message: 'ok', tasa: objTasa });
+        } catch (err) {
+            console.error(err);
+            res.status(400).json(err);
+        }
+    },
 };
 
 async function asegurar_existencia_tasas() {
@@ -166,6 +256,7 @@ async function asegurar_existencia_tasas() {
                 nombre: tasa_existente,
                 simbolo: "$",
                 valor: 1,
+                rastreo_bcv: 0,
             });
         }
     }

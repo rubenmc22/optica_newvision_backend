@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+const Usuario = require('./Usuario');
 
-const TasaHistorial = sequelize.define('Usuario', {
+const TasaHistorial = sequelize.define('TasaHistorial', {
   id: {
     type: DataTypes.INTEGER(11),
     primaryKey: true,
@@ -41,6 +42,12 @@ const TasaHistorial = sequelize.define('Usuario', {
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at',
+});
+
+TasaHistorial.belongsTo(Usuario, {
+  foreignKey: 'usu_cedula',
+  targetKey: 'cedula',
+  as: 'usuario'
 });
 
 module.exports = TasaHistorial;

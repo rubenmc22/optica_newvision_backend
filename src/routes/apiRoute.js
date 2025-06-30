@@ -46,6 +46,8 @@ router.get('/tasas/:id?', authMiddleware, TasasController.get);
 router.put('/tasas-update/:id', authMiddleware, TasasController.update);
 router.put('/tasas-update-with-bcv', authMiddleware, TasasController.update_with_bcv);
 router.get('/get-tasa-bcv', TasasController.get_tasa_bcv);
+router.get('/tasas-history/:id/:fecha_inicio?/:fecha_final?', authMiddleware, TasasController.get_history);
+router.put('/tasas-rastreo-automatico/:id', authMiddleware, TasasController.rastreo_automatico);
 
 router.get('/home', authMiddleware, (req, res) => {
   res.json({ message: 'Bienvenido a la página de inicio.', user: req.user });

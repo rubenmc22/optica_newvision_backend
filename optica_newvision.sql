@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 20-06-2025 a las 03:13:45
+-- Tiempo de generación: 30-06-2025 a las 22:30:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -109,6 +109,7 @@ CREATE TABLE `tasas` (
   `nombre` varchar(255) NOT NULL,
   `simbolo` varchar(3) NOT NULL,
   `valor` double NOT NULL,
+  `rastreo_bcv` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -117,9 +118,9 @@ CREATE TABLE `tasas` (
 -- Volcado de datos para la tabla `tasas`
 --
 
-INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `created_at`, `updated_at`) VALUES
-('dolar', 'Dolar', '$', 104.5434, '2025-06-14 16:18:23', '2025-06-20 01:05:35'),
-('euro', 'Euro', '€', 120.0033, '2025-06-14 16:18:23', '2025-06-20 01:05:35');
+INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `rastreo_bcv`, `created_at`, `updated_at`) VALUES
+('dolar', 'Dolar', '$', 108.1891, 0, '2025-06-14 16:18:23', '2025-06-30 19:58:36'),
+('euro', 'Euro', '€', 127.1384, 0, '2025-06-14 16:18:23', '2025-06-30 20:29:50');
 
 -- --------------------------------------------------------
 
@@ -136,6 +137,14 @@ CREATE TABLE `tasas_historial` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tasas_historial`
+--
+
+INSERT INTO `tasas_historial` (`id`, `tasa_id`, `valor_nuevo`, `usu_cedula`, `tipo_cambio`, `created_at`, `updated_at`) VALUES
+(10, 'dolar', 108.1891, '25409904', 'manual con BCV', '2025-06-30 19:58:36', '2025-06-30 19:58:36'),
+(11, 'euro', 127.1384, '25409904', 'manual con BCV', '2025-06-30 19:58:36', '2025-06-30 19:58:36');
 
 -- --------------------------------------------------------
 
@@ -227,7 +236,7 @@ ALTER TABLE `otps`
 -- AUTO_INCREMENT de la tabla `tasas_historial`
 --
 ALTER TABLE `tasas_historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
