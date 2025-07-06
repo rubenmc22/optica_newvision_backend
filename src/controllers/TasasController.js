@@ -69,14 +69,12 @@ const TasasController = {
             objTasa.valor = valor_numerico;
             await objTasa.save();
 
-            if(objTasa.valor != valor_anterior) {
-                await TasaHistorial.create({
-                    tasa_id: id,
-                    valor_nuevo: valor,
-                    usu_cedula: req.user.cedula,
-                    tipo_cambio: 'manual',
-                });
-            }
+            await TasaHistorial.create({
+                tasa_id: id,
+                valor_nuevo: valor,
+                usu_cedula: req.user.cedula,
+                tipo_cambio: 'manual',
+            });
             
             res.status(200).json({ message: 'ok', tasa: objTasa });
         } catch (err) {
@@ -108,14 +106,12 @@ const TasasController = {
                 objTasa.valor = valor_numerico;
                 await objTasa.save();
 
-                if(objTasa.valor != valor_anterior) {
-                    await TasaHistorial.create({
-                        tasa_id: objTasa.id,
-                        valor_nuevo: objTasa.valor,
-                        usu_cedula: req.user.cedula,
-                        tipo_cambio: 'manual con BCV',
-                    });
-                }
+                await TasaHistorial.create({
+                    tasa_id: objTasa.id,
+                    valor_nuevo: objTasa.valor,
+                    usu_cedula: req.user.cedula,
+                    tipo_cambio: 'manual con BCV',
+                });
             }
 
             const tasas = await Tasa.findAll({
