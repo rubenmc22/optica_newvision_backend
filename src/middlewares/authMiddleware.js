@@ -21,8 +21,8 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: 'Usuario inactivo.' });
     }
 
+    req.sede = data.sede;
     req.user = data.user;
-    req.rol = data.rol;
   } catch (err) {
     res.status(400).json({ message: err.message });
     return;

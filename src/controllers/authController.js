@@ -7,15 +7,20 @@ const FilesUtils = require('../utils/FilesUtils');
 const path = require('path');
 const Rol = require('./../models/Rol');
 const Usuario = require('../models/Usuario');
+const Sede = require('../models/Sede');
+const Login = require('../models/Login');
 
 const authController = {
   login: async (req, res) => {
     try {
-      const { cedula, password } = req.body;
+      const { sede: sede_key, cedula, password } = req.body;
 
       /**
        * Validamos los datos
        */
+      if(sede_key.trim().length === 0) {
+        throw { message: "La sede no puede estar vacia." };
+      }
       if (cedula.trim().length === 0 || !VerificationUtils.verify_cedula(cedula)) {
         throw { message: "La cedula no puede estar vacio." };
       }
@@ -26,6 +31,10 @@ const authController = {
       /**
        * Verificar si el usuario existe
        */
+      const sede = await Sede.findOne({ where: { id: sede_key } });
+      if (!sede) {
+        throw { message: "Sede no existe." };
+      }
       const user = await Usuario.findOne({ where: { cedula: cedula }, include: ['rol','cargo'] });
       if (!user) {
         throw { message: "Credenciales inválidas." };
@@ -49,7 +58,19 @@ const authController = {
       /**
        * Generar un token JWT
        */
-      const token = jwt.sign({ userCedula: user.cedula }, process.env.JWT_SECRET, { expiresIn: '24h' });
+      const token = jwt.sign({ sede_id: sede.id, userCedula: user.cedula }, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+      /**
+       * Guardamos el inicio de sesion
+       */
+      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+      await Login.create({
+        sede_id: sede.id,
+        usu_cedula: user.cedula,
+        token: token,
+        ip: ip,
+      });
 
       /**
        * Fin
@@ -76,6 +97,10 @@ const authController = {
           key: user.cargo.id,
           name: user.cargo.nombre,
         },
+        sede: {
+          key: sede.id,
+          nombre: sede.nombre
+        },
       });
     } catch (err) {
       console.error(err);
@@ -89,6 +114,7 @@ const authController = {
         throw "";
       }
 
+      const sede = req.sede;
       const user = req.user;
 
       res.status(200).json({ user: {
@@ -110,7 +136,11 @@ const authController = {
       cargo: {
         key: user.cargo.id,
         name: user.cargo.nombre,
-      } });
+      },
+      sede: {
+        key: sede.id,
+        nombre: sede.nombre
+      }, });
     } catch(err) {
       if(err != "") {
         console.log(err);

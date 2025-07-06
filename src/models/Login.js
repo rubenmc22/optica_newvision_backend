@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+const Sede = require('./Sede');
+const Usuario = require('./Usuario');
 
 const Login = sequelize.define('Login', {
   id: {
@@ -7,6 +9,11 @@ const Login = sequelize.define('Login', {
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
+  },
+  sede_id: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    collate: 'utf8mb4_general_ci'
   },
   usu_cedula: {
     type: DataTypes.STRING(20),
@@ -35,11 +42,20 @@ const Login = sequelize.define('Login', {
   }
 }, {
   tableName: 'logins',
-  timestamps: true, // Habilita created_at y updated_at automáticos
+  timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at',
-  underscored: true, // Usa snake_case para los nombres de campos
+  underscored: true,
   collate: 'utf8mb4_general_ci'
+});
+
+Login.belongsTo(Sede, {
+  foreignKey: 'sede_id',
+  as: 'sede'
+});
+Login.belongsTo(Usuario, {
+  foreignKey: 'usu_cedula',
+  as: 'usuario'
 });
 
 module.exports = Login;
