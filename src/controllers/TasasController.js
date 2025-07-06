@@ -22,11 +22,11 @@ const TasasController = {
             if (id) {
                 tasas = await Tasa.findAll({
                     where: { id: id },
-                    attributes: ['id','nombre','simbolo','valor','rastreo_bcv','updated_at']
+                    attributes: ['id','nombre','simbolo','valor','rastreo_bcv','ultimo_tipo_cambio','updated_at']
                 });
             } else {
                 tasas = await Tasa.findAll({
-                    attributes: ['id','nombre','simbolo','valor','rastreo_bcv','updated_at']
+                    attributes: ['id','nombre','simbolo','valor','rastreo_bcv','ultimo_tipo_cambio','updated_at']
                 });
             }
 
@@ -68,6 +68,7 @@ const TasasController = {
 
             objTasa.valor = valor_numerico;
             objTasa.rastreo_bcv = false;
+            objTasa.ultimo_tipo_cambio = "Manual";
             await objTasa.save();
 
             await TasaHistorial.create({
@@ -105,6 +106,7 @@ const TasasController = {
                 const valor_anterior = objTasa.valor;
 
                 objTasa.valor = valor_numerico;
+                objTasa.ultimo_tipo_cambio = 'Manual con BCV';
                 await objTasa.save();
 
                 await TasaHistorial.create({
@@ -245,6 +247,8 @@ const TasasController = {
                 let valor_numerico = Number(tasas_bcv[objTasa.id]);
                 valor_numerico = Number(valor_numerico.toFixed(4));
                 objTasa.valor = valor_numerico;
+                objTasa.ultimo_tipo_cambio = "Automatico";
+                await objTasa.save();
             }
             
             res.status(200).json({ message: 'ok', tasa: objTasa });

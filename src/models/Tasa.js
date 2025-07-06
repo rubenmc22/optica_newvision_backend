@@ -32,6 +32,11 @@ const Tasa = sequelize.define('Usuario', {
       this.setDataValue('rastreo_bcv', value ? 1 : 0);
     }
   },
+  ultimo_tipo_cambio: {
+    type: DataTypes.STRING(50),
+    allowNull: true,
+    collate: 'utf8mb4_general_ci',
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,
