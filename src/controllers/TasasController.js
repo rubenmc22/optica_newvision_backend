@@ -233,9 +233,20 @@ const TasasController = {
 
             objTasa.rastreo_bcv = activar;
             await objTasa.save();
-            
-            // Actualizar de una vez con la tasa del BCV
 
+            if(activar && ['dolar','euro'].includes(objTasa.id)) {
+                const tasas_bcv = await obtenerDolarBCV();
+                if(typeof tasas_bcv === 'string') {
+                    // throw { message: tasas_bcv };
+                    res.status(201).json({ message: 'El rastreo automatico se activo pero no se pudo actualizar ahora mismo con el BCV.' });
+                    return;
+                }
+
+                let valor_numerico = Number(tasas_bcv[objTasa.id]);
+                valor_numerico = Number(valor_numerico.toFixed(4));
+                objTasa.valor = valor_numerico;
+            }
+            
             res.status(200).json({ message: 'ok', tasa: objTasa });
         } catch (err) {
             console.error(err);
