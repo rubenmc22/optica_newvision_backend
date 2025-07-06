@@ -723,7 +723,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE3NjQ5MjYsImV4cCI6MTc1MTg1MTMyNn0.4I9bCSkIbSOMxPdNYzs7N6-mARwgaUBYNFePwSAGWMM",
 								"type": "text"
 							}
 						],
@@ -809,6 +809,190 @@
 								"api",
 								"tasas-rastreo-automatico",
 								"euro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Pacientes - Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/paciente-get/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"paciente-get",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pacientes - Get con ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/paciente-get/guarenas-25409904",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"paciente-get",
+								"guarenas-25409904"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pacientes - Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreCompleto\": \"Jefferson Torres\",\r\n    \"cedula\": \"25409904\",\r\n    \"telefono\": \"04241738615\", // Puede ser null\r\n    \"email\": \"jefersonugas@gmail.com\", // Puede ser null\r\n    \"fechaNacimiento\": \"1996-06-11\",\r\n    \"ocupacion\": \"Ingeniero de Sistemas\", // Puede ser null\r\n    \"genero\": \"m\", // m o f\r\n    \"direccion\": \"Guatire, Castillejo, en una casa.\", // Puede ser null\r\n    \"redesSociales\": [\r\n        { \"platform\": \"Facebook\", \"username\": \"maria.gonzalez\" },\r\n        { \"platform\": \"Instagram\", \"username\": \"@maria.g\" }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/paciente-add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"paciente-add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pacientes - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreCompleto\": \"Jefferson Torres\",\r\n    \"cedula\": \"25409904\",\r\n    \"telefono\": \"04241738615\", // Puede ser null\r\n    \"email\": \"jefersonugas@gmail.com\", // Puede ser null\r\n    \"fechaNacimiento\": \"1996-06-11\",\r\n    \"ocupacion\": \"Ingeniero de Sistemas\", // Puede ser null\r\n    \"genero\": \"m\", // m o f\r\n    \"direccion\": \"Guatire, Castillejo, en una casa.\", // Puede ser null\r\n    \"redesSociales\": [\r\n        { \"platform\": \"Facebook\", \"username\": \"maria.gonzalez\" },\r\n        { \"platform\": \"Instagram\", \"username\": \"@maria.g\" }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/paciente-update/guarenas-25409904",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"paciente-update",
+								"guarenas-25409904"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pacientes - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/paciente-delete/guarenas-25409904",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"paciente-delete",
+								"guarenas-25409904"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pacientes - Get con ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/paciente-get/guarenas-25409904",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"paciente-get",
+								"guarenas-25409904"
 							]
 						}
 					},

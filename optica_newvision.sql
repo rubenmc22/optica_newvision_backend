@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 06-07-2025 a las 19:56:03
+-- Tiempo de generación: 07-07-2025 a las 01:45:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -60,16 +60,6 @@ CREATE TABLE `logins` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `logins`
---
-
-INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`, `updated_at`) VALUES
-(1, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc1MTgyMzgwOCwiZXhwIjoxNzUxOTEwMjA4fQ.RVWjE0mUrZebla2xuWjb5xBM8WIRo4ViuV7fH9jHYag', '::1', '2025-07-06 17:43:28', '2025-07-06 17:43:28'),
-(2, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc1MTgyMzgxMiwiZXhwIjoxNzUxOTEwMjEyfQ.DuDh3ynBmfDAvy8gOMG2vF5ypzBYvBv_qKibFBVcHtQ', '::1', '2025-07-06 17:43:32', '2025-07-06 17:43:32'),
-(3, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc1MTgyNDQ2OCwiZXhwIjoxNzUxOTEwODY4fQ.M7FA98oQ1bL64SsW3XBIMsxN7ldvApvJ3VuwFbnuy0o', '::1', '2025-07-06 17:54:28', '2025-07-06 17:54:28'),
-(4, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q', '::1', '2025-07-06 17:54:49', '2025-07-06 17:54:49');
-
 -- --------------------------------------------------------
 
 --
@@ -96,7 +86,8 @@ CREATE TABLE `otps` (
 --
 
 CREATE TABLE `pacientes` (
-  `id` varchar(70) NOT NULL,
+  `id` int(11) NOT NULL,
+  `pkey` varchar(70) NOT NULL,
   `sede_id` varchar(50) NOT NULL,
   `cedula` varchar(20) NOT NULL,
   `nombre` varchar(255) NOT NULL,
@@ -111,6 +102,13 @@ CREATE TABLE `pacientes` (
   `updated_at` datetime NOT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pacientes`
+--
+
+INSERT INTO `pacientes` (`id`, `pkey`, `sede_id`, `cedula`, `nombre`, `fecha_nacimiento`, `telefono`, `email`, `ocupacion`, `genero`, `direccion`, `redes_sociales`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'guarenas-25409904', 'guarenas', '25409904', 'Jefferson Torres', '1996-06-11', '04241738615', 'jefersonugas@gmail.com', 'Ingeniero de Sistemas', 'm', 'Guatire, Castillejo, en una casa.', '[{\"platform\":\"Facebook\",\"username\":\"maria.gonzalez\"},{\"platform\":\"Instagram\",\"username\":\"@maria.g\"}]', '2025-07-06 23:28:41', '2025-07-06 23:33:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -260,6 +258,13 @@ ALTER TABLE `otps`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `pacientes`
+--
+ALTER TABLE `pacientes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pkey` (`pkey`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -309,6 +314,12 @@ ALTER TABLE `logins`
 --
 ALTER TABLE `otps`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pacientes`
+--
+ALTER TABLE `pacientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tasas_historial`
