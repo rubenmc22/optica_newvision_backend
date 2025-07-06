@@ -67,6 +67,7 @@ const TasasController = {
             const valor_anterior = objTasa.valor;
 
             objTasa.valor = valor_numerico;
+            objTasa.rastreo_bcv = false;
             await objTasa.save();
 
             await TasaHistorial.create({
@@ -233,6 +234,8 @@ const TasasController = {
             objTasa.rastreo_bcv = activar;
             await objTasa.save();
             
+            // Actualizar de una vez con la tasa del BCV
+
             res.status(200).json({ message: 'ok', tasa: objTasa });
         } catch (err) {
             console.error(err);
