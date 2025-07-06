@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cedula\": \"25409904\",\r\n    \"password\": \"11554570\"\r\n}",
+							"raw": "{\r\n    \"sede\": \"guarenas\",\r\n    \"cedula\": \"25409904\",\r\n    \"password\": \"11554570\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -605,7 +605,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE3NjQ5MjYsImV4cCI6MTc1MTg1MTMyNn0.4I9bCSkIbSOMxPdNYzs7N6-mARwgaUBYNFePwSAGWMM",
 								"type": "text"
 							}
 						],
@@ -687,7 +687,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE3NjQ5MjYsImV4cCI6MTc1MTg1MTMyNn0.4I9bCSkIbSOMxPdNYzs7N6-mARwgaUBYNFePwSAGWMM",
 								"type": "text"
 							}
 						],
@@ -785,13 +785,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTEzMTI3OTMsImV4cCI6MTc1MTM5OTE5M30.OHTJJ4aT3FIZyM85lBgCHLmVuvj34jRkiG6av-qKz38",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE3NjQ5MjYsImV4cCI6MTc1MTg1MTMyNn0.4I9bCSkIbSOMxPdNYzs7N6-mARwgaUBYNFePwSAGWMM",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rastrear_auto\": false\r\n}",
+							"raw": "{\r\n    \"rastrear_auto\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -826,7 +826,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDkyMzY3MzAsImV4cCI6MTc0OTMyMzEzMH0.u7oU7l0J3aVxntT7_UhZDjcsGNBZRqrmRnjaPPvN_jI",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q",
 						"type": "text"
 					}
 				],

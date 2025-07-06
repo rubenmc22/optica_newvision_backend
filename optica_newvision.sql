@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 30-06-2025 a las 22:30:26
+-- Tiempo de generación: 06-07-2025 a las 19:56:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -52,12 +52,23 @@ INSERT INTO `cargos` (`id`, `nombre`) VALUES
 
 CREATE TABLE `logins` (
   `id` int(11) NOT NULL,
+  `sede_id` varchar(50) NOT NULL,
   `usu_cedula` varchar(20) NOT NULL,
   `token` text NOT NULL,
   `ip` varchar(15) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `logins`
+--
+
+INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`, `updated_at`) VALUES
+(1, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc1MTgyMzgwOCwiZXhwIjoxNzUxOTEwMjA4fQ.RVWjE0mUrZebla2xuWjb5xBM8WIRo4ViuV7fH9jHYag', '::1', '2025-07-06 17:43:28', '2025-07-06 17:43:28'),
+(2, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc1MTgyMzgxMiwiZXhwIjoxNzUxOTEwMjEyfQ.DuDh3ynBmfDAvy8gOMG2vF5ypzBYvBv_qKibFBVcHtQ', '::1', '2025-07-06 17:43:32', '2025-07-06 17:43:32'),
+(3, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc1MTgyNDQ2OCwiZXhwIjoxNzUxOTEwODY4fQ.M7FA98oQ1bL64SsW3XBIMsxN7ldvApvJ3VuwFbnuy0o', '::1', '2025-07-06 17:54:28', '2025-07-06 17:54:28'),
+(4, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE4MjQ0ODksImV4cCI6MTc1MTkxMDg4OX0.mSiWLvQ1MEdL7UT39euFECXLFx_W0U5-hIUhbvyie0Q', '::1', '2025-07-06 17:54:49', '2025-07-06 17:54:49');
 
 -- --------------------------------------------------------
 
@@ -76,6 +87,29 @@ CREATE TABLE `otps` (
   `historial` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pacientes`
+--
+
+CREATE TABLE `pacientes` (
+  `id` varchar(70) NOT NULL,
+  `sede_id` varchar(50) NOT NULL,
+  `cedula` varchar(20) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `ocupacion` text NOT NULL,
+  `genero` varchar(1) NOT NULL,
+  `direccion` text NOT NULL,
+  `redes_sociales` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`redes_sociales`)),
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -101,6 +135,25 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sedes`
+--
+
+CREATE TABLE `sedes` (
+  `id` varchar(50) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sedes`
+--
+
+INSERT INTO `sedes` (`id`, `nombre`) VALUES
+('guarenas', 'Sede Guarenas'),
+('guatire', 'Sede Guatire');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tasas`
 --
 
@@ -110,6 +163,7 @@ CREATE TABLE `tasas` (
   `simbolo` varchar(3) NOT NULL,
   `valor` double NOT NULL,
   `rastreo_bcv` tinyint(4) NOT NULL DEFAULT 0,
+  `ultimo_tipo_cambio` varchar(50) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -118,9 +172,9 @@ CREATE TABLE `tasas` (
 -- Volcado de datos para la tabla `tasas`
 --
 
-INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `rastreo_bcv`, `created_at`, `updated_at`) VALUES
-('dolar', 'Dolar', '$', 108.1891, 0, '2025-06-14 16:18:23', '2025-06-30 19:58:36'),
-('euro', 'Euro', '€', 127.1384, 0, '2025-06-14 16:18:23', '2025-06-30 20:29:50');
+INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `rastreo_bcv`, `ultimo_tipo_cambio`, `created_at`, `updated_at`) VALUES
+('dolar', 'Dolar', '$', 111.4186, 0, NULL, '2025-06-14 16:18:23', '2025-07-06 01:22:17'),
+('euro', 'Euro', '€', 120, 1, 'Manual', '2025-06-14 16:18:23', '2025-07-06 16:30:46');
 
 -- --------------------------------------------------------
 
@@ -144,7 +198,12 @@ CREATE TABLE `tasas_historial` (
 
 INSERT INTO `tasas_historial` (`id`, `tasa_id`, `valor_nuevo`, `usu_cedula`, `tipo_cambio`, `created_at`, `updated_at`) VALUES
 (10, 'dolar', 108.1891, '25409904', 'manual con BCV', '2025-06-30 19:58:36', '2025-06-30 19:58:36'),
-(11, 'euro', 127.1384, '25409904', 'manual con BCV', '2025-06-30 19:58:36', '2025-06-30 19:58:36');
+(11, 'euro', 127.1384, '25409904', 'manual con BCV', '2025-06-30 19:58:36', '2025-06-30 19:58:36'),
+(12, 'dolar', 111.4186, '25409904', 'manual con BCV', '2025-07-06 01:22:17', '2025-07-06 01:22:17'),
+(13, 'euro', 131.2389, '25409904', 'manual con BCV', '2025-07-06 01:22:17', '2025-07-06 01:22:17'),
+(14, 'euro', 120, '25409904', 'manual', '2025-07-06 15:57:32', '2025-07-06 15:57:32'),
+(15, 'euro', 120, '25409904', 'manual', '2025-07-06 15:57:47', '2025-07-06 15:57:47'),
+(16, 'euro', 120, '25409904', 'manual', '2025-07-06 16:30:37', '2025-07-06 16:30:37');
 
 -- --------------------------------------------------------
 
@@ -189,6 +248,12 @@ ALTER TABLE `cargos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `logins`
+--
+ALTER TABLE `logins`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `otps`
 --
 ALTER TABLE `otps`
@@ -199,6 +264,13 @@ ALTER TABLE `otps`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `sedes`
+--
+ALTER TABLE `sedes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indices de la tabla `tasas`
@@ -227,6 +299,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `logins`
+--
+ALTER TABLE `logins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `otps`
 --
 ALTER TABLE `otps`
@@ -236,7 +314,7 @@ ALTER TABLE `otps`
 -- AUTO_INCREMENT de la tabla `tasas_historial`
 --
 ALTER TABLE `tasas_historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
