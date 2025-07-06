@@ -238,7 +238,7 @@ const TasasController = {
                 const tasas_bcv = await obtenerDolarBCV();
                 if(typeof tasas_bcv === 'string') {
                     // throw { message: tasas_bcv };
-                    res.status(201).json({ message: 'El rastreo automatico se activo pero no se pudo actualizar ahora mismo con el BCV.' });
+                    res.status(201).json({ message: 'El rastreo automatico se activo pero no se pudo actualizar ahora mismo con el BCV.', tasa: objTasa });
                     return;
                 }
 
