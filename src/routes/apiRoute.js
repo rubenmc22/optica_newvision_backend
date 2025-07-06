@@ -9,6 +9,7 @@ const UsuarioController = require('../controllers/UsuarioController');
 const RolController = require('../controllers/RolController');
 const CargoController = require('../controllers/CargoController');
 const TasasController = require('../controllers/TasasController');
+const SedesController = require('../controllers/SedesController');
 
 const router = express.Router();
 
@@ -22,6 +23,8 @@ router.get('', (req, res) => {
 /**
  * Auth
  */
+router.get('/sedes-get', SedesController.get);
+
 router.post('/auth/login', noAuthMiddleware, authController.login);
 router.get('/auth/get_data', authMiddleware, authController.get_data);
 router.post('/auth/forgot-password', noAuthMiddleware, authController.forgot_password);
