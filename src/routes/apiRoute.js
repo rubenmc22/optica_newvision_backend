@@ -10,6 +10,7 @@ const RolController = require('../controllers/RolController');
 const CargoController = require('../controllers/CargoController');
 const TasasController = require('../controllers/TasasController');
 const SedesController = require('../controllers/SedesController');
+const PacienteController = require('../controllers/PacienteController');
 
 const router = express.Router();
 
@@ -51,6 +52,11 @@ router.put('/tasas-update-with-bcv', authMiddleware, TasasController.update_with
 router.get('/get-tasa-bcv', TasasController.get_tasa_bcv);
 router.get('/tasas-history/:id/:fecha_inicio?/:fecha_final?', authMiddleware, TasasController.get_history);
 router.put('/tasas-rastreo-automatico/:id', authMiddleware, TasasController.rastreo_automatico);
+
+router.get('/paciente-get/:id?', authMiddleware, PacienteController.get);
+router.post('/paciente-add/', authMiddleware, PacienteController.add);
+router.put('/paciente-update/:id?', authMiddleware, PacienteController.update);
+router.delete('/paciente-delete/:id?', authMiddleware, PacienteController.delete);
 
 router.get('/home', authMiddleware, (req, res) => {
   res.json({ message: 'Bienvenido a la página de inicio.', user: req.user });

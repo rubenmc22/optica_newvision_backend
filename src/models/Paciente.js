@@ -4,8 +4,12 @@ const Sede = require('./Sede');
 
 const Paciente = sequelize.define('Paciente', {
   id: {
-    type: DataTypes.STRING(70),
+    type: DataTypes.INTEGER(11),
     primaryKey: true,
+    autoIncrement: true,
+  },
+  pkey: {
+    type: DataTypes.STRING(70),
     allowNull: false,
     collate: 'utf8mb4_general_ci'
   },
@@ -65,7 +69,21 @@ const Paciente = sequelize.define('Paciente', {
     },
     get() {
       const raw = this.getDataValue('redes_sociales');
-      return Array.isArray(raw) ? raw : [];
+
+      if (Array.isArray(raw)) {
+        return raw
+      };
+
+      if (typeof raw === 'string') {
+        try {
+          const parsed = JSON.parse(raw);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      return [];
     },
     set(value) {
       if (!Array.isArray(value)) {

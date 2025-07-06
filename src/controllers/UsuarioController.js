@@ -146,7 +146,7 @@ const UsuarioController = {
             const cedula = req.params.cedula;
 
             const {
-                 rolId: rol_id,
+                rolId: rol_id,
                 cargoId: cargo_id,
                 cedula: nueva_cedula,
                 nombre: nombre_temp,
