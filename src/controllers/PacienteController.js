@@ -75,16 +75,16 @@ const PacienteController = {
                 throw { message: "El parametro 'historiaClinica.alergicoA' debe ser nula o una cadena de texto." };
             }
             if(historiaClinica.antecedentesPersonales !== null && !Array.isArray(historiaClinica.antecedentesPersonales)) {
-                throw { message: "El parametro 'historiaClinica.antecedentesPersonales' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.antecedentesPersonales' debe ser nula o un array." };
             }
             if(historiaClinica.antecedentesFamiliares !== null && !Array.isArray(historiaClinica.antecedentesFamiliares)) {
-                throw { message: "El parametro 'historiaClinica.antecedentesFamiliares' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.antecedentesFamiliares' debe ser nula o un array." };
             }
             if(historiaClinica.patologias !== null && !Array.isArray(historiaClinica.patologias)) {
-                throw { message: "El parametro 'historiaClinica.patologias' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.patologias' debe ser nula o un array." };
             }
             if(historiaClinica.patologiaOcular !== null && !Array.isArray(historiaClinica.patologiaOcular)) {
-                throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o un array." };
             }
 
             const objPaciente = await Paciente.create({
@@ -225,16 +225,16 @@ const PacienteController = {
                 throw { message: "El parametro 'historiaClinica.alergicoA' debe ser nula o una cadena de texto." };
             }
             if(historiaClinica.antecedentesPersonales !== null && !Array.isArray(historiaClinica.antecedentesPersonales)) {
-                throw { message: "El parametro 'historiaClinica.antecedentesPersonales' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.antecedentesPersonales' debe ser nula o un array." };
             }
             if(historiaClinica.antecedentesFamiliares !== null && !Array.isArray(historiaClinica.antecedentesFamiliares)) {
-                throw { message: "El parametro 'historiaClinica.antecedentesFamiliares' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.antecedentesFamiliares' debe ser nula o un array." };
             }
             if(historiaClinica.patologias !== null && !Array.isArray(historiaClinica.patologias)) {
-                throw { message: "El parametro 'historiaClinica.patologias' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.patologias' debe ser nula o un array." };
             }
             if(historiaClinica.patologiaOcular !== null && !Array.isArray(historiaClinica.patologiaOcular)) {
-                throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o una cadena de texto." };
+                throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o un array." };
             }
 
             if(objPaciente.cedula != informacionPersonal.cedula) {

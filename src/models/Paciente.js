@@ -140,7 +140,7 @@ const Paciente = sequelize.define('Paciente', {
       }
     },
     set(value) {
-      if (!Array.isArray(value)) {
+      if (value !== null && !Array.isArray(value)) {
         throw new Error('antecedentes_personales debe ser un arreglo.');
       }
       if(value == [] || value == null) {
@@ -163,7 +163,7 @@ const Paciente = sequelize.define('Paciente', {
       }
     },
     set(value) {
-      if (!Array.isArray(value)) {
+      if (value !== null && !Array.isArray(value)) {
         throw new Error('antecedentes_familiares debe ser un arreglo.');
       }
       if(value == [] || value == null) {
@@ -186,7 +186,7 @@ const Paciente = sequelize.define('Paciente', {
       }
     },
     set(value) {
-      if (!Array.isArray(value)) {
+      if (value !== null && !Array.isArray(value)) {
         throw new Error('patologias debe ser un arreglo.');
       }
       if(value == [] || value === null) {
@@ -209,7 +209,7 @@ const Paciente = sequelize.define('Paciente', {
       }
     },
     set(value) {
-      if (!Array.isArray(value)) {
+      if (value !== null && !Array.isArray(value)) {
         throw new Error('patologia_ocular debe ser un arreglo.');
       }
       if(value == [] || value == null) {
