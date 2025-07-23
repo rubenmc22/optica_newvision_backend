@@ -92,6 +92,133 @@ const Paciente = sequelize.define('Paciente', {
       this.setDataValue('redes_sociales', value);
     }
   },
+  tiene_lentes: {
+    type: DataTypes.STRING(100),
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  fotofobia: {
+    type: DataTypes.STRING(100),
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  traumatismo_ocular: {
+    type: DataTypes.STRING(100),
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  traumatismo_ocular_descripcion: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  cirugia_ocular: {
+    type: DataTypes.STRING(100),
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  cirugia_ocular_descripcion: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  alergias: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  antecedentes_personales: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci',
+    get() {
+      const raw = this.getDataValue('antecedentes_personales');
+      if(raw == null || raw == "") {
+        return [];
+      } else {
+        return raw.split('|');
+      }
+    },
+    set(value) {
+      if (!Array.isArray(value)) {
+        throw new Error('antecedentes_personales debe ser un arreglo.');
+      }
+      if(value == [] || value == null) {
+        this.setDataValue('antecedentes_personales', "");
+      } else {
+        this.setDataValue('antecedentes_personales', value.join('|'));
+      }
+    }
+  },
+  antecedentes_familiares: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci',
+    get() {
+      const raw = this.getDataValue('antecedentes_familiares');
+      if(raw == null || raw == "") {
+        return [];
+      } else {
+        return raw.split('|');
+      }
+    },
+    set(value) {
+      if (!Array.isArray(value)) {
+        throw new Error('antecedentes_familiares debe ser un arreglo.');
+      }
+      if(value == [] || value == null) {
+        this.setDataValue('antecedentes_familiares', "");
+      } else {
+        this.setDataValue('antecedentes_familiares', value.join('|'));
+      }
+    }
+  },
+  patologias: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci',
+    get() {
+      const raw = this.getDataValue('patologias');
+      if(raw === null || raw === "") {
+        return [];
+      } else {
+        return raw.split('|');
+      }
+    },
+    set(value) {
+      if (!Array.isArray(value)) {
+        throw new Error('patologias debe ser un arreglo.');
+      }
+      if(value == [] || value === null) {
+        this.setDataValue('patologias', "");
+      } else {
+        this.setDataValue('patologias', value.join('|'));
+      }
+    }
+  },
+  patologia_ocular: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci',
+    get() {
+      const raw = this.getDataValue('patologia_ocular');
+      if(raw == null || raw == "") {
+        return [];
+      } else {
+        return raw.split('|');
+      }
+    },
+    set(value) {
+      if (!Array.isArray(value)) {
+        throw new Error('patologia_ocular debe ser un arreglo.');
+      }
+      if(value == [] || value == null) {
+        this.setDataValue('patologia_ocular', "");
+      } else {
+        this.setDataValue('patologia_ocular', value.join('|'));
+      }
+    }
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,

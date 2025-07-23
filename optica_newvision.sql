@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 07-07-2025 a las 01:45:06
+-- Tiempo de generación: 23-07-2025 a las 09:35:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -60,6 +60,13 @@ CREATE TABLE `logins` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `logins`
+--
+
+INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`, `updated_at`) VALUES
+(5, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTMyNTM1NzMsImV4cCI6MTc1MzMzOTk3M30.3d-pbVT3JKUv0GQdbKA6IgzahZpeH0ZWtIG1w-IR5F4', '::1', '2025-07-23 06:52:53', '2025-07-23 06:52:53');
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +105,17 @@ CREATE TABLE `pacientes` (
   `genero` varchar(1) NOT NULL,
   `direccion` text NOT NULL,
   `redes_sociales` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`redes_sociales`)),
+  `tiene_lentes` varchar(100) DEFAULT NULL,
+  `fotofobia` varchar(100) DEFAULT NULL,
+  `traumatismo_ocular` varchar(100) DEFAULT NULL,
+  `traumatismo_ocular_descripcion` text DEFAULT NULL,
+  `cirugia_ocular` varchar(100) DEFAULT NULL,
+  `cirugia_ocular_descripcion` text DEFAULT NULL,
+  `alergias` text DEFAULT NULL,
+  `antecedentes_personales` text DEFAULT NULL,
+  `antecedentes_familiares` text DEFAULT NULL,
+  `patologias` text DEFAULT NULL,
+  `patologia_ocular` text DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -107,8 +125,8 @@ CREATE TABLE `pacientes` (
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id`, `pkey`, `sede_id`, `cedula`, `nombre`, `fecha_nacimiento`, `telefono`, `email`, `ocupacion`, `genero`, `direccion`, `redes_sociales`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'guarenas-25409904', 'guarenas', '25409904', 'Jefferson Torres', '1996-06-11', '04241738615', 'jefersonugas@gmail.com', 'Ingeniero de Sistemas', 'm', 'Guatire, Castillejo, en una casa.', '[{\"platform\":\"Facebook\",\"username\":\"maria.gonzalez\"},{\"platform\":\"Instagram\",\"username\":\"@maria.g\"}]', '2025-07-06 23:28:41', '2025-07-06 23:33:50', NULL);
+INSERT INTO `pacientes` (`id`, `pkey`, `sede_id`, `cedula`, `nombre`, `fecha_nacimiento`, `telefono`, `email`, `ocupacion`, `genero`, `direccion`, `redes_sociales`, `tiene_lentes`, `fotofobia`, `traumatismo_ocular`, `traumatismo_ocular_descripcion`, `cirugia_ocular`, `cirugia_ocular_descripcion`, `alergias`, `antecedentes_personales`, `antecedentes_familiares`, `patologias`, `patologia_ocular`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 'guarenas-25409904', 'guarenas', '25409904', 'Jefferson Torres', '1996-06-11', '04241738615', 'jefersonugas@gmail.com', 'Ingeniero de Sistemas', 'm', 'Guatire, Castillejo, en una casa.', '[{\"platform\":\"Facebook\",\"username\":\"maria.gonzalez\"},{\"platform\":\"Instagram\",\"username\":\"@maria.g\"}]', 'Si', NULL, NULL, NULL, NULL, NULL, NULL, '', '', 'a|b|c', '', '2025-07-23 07:32:52', '2025-07-23 07:32:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -307,7 +325,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`
@@ -319,7 +337,7 @@ ALTER TABLE `otps`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tasas_historial`

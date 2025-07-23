@@ -9,64 +9,138 @@ const PacienteController = {
             }
 
             const {
-                nombreCompleto: nombre,
-                cedula: cedula,
-                telefono: telefono,
-                email: email,
-                fechaNacimiento: fecha_nacimiento,
-                ocupacion: ocupacion,
-                genero: genero,
-                direccion: direccion,
+                informacionPersonal: informacionPersonal,
                 redesSociales: redes_sociales,
+                historiaClinica: historiaClinica,
             } = req.body;
 
-            const paciente_id = `${req.sede.id}-${cedula}`;
+            const paciente_id = `${req.sede.id}-${informacionPersonal.cedula}`;
 
+            if(!validar_estructura_informacion_personal(informacionPersonal)) {
+                throw { message: "La estructura de 'informacionPersonal' es incorrecta." };
+            }
+            if(!validar_estructura_historia_clinica(historiaClinica)) {
+                throw { message: "La estructura de 'historiaClinica' es incorrecta." };
+            }
             const cant = await Paciente.count({ where: { pkey: paciente_id } });
             if(cant > 0) {
                 throw { message: `Ya esta registrada la cedula '${cedula}' en la sede '${req.sede.nombre}'.` };
             }
-            if (!VerificationUtils.verify_cedula(cedula)) {
+            if (!VerificationUtils.verify_cedula(informacionPersonal.cedula)) {
                 throw { message: "La cedula no es valida." };
             }
-            if (!VerificationUtils.verify_nombre(nombre)) {
+            if (!VerificationUtils.verify_nombre(informacionPersonal.nombreCompleto)) {
                 throw { message: "El nombre no puede estar vacio." };
             }
-            if (!VerificationUtils.verify_fecha(fecha_nacimiento)) {
+            if (!VerificationUtils.verify_fecha(informacionPersonal.fechaNacimiento)) {
                 throw { message: "La fecha no tiene el formato correcto" };
             }
-            if (telefono != null && !VerificationUtils.verify_telefono(telefono)) {
+            if (informacionPersonal.telefono != null && !VerificationUtils.verify_telefono(informacionPersonal.telefono)) {
                 throw { message: "El telefono debe contener 11 digitos." };
             }
-            if (email != null && !VerificationUtils.verify_correo(email)) {
+            if (informacionPersonal.email != null && !VerificationUtils.verify_correo(informacionPersonal.email)) {
                 throw { message: "El correo no es valido." };
             }
-            if(!['m','f'].includes(genero.toLowerCase())) {
+            if(!['m','f'].includes(informacionPersonal.genero.toLowerCase())) {
                 throw { message: "El genero debe ser 'm' (Masculino) o 'f' (Femenino)." };
+            }
+            if(informacionPersonal.ocupacion !== null && typeof informacionPersonal.ocupacion !== 'string') {
+                throw { message: "La ocupacion debe ser nula o una cadena de texto." };
+            }
+            if(informacionPersonal.direccion !== null && typeof informacionPersonal.direccion !== 'string') {
+                throw { message: "La direccion debe ser nula o una cadena de texto." };
             }
             if(!validar_array_redes_sociales(redes_sociales)) {
                 throw { message: "Las redes sociales enviadas no tienen el formato esperado: [{platform, username}]" };
             }
+            if(historiaClinica.usuarioLentes !== null && typeof historiaClinica.usuarioLentes !== 'string') {
+                throw { message: "El parametro 'historiaClinica.usuarioLentes' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.fotofobia !== null && typeof historiaClinica.fotofobia !== 'string') {
+                throw { message: "El parametro 'historiaClinica.fotofobia' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.traumatismoOcular !== null && typeof historiaClinica.traumatismoOcular !== 'string') {
+                throw { message: "El parametro 'historiaClinica.traumatismoOcular' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.traumatismoOcularDescripcion !== null && typeof historiaClinica.traumatismoOcularDescripcion !== 'string') {
+                throw { message: "El parametro 'historiaClinica.traumatismoOcularDescripcion' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.cirugiaOcular !== null && typeof historiaClinica.cirugiaOcular !== 'string') {
+                throw { message: "El parametro 'historiaClinica.cirugiaOcular' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.cirugiaOcularDescripcion !== null && typeof historiaClinica.cirugiaOcularDescripcion !== 'string') {
+                throw { message: "El parametro 'historiaClinica.cirugiaOcularDescripcion' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.alergicoA !== null && typeof historiaClinica.alergicoA !== 'string') {
+                throw { message: "El parametro 'historiaClinica.alergicoA' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.antecedentesPersonales !== null && !Array.isArray(historiaClinica.antecedentesPersonales)) {
+                throw { message: "El parametro 'historiaClinica.antecedentesPersonales' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.antecedentesFamiliares !== null && !Array.isArray(historiaClinica.antecedentesFamiliares)) {
+                throw { message: "El parametro 'historiaClinica.antecedentesFamiliares' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.patologias !== null && !Array.isArray(historiaClinica.patologias)) {
+                throw { message: "El parametro 'historiaClinica.patologias' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.patologiaOcular !== null && !Array.isArray(historiaClinica.patologiaOcular)) {
+                throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o una cadena de texto." };
+            }
 
-            const paciente = await Paciente.create({
+            const objPaciente = await Paciente.create({
                 pkey: paciente_id,
                 sede_id: req.sede.id,
-                cedula: cedula,
-                nombre: nombre,
-                fecha_nacimiento: fecha_nacimiento,
-                telefono: (telefono == null) ? "" : telefono,
-                email: (email == null) ? "" : email,
-                ocupacion: (ocupacion == null) ? "" : ocupacion,
-                genero: genero.toLowerCase(),
-                direccion: (direccion == null) ? "" : direccion,
-                redes_sociales: redes_sociales
+                cedula: informacionPersonal.cedula,
+                nombre: informacionPersonal.nombreCompleto,
+                fecha_nacimiento: informacionPersonal.fechaNacimiento,
+                telefono: (informacionPersonal.telefono == null) ? "" : informacionPersonal.telefono,
+                email: (informacionPersonal.email == null) ? "" : informacionPersonal.email,
+                ocupacion: (informacionPersonal.ocupacion == null) ? "" : informacionPersonal.ocupacion,
+                genero: informacionPersonal.genero.toLowerCase(),
+                direccion: (informacionPersonal.direccion == null) ? "" : informacionPersonal.direccion,
+                redes_sociales: redes_sociales,
+                tiene_lentes: historiaClinica.usuarioLentes,
+                fotofobia: historiaClinica.fotofobia,
+                traumatismo_ocular: historiaClinica.traumatismoOcular,
+                traumatismo_ocular_descripcion: historiaClinica.traumatismoOcularDescripcion,
+                cirugia_ocular: historiaClinica.cirugiaOcular,
+                cirugia_ocular_descripcion: historiaClinica.cirugiaOcularDescripcion,
+                alergias: historiaClinica.alergicoA,
+                antecedentes_personales: historiaClinica.antecedentesPersonales,
+                antecedentes_familiares: historiaClinica.antecedentesFamiliares,
+                patologias: historiaClinica.patologias,
+                patologia_ocular: historiaClinica.patologiaOcular,
             });
             
-            const objPaciente = paciente.get({ plain: true });
-            objPaciente.key = objPaciente.pkey;
-            delete objPaciente.id;
-            delete objPaciente.pkey;
-            res.status(200).json({ message: 'ok', paciente: objPaciente });
+            const paciente = objPaciente.get({ plain: true });
+            const paciente_output = {
+                key: paciente.pkey,
+                informacionPersonal: {
+                    nombreCompleto: paciente.nombre,
+                    cedula: paciente.cedula,
+                    telefono: paciente.telefono,
+                    email: paciente.email,
+                    fechaNacimiento: paciente.fecha_nacimiento,
+                    ocupacion: paciente.ocupacion,
+                    genero: paciente.genero,
+                    direccion: paciente.direccion
+                },
+                redesSociales: paciente.redes_sociales,
+                historiaClinica: {
+                    usuarioLentes: paciente.tiene_lentes,
+                    fotofobia: paciente.fotofobia,
+                    traumatismoOcular: paciente.traumatismo_ocular,
+                    traumatismoOcularDescripcion: paciente.traumatismo_ocular_descripcion,
+                    cirugiaOcular: paciente.cirugia_ocular,
+                    cirugiaOcularDescripcion: paciente.cirugia_ocular_descripcion,
+                    alergicoA: paciente.alergias,
+                    antecedentesPersonales: paciente.antecedentes_personales,
+                    antecedentesFamiliares: paciente.antecedentes_familiares,
+                    patologias: paciente.patologias,
+                    patologiaOcular: paciente.patologia_ocular
+                }
+            };
+            res.status(200).json({ message: 'ok', paciente: paciente_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
@@ -89,65 +163,141 @@ const PacienteController = {
             }
             
             const {
-                nombreCompleto: nombre,
-                cedula: cedula,
-                telefono: telefono,
-                email: email,
-                fechaNacimiento: fecha_nacimiento,
-                ocupacion: ocupacion,
-                genero: genero,
-                direccion: direccion,
+                informacionPersonal: informacionPersonal,
                 redesSociales: redes_sociales,
+                historiaClinica: historiaClinica,
             } = req.body;
 
-            if (!VerificationUtils.verify_cedula(cedula)) {
+            if(!validar_estructura_informacion_personal(informacionPersonal)) {
+                throw { message: "La estructura de 'informacionPersonal' es incorrecta." };
+            }
+            if(!validar_estructura_historia_clinica(historiaClinica)) {
+                throw { message: "La estructura de 'historiaClinica' es incorrecta." };
+            }
+            if (!VerificationUtils.verify_cedula(informacionPersonal.cedula)) {
                 throw { message: "La cedula no es valida." };
             }
-            if (!VerificationUtils.verify_nombre(nombre)) {
+            if (!VerificationUtils.verify_nombre(informacionPersonal.nombreCompleto)) {
                 throw { message: "El nombre no puede estar vacio." };
             }
-            if (!VerificationUtils.verify_fecha(fecha_nacimiento)) {
+            if (!VerificationUtils.verify_fecha(informacionPersonal.fechaNacimiento)) {
                 throw { message: "La fecha no tiene el formato correcto" };
             }
-            if (telefono != null && !VerificationUtils.verify_telefono(telefono)) {
+            if (informacionPersonal.telefono != null && !VerificationUtils.verify_telefono(informacionPersonal.telefono)) {
                 throw { message: "El telefono debe contener 11 digitos." };
             }
-            if (email != null && !VerificationUtils.verify_correo(email)) {
+            if (informacionPersonal.email != null && !VerificationUtils.verify_correo(informacionPersonal.email)) {
                 throw { message: "El correo no es valido." };
             }
-            if(!['m','f'].includes(genero.toLowerCase())) {
+            if(!['m','f'].includes(informacionPersonal.genero.toLowerCase())) {
                 throw { message: "El genero debe ser 'm' (Masculino) o 'f' (Femenino)." };
+            }
+            if(informacionPersonal.ocupacion !== null && typeof informacionPersonal.ocupacion !== 'string') {
+                throw { message: "La ocupacion debe ser nula o una cadena de texto." };
+            }
+            if(informacionPersonal.direccion !== null && typeof informacionPersonal.direccion !== 'string') {
+                throw { message: "La direccion debe ser nula o una cadena de texto." };
             }
             if(!validar_array_redes_sociales(redes_sociales)) {
                 throw { message: "Las redes sociales enviadas no tienen el formato esperado: [{platform, username}]" };
             }
+            if(historiaClinica.usuarioLentes !== null && typeof historiaClinica.usuarioLentes !== 'string') {
+                throw { message: "El parametro 'historiaClinica.usuarioLentes' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.fotofobia !== null && typeof historiaClinica.fotofobia !== 'string') {
+                throw { message: "El parametro 'historiaClinica.fotofobia' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.traumatismoOcular !== null && typeof historiaClinica.traumatismoOcular !== 'string') {
+                throw { message: "El parametro 'historiaClinica.traumatismoOcular' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.traumatismoOcularDescripcion !== null && typeof historiaClinica.traumatismoOcularDescripcion !== 'string') {
+                throw { message: "El parametro 'historiaClinica.traumatismoOcularDescripcion' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.cirugiaOcular !== null && typeof historiaClinica.cirugiaOcular !== 'string') {
+                throw { message: "El parametro 'historiaClinica.cirugiaOcular' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.cirugiaOcularDescripcion !== null && typeof historiaClinica.cirugiaOcularDescripcion !== 'string') {
+                throw { message: "El parametro 'historiaClinica.cirugiaOcularDescripcion' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.alergicoA !== null && typeof historiaClinica.alergicoA !== 'string') {
+                throw { message: "El parametro 'historiaClinica.alergicoA' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.antecedentesPersonales !== null && !Array.isArray(historiaClinica.antecedentesPersonales)) {
+                throw { message: "El parametro 'historiaClinica.antecedentesPersonales' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.antecedentesFamiliares !== null && !Array.isArray(historiaClinica.antecedentesFamiliares)) {
+                throw { message: "El parametro 'historiaClinica.antecedentesFamiliares' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.patologias !== null && !Array.isArray(historiaClinica.patologias)) {
+                throw { message: "El parametro 'historiaClinica.patologias' debe ser nula o una cadena de texto." };
+            }
+            if(historiaClinica.patologiaOcular !== null && !Array.isArray(historiaClinica.patologiaOcular)) {
+                throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o una cadena de texto." };
+            }
 
-            if(objPaciente.cedula != cedula) {
-                const paciente_id = `${req.sede.id}-${cedula}`;
+            if(objPaciente.cedula != informacionPersonal.cedula) {
+                const paciente_id = `${req.sede.id}-${informacionPersonal.cedula}`;
                 const cant = await Paciente.count({ where: { pkey: paciente_id } });
                 if(cant > 0) {
-                    throw { message: `Ya esta registrada la cedula '${cedula}' en la sede '${req.sede.nombre}'.` };
+                    throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}'.` };
                 }
 
                 objPaciente.pkey = paciente_id;
-                objPaciente.cedula = cedula;
+                objPaciente.cedula = informacionPersonal.cedula;
             }
 
-            objPaciente.nombre = nombre;
-            objPaciente.fecha_nacimiento = fecha_nacimiento;
-            objPaciente.telefono = (telefono == null) ? "" : telefono;
-            objPaciente.email = (email == null) ? "" : email;
-            objPaciente.ocupacion = (ocupacion == null) ? "" : ocupacion;
-            objPaciente.genero = genero.toLowerCase();
-            objPaciente.direccion = (direccion == null) ? "" : direccion;
+            objPaciente.nombre = informacionPersonal.nombreCompleto;
+            objPaciente.fecha_nacimiento = informacionPersonal.fechaNacimiento;
+            objPaciente.telefono = (informacionPersonal.telefono == null) ? "" : informacionPersonal.telefono;
+            objPaciente.email = (informacionPersonal.email == null) ? "" : informacionPersonal.email;
+            objPaciente.ocupacion = (informacionPersonal.ocupacion == null) ? "" : informacionPersonal.ocupacion;
+            objPaciente.genero = informacionPersonal.genero.toLowerCase();
+            objPaciente.direccion = (informacionPersonal.direccion == null) ? "" : informacionPersonal.direccion;
             objPaciente.redes_sociales = redes_sociales;
+            objPaciente.tiene_lentes = historiaClinica.usuarioLentes;
+            objPaciente.fotofobia = historiaClinica.fotofobia;
+            objPaciente.traumatismo_ocular = historiaClinica.traumatismoOcular;
+            objPaciente.traumatismo_ocular_descripcion = historiaClinica.traumatismoOcularDescripcion;
+            objPaciente.cirugia_ocular = historiaClinica.cirugiaOcular;
+            objPaciente.cirugia_ocular_descripcion = historiaClinica.cirugiaOcularDescripcion;
+            objPaciente.alergias = historiaClinica.alergicoA;
+            objPaciente.antecedentes_personales = historiaClinica.antecedentesPersonales;
+            objPaciente.antecedentes_familiares = historiaClinica.antecedentesFamiliares;
+            objPaciente.patologias = historiaClinica.patologias;
+            objPaciente.patologia_ocular = historiaClinica.patologiaOcular;
+
             objPaciente.save();
             
             const paciente = objPaciente.get({ plain: true });
-            paciente.key = paciente.pkey;
-            delete paciente.id;
-            delete paciente.pkey;
-            res.status(200).json({ message: 'ok', paciente: paciente });
+            const paciente_output = {
+                key: paciente.pkey,
+                informacionPersonal: {
+                    nombreCompleto: paciente.nombre,
+                    cedula: paciente.cedula,
+                    telefono: paciente.telefono,
+                    email: paciente.email,
+                    fechaNacimiento: paciente.fecha_nacimiento,
+                    ocupacion: paciente.ocupacion,
+                    genero: paciente.genero,
+                    direccion: paciente.direccion
+                },
+                redesSociales: paciente.redes_sociales,
+                historiaClinica: {
+                    usuarioLentes: paciente.tiene_lentes,
+                    fotofobia: paciente.fotofobia,
+                    traumatismoOcular: paciente.traumatismo_ocular,
+                    traumatismoOcularDescripcion: paciente.traumatismo_ocular_descripcion,
+                    cirugiaOcular: paciente.cirugia_ocular,
+                    cirugiaOcularDescripcion: paciente.cirugia_ocular_descripcion,
+                    alergicoA: paciente.alergias,
+                    antecedentesPersonales: paciente.antecedentes_personales,
+                    antecedentesFamiliares: paciente.antecedentes_familiares,
+                    patologias: paciente.patologias,
+                    patologiaOcular: paciente.patologia_ocular
+                }
+            };
+            
+            res.status(200).json({ message: 'ok', paciente: paciente_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
@@ -161,22 +311,58 @@ const PacienteController = {
             }
 
             const paciente_id = req.params.id;
-            let pacientes = [];
+            let pacientes_db = [];
+            const attributes = [
+                'pkey','cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
+                'tiene_lentes','fotofobia','traumatismo_ocular','traumatismo_ocular_descripcion','cirugia_ocular','cirugia_ocular_descripcion','alergias',
+                'antecedentes_personales','antecedentes_familiares','patologias','patologia_ocular'
+            ];
 
             if (paciente_id) {
-                pacientes = await Paciente.findAll({
+                pacientes_db = await Paciente.findAll({
                     where: { pkey: paciente_id },
-                    attributes: [['pkey', 'key'],'cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at'],
+                    attributes: attributes,
                     include: ['sede']
                 });
             } else {
-                pacientes = await Paciente.findAll({
-                    attributes: [['pkey', 'key'],'cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at'],
+                pacientes_db = await Paciente.findAll({
+                    attributes: attributes,
                     include: ['sede']
                 });
             }
+
+            let pacientes_output = [];
+            for(let paciente of pacientes_db) {
+                pacientes_output.push({
+                    key: paciente.pkey,
+                    informacionPersonal: {
+                        nombreCompleto: paciente.nombre,
+                        cedula: paciente.cedula,
+                        telefono: paciente.telefono,
+                        email: paciente.email,
+                        fechaNacimiento: paciente.fecha_nacimiento,
+                        ocupacion: paciente.ocupacion,
+                        genero: paciente.genero,
+                        direccion: paciente.direccion
+                    },
+                    redesSociales: paciente.redes_sociales,
+                    historiaClinica: {
+                        usuarioLentes: paciente.tiene_lentes,
+                        fotofobia: paciente.fotofobia,
+                        traumatismoOcular: paciente.traumatismo_ocular,
+                        traumatismoOcularDescripcion: paciente.traumatismo_ocular_descripcion,
+                        cirugiaOcular: paciente.cirugia_ocular,
+                        cirugiaOcularDescripcion: paciente.cirugia_ocular_descripcion,
+                        alergicoA: paciente.alergias,
+                        antecedentesPersonales: paciente.antecedentes_personales,
+                        antecedentesFamiliares: paciente.antecedentes_familiares,
+                        patologias: paciente.patologias,
+                        patologiaOcular: paciente.patologia_ocular
+                    }
+                });
+            }
             
-            res.status(200).json({ message: 'ok', pacientes: pacientes });
+            res.status(200).json({ message: 'ok', pacientes: pacientes_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
@@ -207,6 +393,37 @@ const PacienteController = {
         }
     },
 };
+
+function validar_estructura_informacion_personal(objeto) {
+    return (
+        objeto && typeof objeto === 'object' &&
+        'nombreCompleto' in objeto &&
+        'cedula' in objeto &&
+        'telefono' in objeto &&
+        'email' in objeto &&
+        'fechaNacimiento' in objeto &&
+        'ocupacion' in objeto &&
+        'genero' in objeto &&
+        'direccion' in objeto
+    );
+}
+
+function validar_estructura_historia_clinica(objeto) {
+    return (
+        objeto && typeof objeto === 'object' &&
+        'usuarioLentes' in objeto &&
+        'fotofobia' in objeto &&
+        'traumatismoOcular' in objeto &&
+        'traumatismoOcularDescripcion' in objeto &&
+        'cirugiaOcular' in objeto &&
+        'cirugiaOcularDescripcion' in objeto &&
+        'alergicoA' in objeto &&
+        'antecedentesPersonales' in objeto &&
+        'antecedentesFamiliares' in objeto &&
+        'patologias' in objeto &&
+        'patologiaOcular' in objeto
+    );
+}
 
 function validar_array_redes_sociales(redes) {
   return (
