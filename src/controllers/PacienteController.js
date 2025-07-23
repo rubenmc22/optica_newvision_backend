@@ -115,6 +115,8 @@ const PacienteController = {
             const paciente = objPaciente.get({ plain: true });
             const paciente_output = {
                 key: paciente.pkey,
+                created_at: paciente.created_at,
+                updated_at: paciente.updated_at,
                 informacionPersonal: {
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
@@ -271,6 +273,8 @@ const PacienteController = {
             const paciente = objPaciente.get({ plain: true });
             const paciente_output = {
                 key: paciente.pkey,
+                created_at: paciente.created_at,
+                updated_at: paciente.updated_at,
                 informacionPersonal: {
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
@@ -335,6 +339,8 @@ const PacienteController = {
             for(let paciente of pacientes_db) {
                 pacientes_output.push({
                     key: paciente.pkey,
+                    created_at: paciente.created_at,
+                    updated_at: paciente.updated_at,
                     informacionPersonal: {
                         nombreCompleto: paciente.nombre,
                         cedula: paciente.cedula,
