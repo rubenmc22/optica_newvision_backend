@@ -24,7 +24,7 @@ const PacienteController = {
             }
             const cant = await Paciente.count({ where: { pkey: paciente_id } });
             if(cant > 0) {
-                throw { message: `Ya esta registrada la cedula '${cedula}' en la sede '${req.sede.nombre}'.` };
+                throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}'.` };
             }
             if (!VerificationUtils.verify_cedula(informacionPersonal.cedula)) {
                 throw { message: "La cedula no es valida." };
