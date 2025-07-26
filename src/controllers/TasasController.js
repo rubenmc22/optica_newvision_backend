@@ -91,13 +91,25 @@ const TasasController = {
                 throw { message: "Sesion invalida." };
             }
 
+            const id = req.params.id;
+
             await asegurar_existencia_tasas();
             const tasas_bcv = await obtenerDolarBCV();
             if(typeof tasas_bcv === 'string') {
                 throw { message: tasas_bcv };
             }
 
-            for(const tasa_id of ['dolar', 'euro']) {
+            let tasas_cambio = ['dolar', 'euro'];
+
+            if(id) {
+                const objTasaCambio = await Tasa.findOne({ where: { id: id } });
+                if(!objTasaCambio) {
+                    throw { message: `La tasa enviada no existe: '${id}'` };
+                }
+                tasas_cambio = [objTasaCambio.id];
+            }
+            
+            for(const tasa_id of tasas_cambio) {
                 const objTasa = await Tasa.findOne({ where: { id: tasa_id } });
 
                 let valor_numerico = Number(tasas_bcv[tasa_id]);
@@ -116,9 +128,9 @@ const TasasController = {
                     tipo_cambio: 'manual con BCV',
                 });
             }
-
+            
             const tasas = await Tasa.findAll({
-                where: { id: { [Op.in]: ['dolar', 'euro'] } },
+                where: { id: { [Op.in]: tasas_cambio } },
                 attributes: ['id', 'nombre', 'simbolo', 'valor', 'rastreo_bcv', 'updated_at']
             });
 

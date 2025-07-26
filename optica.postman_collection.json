@@ -723,7 +723,33 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTE3NjQ5MjYsImV4cCI6MTc1MTg1MTMyNn0.4I9bCSkIbSOMxPdNYzs7N6-mARwgaUBYNFePwSAGWMM",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTM1NTU2MzIsImV4cCI6MTc1MzY0MjAzMn0.ME93WQeOnB5CvkB6wCdV4BVQX4e0GcrSQl1LSyZSgcc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/tasas-update-with-bcv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasas-update-with-bcv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tasas - Actualizar con BCV - ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTM1NTU2MzIsImV4cCI6MTc1MzY0MjAzMn0.ME93WQeOnB5CvkB6wCdV4BVQX4e0GcrSQl1LSyZSgcc",
 								"type": "text"
 							}
 						],
@@ -737,7 +763,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tasas-update-with-bcv",
+							"raw": "http://localhost:3000/api/tasas-update-with-bcv/euro",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -745,7 +771,8 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"tasas-update-with-bcv"
+								"tasas-update-with-bcv",
+								"euro"
 							]
 						}
 					},
@@ -886,7 +913,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"nombreCompleto\": \"Jefferson Torres\",\r\n        \"cedula\": \"25409904\",\r\n        \"telefono\": \"04241738615\",\r\n        \"email\": \"jefersonugas@gmail.com\",\r\n        \"fechaNacimiento\": \"1996-06-11\",\r\n        \"ocupacion\": \"Ingeniero de Sistemas\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Guatire, Castillejo, en una casa.\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Facebook\",\r\n            \"username\": \"maria.gonzalez\"\r\n        },\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"@maria.g\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Si\",\r\n        \"fotofobia\": null,\r\n        \"traumatismoOcular\": null,\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": null,\r\n        \"cirugiaOcularDescripcion\": null,\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": [],\r\n        \"antecedentesFamiliares\": [],\r\n        \"patologias\": [\"a\", \"b\", \"c\"],\r\n        \"patologiaOcular\": []\r\n    }\r\n}",
+							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"nombreCompleto\": \"Ruben Martinez\",\r\n        \"cedula\": \"24367965\",\r\n        \"telefono\": \"04123920817\",\r\n        \"email\": \"rubemm18@gmail.com\",\r\n        \"fechaNacimiento\": \"2025-07-01\",\r\n        \"ocupacion\": \"fgdfgdf\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Las rosas, conj res, country villas\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"asdadasda\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Sí\",\r\n        \"fotofobia\": \"No\",\r\n        \"traumatismoOcular\": \"No\",\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": \"Sí\",\r\n        \"cirugiaOcularDescripcion\": \"catarata\",\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": null,\r\n        \"antecedentesFamiliares\": [\r\n            \"Diabetes\"\r\n        ],\r\n        \"patologias\": [\r\n            \"Astigmatismo\",\r\n            \"Miopía\"\r\n        ],\r\n        \"patologiaOcular\": null\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -921,7 +948,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"key\": \"guarenas-25409904\",\r\n    \"informacionPersonal\": {\r\n        \"nombreCompleto\": \"Jefferson Torres\",\r\n        \"cedula\": \"25409904\",\r\n        \"telefono\": \"04241738615\",\r\n        \"email\": \"jefersonugas@gmail.com\",\r\n        \"fechaNacimiento\": \"1996-06-11\",\r\n        \"ocupacion\": \"Ingeniero de Sistemas\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Guatire, Castillejo, en una casa.\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Facebook\",\r\n            \"username\": \"maria.gonzalez\"\r\n        },\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"@maria.g\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Si\",\r\n        \"fotofobia\": null,\r\n        \"traumatismoOcular\": null,\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": null,\r\n        \"cirugiaOcularDescripcion\": null,\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": [],\r\n        \"antecedentesFamiliares\": [],\r\n        \"patologias\": [\"a\", \"b\", \"c\"],\r\n        \"patologiaOcular\": []\r\n    }\r\n}",
+							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"nombreCompleto\": \"Jefferson Torres\",\r\n        \"cedula\": \"25409904\",\r\n        \"telefono\": \"04241738615\",\r\n        \"email\": \"jefersonugas@gmail.com\",\r\n        \"fechaNacimiento\": \"1996-06-11\",\r\n        \"ocupacion\": \"Ingeniero de Sistemas\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Guatire, Castillejo, en una casa.\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Facebook\",\r\n            \"username\": \"maria.gonzalez\"\r\n        },\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"@maria.g\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Si\",\r\n        \"fotofobia\": null,\r\n        \"traumatismoOcular\": null,\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": null,\r\n        \"cirugiaOcularDescripcion\": null,\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": [],\r\n        \"antecedentesFamiliares\": [],\r\n        \"patologias\": [\"a\", \"b\", \"c\"],\r\n        \"patologiaOcular\": []\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
