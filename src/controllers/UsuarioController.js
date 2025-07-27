@@ -113,20 +113,41 @@ const UsuarioController = {
              */
             const hashedPassword = await bcrypt.hash(cedula, 10);
 
+            let user = await Usuario.findOne({
+                where: { cedula: cedula },
+                paranoid: false
+            });
+            
+            /**
+             * Rehusamos el usuario
+             */
+            if(user) {
+                await user.restore();
+                user.rol_id = rol.id;
+                user.cargo_id = cargo.id;
+                user.cedula = cedula;
+                user.nombre = nombre;
+                user.correo = correo;
+                user.telefono = telefono;
+                user.fecha_nacimiento = fecha_nacimiento;
+                await user.save();
+            }
             /**
              * Crear el usuario
              */
-            const user = await Usuario.create({
-                rol_id: rol.id,
-                cargo_id: cargo.id,
-                cedula: cedula,
-                nombre: nombre,
-                correo: correo,
-                telefono: telefono,
-                fecha_nacimiento: fecha_nacimiento,
-                password: hashedPassword,
-                activo: true,
-            });
+            else {
+                user = await Usuario.create({
+                    rol_id: rol.id,
+                    cargo_id: cargo.id,
+                    cedula: cedula,
+                    nombre: nombre,
+                    correo: correo,
+                    telefono: telefono,
+                    fecha_nacimiento: fecha_nacimiento,
+                    password: hashedPassword,
+                    activo: true,
+                });
+            }
 
             /**
              * Fin
@@ -229,7 +250,7 @@ const UsuarioController = {
             user.correo = correo;
             user.telefono = telefono;
             user.fecha_nacimiento = fecha_nacimiento;
-            user.save();
+            await user.save();
 
             /**
              * Fin
@@ -298,7 +319,7 @@ const UsuarioController = {
              * Modificamos los datos
              */
             user.activo = activar;
-            user.save();
+            await user.save();
 
             /**
              * Fin
