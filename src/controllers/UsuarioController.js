@@ -19,12 +19,12 @@ const UsuarioController = {
             if (cedula) {
                 usuarios = await Usuario.findAll({
                     where: { cedula: cedula },
-                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url','activo'],
+                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url','activo','created_at','updated_at'],
                     include: ['rol','cargo']
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url','activo'],
+                    attributes: ['id','cedula','nombre','correo','telefono','fecha_nacimiento','ruta_imagen','avatar_url','activo','created_at','updated_at'],
                     include: ['rol','cargo']
                 });
             }
