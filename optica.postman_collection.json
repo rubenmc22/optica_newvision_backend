@@ -297,7 +297,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTAzODA5NTUsImV4cCI6MTc1MDQ2NzM1NX0.bg3ujC8FCcTxJWDEpeDQpmxheqBK1Ii17VNQJSjPXtU",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTM2Mjg2ODYsImV4cCI6MTc1MzcxNTA4Nn0.m3tCEhVkmXafTyohLpH4O5qEgmvradmbpnWOgvQAl1c",
 								"type": "text"
 							}
 						],
@@ -350,13 +350,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTM2Mjg2ODYsImV4cCI6MTc1MzcxNTA4Nn0.m3tCEhVkmXafTyohLpH4O5qEgmvradmbpnWOgvQAl1c",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "// Registro completo\r\n{\r\n    \"rolId\": \"asesor-optico\",\r\n    \"cargoId\": \"asesor-optico-1\",\r\n    \"representativeId\": \"11554570\",\r\n    \"representativeName\": \"Heriberto Torres\",\r\n    \"representativeEmail\": \"heriberto@gmail.com\",\r\n    \"representativePhone\": \"04241738615\",\r\n    \"representativeDate\": \"1996-06-11\"\r\n}\r\n\r\n// Registro simple\r\n// {\r\n//     \"rolId\": \"asesor-optico\",\r\n//     \"cargoId\": \"asesor-optico-1\",\r\n//     \"representativeId\": \"11554570\",\r\n//     \"representativeName\": \"\",\r\n//     \"representativeEmail\": \"\",\r\n//     \"representativePhone\": \"\",\r\n//     \"representativeDate\": \"\"\r\n// }",
+							"raw": "// Registro completo\r\n{\r\n    \"rolId\": \"asesor-optico\",\r\n    \"cargoId\": \"asesor-optico-1\",\r\n    \"cedula\": \"11554570\",\r\n    \"nombre\": \"Heriberto Torres\",\r\n    \"email\": \"heriberto@gmail.com\",\r\n    \"phone\": \"04241738615\",\r\n    \"fechaRegistro\": \"1996-06-11\"\r\n}\r\n\r\n// Registro simple\r\n// {\r\n//     \"rolId\": \"asesor-optico\",\r\n//     \"cargoId\": \"asesor-optico-1\",\r\n//     \"representativeId\": \"11554570\",\r\n//     \"representativeName\": \"\",\r\n//     \"representativeEmail\": \"\",\r\n//     \"representativePhone\": \"\",\r\n//     \"representativeDate\": \"\"\r\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -421,12 +421,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDk4NjQxNTcsImV4cCI6MTc0OTk1MDU1N30.q1atvd47kFOOzct2GFeErSa5OxoZGLr7vUmZcE6dG7s",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTM2Mjg2ODYsImV4cCI6MTc1MzcxNTA4Nn0.m3tCEhVkmXafTyohLpH4O5qEgmvradmbpnWOgvQAl1c",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/delete-usuarios/25409904",
+							"raw": "http://localhost:3000/api/delete-usuarios/11554570",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -435,7 +435,7 @@
 							"path": [
 								"api",
 								"delete-usuarios",
-								"25409904"
+								"11554570"
 							]
 						}
 					},

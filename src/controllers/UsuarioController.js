@@ -131,6 +131,11 @@ const UsuarioController = {
                 user.telefono = telefono;
                 user.fecha_nacimiento = fecha_nacimiento;
                 await user.save();
+
+                await Usuario.update(
+                    { created_at: new Date() },
+                    { where: { cedula: user.cedula }, individualHooks: false }
+                );
             }
             /**
              * Crear el usuario
