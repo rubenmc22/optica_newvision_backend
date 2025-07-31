@@ -55,10 +55,7 @@ const accountController = {
       if (!req.user) {
         throw { message: "Sesion invalida." };
       }
-      if (!['admin', 'representante'].includes(req.user.rol.id)) {
-        throw { message: "Modulo exclusivo para admin y representante." };
-      }
-
+      
       const {
         nombre,
         correo,
