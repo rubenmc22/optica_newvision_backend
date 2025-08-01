@@ -11,6 +11,7 @@ const CargoController = require('../controllers/CargoController');
 const TasasController = require('../controllers/TasasController');
 const SedesController = require('../controllers/SedesController');
 const PacienteController = require('../controllers/PacienteController');
+const HistorialMedicoController = require('../controllers/HistorialMedicoController');
 
 const router = express.Router();
 
@@ -57,6 +58,11 @@ router.get('/paciente-get/:id?', authMiddleware, PacienteController.get);
 router.post('/paciente-add/', authMiddleware, PacienteController.add);
 router.put('/paciente-update/:id?', authMiddleware, PacienteController.update);
 router.delete('/paciente-delete/:id?', authMiddleware, PacienteController.delete);
+
+router.get('/historial-medico-get/:id?', authMiddleware, HistorialMedicoController.get);
+router.post('/historial-medico-add/', authMiddleware, HistorialMedicoController.add);
+router.put('/historial-medico-update/:id?', authMiddleware, HistorialMedicoController.update);
+router.delete('/historial-medico-delete/:id?', authMiddleware, HistorialMedicoController.delete);
 
 router.get('/home', authMiddleware, (req, res) => {
   res.json({ message: 'Bienvenido a la página de inicio.', user: req.user });
