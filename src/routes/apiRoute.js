@@ -59,7 +59,8 @@ router.post('/paciente-add/', authMiddleware, PacienteController.add);
 router.put('/paciente-update/:id?', authMiddleware, PacienteController.update);
 router.delete('/paciente-delete/:id?', authMiddleware, PacienteController.delete);
 
-router.get('/historial-medico-get/:id?', authMiddleware, HistorialMedicoController.get);
+router.get('/historial-medico-all/:id?', authMiddleware, HistorialMedicoController.get_all);
+router.get('/historial-medico-paciente/:paciente_id', authMiddleware, HistorialMedicoController.get_paciente);
 router.post('/historial-medico-add/', authMiddleware, HistorialMedicoController.add);
 router.put('/historial-medico-update/:id?', authMiddleware, HistorialMedicoController.update);
 router.delete('/historial-medico-delete/:id?', authMiddleware, HistorialMedicoController.delete);

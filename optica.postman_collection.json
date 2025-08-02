@@ -1015,7 +1015,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-get/",
+							"raw": "http://localhost:3000/api/historial-medico-all/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1023,7 +1023,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"historial-medico-get",
+								"historial-medico-all",
 								""
 							]
 						}
@@ -1042,7 +1042,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-get/H-20250801-001",
+							"raw": "http://localhost:3000/api/historial-medico-all/H-20250801-001",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1050,8 +1050,35 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"historial-medico-get",
+								"historial-medico-all",
 								"H-20250801-001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Historial Medico - Get Paciente",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTQxMTEwMzEsImV4cCI6MTc1NDE5NzQzMX0.cJ5hzM-u6Jg66tvLRMQuphlmgXD7qF6l7Z-uOjGr-_o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/historial-medico-paciente/guarenas-25409904",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"historial-medico-paciente",
+								"guarenas-25409904"
 							]
 						}
 					},

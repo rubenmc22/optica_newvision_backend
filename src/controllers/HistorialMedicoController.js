@@ -194,7 +194,7 @@ const HistorialMedicoController = {
         }
     },
     
-    get: async (req, res) => {
+    get_all: async (req, res) => {
         try {
             if (!req.user) {
                 throw { message: "Sesion invalida." };
@@ -280,6 +280,83 @@ const HistorialMedicoController = {
             console.error(err);
             res.status(400).json(err);
         }
+    },
+
+    get_paciente: async (req, res) => {
+            if (!req.user) {
+                throw { message: "Sesion invalida." };
+            }
+
+            const paciente_id = req.params.paciente_id;
+            let historiales_bd = [];
+
+            historiales_bd = await HistorialMedico.findAll({
+                where: { paciente_id: paciente_id },
+                include: ['paciente']
+            });
+
+            let historiales_output = [];
+            for(let historial of historiales_bd) {
+                historiales_output.push({
+                    id: historial.id,
+                    nHistoria: historial.numero,
+                    fecha: historial.fecha,
+                    horaEvaluacion: historial.hora,
+                    pacienteId: historial.paciente_id,
+
+                    datosConsulta: {
+                        motivo: historial.motivo_consulta,
+                        otroMotivo: historial.otro_motivo_consulta,
+                        medico: historial.medico,
+                        asesor: historial.asesor,
+                        cedulaAsesor: historial.cedula_asesor,
+                    },
+
+                    antecedentes: {
+                        usuarioLentes: historial.paciente.tiene_lentes,
+                        fotofobia: historial.paciente.fotofobia,
+                        traumatismoOcular: historial.paciente.traumatismo_ocular,
+                        traumatismoOcularDescripcion: historial.paciente.traumatismo_ocular_descripcion,
+                        cirugiaOcular: historial.paciente.cirugia_ocular,
+                        cirugiaOcularDescripcion: historial.paciente.cirugia_ocular_descripcion,
+                        alergicoA: historial.paciente.alergias,
+                        antecedentesPersonales: historial.paciente.antecedentes_personales,
+                        antecedentesFamiliares: historial.paciente.antecedentes_familiares,
+                        patologias: historial.paciente.patologias,
+                        patologiaOcular: historial.paciente.patologia_ocular
+                    },
+
+                    examenOcular: {
+                        lensometria: historial.examen_ocular_lensometria,
+                        refraccion: historial.examen_ocular_refraccion,
+                        refraccionFinal: historial.examen_ocular_refraccion_final,
+                        avsc_avae_otros: historial.examen_ocular_avsc_avae_otros,
+                    },
+
+                    diagnosticoTratamiento: {
+                        diagnostico: historial.diagnostico,
+                        tratamiento: historial.tratamiento,
+                    },
+
+                    recomendaciones: historial.recomendaciones,
+
+                    conformidad: {
+                        notaConformidad: historial.conformidad_nota,
+                        firmaPaciente: historial.conformidad_firma_paciente,
+                        firmaMedico: historial.conformidad_firma_medico,
+                        firmaAsesor: historial.conformidad_firma_asesor,
+                    },
+
+                    auditoria: {
+                        fechaCreacion: historial.created_at,
+                        fechaActualizacion: historial.updated_at,
+                        creadoPor: historial.created_by,
+                        actualizadoPor: historial.updated_by,
+                    }
+                });
+            }
+            
+            res.status(200).json({ message: 'ok', historiales_medicos: historiales_output });
     },
     
     delete: async (req, res) => {
