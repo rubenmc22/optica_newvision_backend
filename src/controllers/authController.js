@@ -25,7 +25,7 @@ const authController = {
         throw { message: "La cedula no puede estar vacio." };
       }
       if (password.trim().length === 0 || !VerificationUtils.verify_clave(password)) {
-        throw { message: "La contraseña debe tener al menos 8 caracteres." };
+        throw { message: "La contraseña debe tener al menos 6 caracteres." };
       }
 
       /**

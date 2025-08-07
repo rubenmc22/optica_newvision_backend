@@ -10,7 +10,7 @@ const VerificationUtils = {
     },
 
     verify_clave(valor) {
-        return (valor && valor.length >= 8);
+        return (valor && valor.length >= 6);
     },
 
     verify_nombre(valor) {

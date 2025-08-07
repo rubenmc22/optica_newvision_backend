@@ -234,7 +234,7 @@ const accountController = {
        * Validamos la clave
        */
       if (!VerificationUtils.verify_clave(clave)) {
-        throw { message: "La contraseña debe tener al menos 8 caracteres." };
+        throw { message: "La contraseña debe tener al menos 6 caracteres." };
       }
       if (!VerificationUtils.verify_otp(otp)) {
         throw { message: "Formato del OTP invalido." };
