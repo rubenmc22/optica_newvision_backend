@@ -13,15 +13,6 @@ const HistorialMedico = sequelize.define('HistorialMedico', {
     allowNull: false,
     collate: 'utf8mb4_general_ci'
   },
-  fecha: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  hora: {
-    type: DataTypes.STRING(5),
-    allowNull: false,
-    collate: 'utf8mb4_general_ci'
-  },
   paciente_id: {
     type: DataTypes.STRING(70),
     allowNull: false,
@@ -42,16 +33,6 @@ const HistorialMedico = sequelize.define('HistorialMedico', {
   },
   medico: {
     type: DataTypes.STRING(255),
-    allowNull: true,
-    collate: 'utf8mb4_general_ci'
-  },
-  asesor: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
-    collate: 'utf8mb4_general_ci'
-  },
-  cedula_asesor: {
-    type: DataTypes.STRING(11),
     allowNull: true,
     collate: 'utf8mb4_general_ci'
   },
@@ -106,21 +87,6 @@ const HistorialMedico = sequelize.define('HistorialMedico', {
   // ========================================
   conformidad_nota: {
     type: DataTypes.TEXT,
-    allowNull: true,
-    collate: 'utf8mb4_general_ci'
-  },
-  conformidad_firma_paciente: {
-    type: DataTypes.STRING(100),
-    allowNull: true,
-    collate: 'utf8mb4_general_ci'
-  },
-  conformidad_firma_medico: {
-    type: DataTypes.STRING(100),
-    allowNull: true,
-    collate: 'utf8mb4_general_ci'
-  },
-  conformidad_firma_asesor: {
-    type: DataTypes.STRING(100),
     allowNull: true,
     collate: 'utf8mb4_general_ci'
   },

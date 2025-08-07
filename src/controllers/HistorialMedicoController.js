@@ -1,5 +1,6 @@
 const HistorialMedico = require('../models/HistorialMedico');
 const Paciente = require('../models/Paciente');
+const Usuario = require('../models/Usuario');
 const VerificationUtils = require('../utils/VerificationUtils');
 
 const HistorialMedicoController = {
@@ -25,7 +26,6 @@ const HistorialMedicoController = {
 
             const now = new Date();
             const fecha = now.toISOString().slice(0, 10);
-            const hora = now.toTimeString().slice(0, 5);
             const fecha_especial = fecha.replaceAll("-", "");
 
             const count_registros_hoy = await HistorialMedico.count({
@@ -36,15 +36,11 @@ const HistorialMedicoController = {
             const objHistorial = await HistorialMedico.create({
                 // ========================================
                 numero: `H-${fecha_especial}-${count_especial}`,
-                fecha: fecha,
-                hora: hora,
                 paciente_id: objPaciente.pkey,
                 // ========================================
                 motivo_consulta: datosConsulta.motivo,
                 otro_motivo_consulta: datosConsulta.otroMotivo,
                 medico: datosConsulta.medico,
-                asesor: datosConsulta.asesor,
-                cedula_asesor: datosConsulta.cedulaAsesor,
                 // ========================================
                 examen_ocular_lensometria: examenOcular.lensometria,
                 examen_ocular_refraccion: examenOcular.refraccion,
@@ -57,9 +53,6 @@ const HistorialMedicoController = {
                 recomendaciones: recomendaciones,
                 // ========================================
                 conformidad_nota: conformidad.notaConformidad,
-                conformidad_firma_paciente: conformidad.firmaPaciente,
-                conformidad_firma_medico: conformidad.firmaMedico,
-                conformidad_firma_asesor: conformidad.firmaAsesor,
                 // ========================================
                 created_by: req.user.cedula,
                 updated_by: req.user.cedula,
@@ -70,30 +63,12 @@ const HistorialMedicoController = {
             const historial_medico = {
                 id: historial.id,
                 nHistoria: historial.numero,
-                fecha: historial.fecha,
-                horaEvaluacion: historial.hora,
                 pacienteId: historial.paciente_id,
 
                 datosConsulta: {
                     motivo: historial.motivo_consulta,
                     otroMotivo: historial.otro_motivo_consulta,
                     medico: historial.medico,
-                    asesor: historial.asesor,
-                    cedulaAsesor: historial.cedula_asesor,
-                },
-
-                antecedentes: {
-                    usuarioLentes: objPaciente.tiene_lentes,
-                    fotofobia: objPaciente.fotofobia,
-                    traumatismoOcular: objPaciente.traumatismo_ocular,
-                    traumatismoOcularDescripcion: objPaciente.traumatismo_ocular_descripcion,
-                    cirugiaOcular: objPaciente.cirugia_ocular,
-                    cirugiaOcularDescripcion: objPaciente.cirugia_ocular_descripcion,
-                    alergicoA: objPaciente.alergias,
-                    antecedentesPersonales: objPaciente.antecedentes_personales,
-                    antecedentesFamiliares: objPaciente.antecedentes_familiares,
-                    patologias: objPaciente.patologias,
-                    patologiaOcular: objPaciente.patologia_ocular
                 },
 
                 examenOcular: {
@@ -112,9 +87,6 @@ const HistorialMedicoController = {
 
                 conformidad: {
                     notaConformidad: historial.conformidad_nota,
-                    firmaPaciente: historial.conformidad_firma_paciente,
-                    firmaMedico: historial.conformidad_firma_medico,
-                    firmaAsesor: historial.conformidad_firma_asesor,
                 },
 
                 auditoria: {
@@ -165,8 +137,6 @@ const HistorialMedicoController = {
             objHistorial.motivo_consulta = datosConsulta.motivo;
             objHistorial.otro_motivo_consulta = datosConsulta.otroMotivo;
             objHistorial.medico = datosConsulta.medico;
-            objHistorial.asesor = datosConsulta.asesor;
-            objHistorial.cedula_asesor = datosConsulta.cedulaAsesor;
             // ========================================
             objHistorial.examen_ocular_lensometria = examenOcular.lensometria;
             objHistorial.examen_ocular_refraccion = examenOcular.refraccion;
@@ -179,9 +149,6 @@ const HistorialMedicoController = {
             objHistorial.recomendaciones = recomendaciones;
             // ========================================
             objHistorial.conformidad_nota = conformidad.notaConformidad;
-            objHistorial.conformidad_firma_paciente = conformidad.firmaPaciente;
-            objHistorial.conformidad_firma_medico = conformidad.firmaMedico;
-            objHistorial.conformidad_firma_asesor = conformidad.firmaAsesor;
             // ========================================
             objHistorial.updated_by = req.user.cedula;
             // ========================================
@@ -216,33 +183,35 @@ const HistorialMedicoController = {
 
             let historiales_output = [];
             for(let historial of historiales_bd) {
+                const user_medico = await Usuario.findOne({
+                    where: { cedula: historial.medico },
+                    attributes: ['cedula','nombre','cargo_id'],
+                    include: ['cargo']
+                });
+                const user_creador = await Usuario.findOne({
+                    where: { cedula: historial.created_by },
+                    attributes: ['cedula','nombre','cargo_id'],
+                    include: ['cargo']
+                });
+                const user_modificador = await Usuario.findOne({
+                    where: { cedula: historial.updated_by },
+                    attributes: ['cedula','nombre','cargo_id'],
+                    include: ['cargo']
+                });
+
+                let user_medico_plain = {cedula: user_medico.cedula, nombre: user_medico.nombre, cargo: user_medico.cargo.nombre};
+                let user_creador_plain = {cedula: user_creador.cedula, nombre: user_creador.nombre, cargo: user_creador.cargo.nombre};
+                let user_modificador_plain = {cedula: user_modificador.cedula, nombre: user_modificador.nombre, cargo: user_modificador.cargo.nombre};
+
                 historiales_output.push({
                     id: historial.id,
                     nHistoria: historial.numero,
-                    fecha: historial.fecha,
-                    horaEvaluacion: historial.hora,
                     pacienteId: historial.paciente_id,
 
                     datosConsulta: {
                         motivo: historial.motivo_consulta,
                         otroMotivo: historial.otro_motivo_consulta,
-                        medico: historial.medico,
-                        asesor: historial.asesor,
-                        cedulaAsesor: historial.cedula_asesor,
-                    },
-
-                    antecedentes: {
-                        usuarioLentes: historial.paciente.tiene_lentes,
-                        fotofobia: historial.paciente.fotofobia,
-                        traumatismoOcular: historial.paciente.traumatismo_ocular,
-                        traumatismoOcularDescripcion: historial.paciente.traumatismo_ocular_descripcion,
-                        cirugiaOcular: historial.paciente.cirugia_ocular,
-                        cirugiaOcularDescripcion: historial.paciente.cirugia_ocular_descripcion,
-                        alergicoA: historial.paciente.alergias,
-                        antecedentesPersonales: historial.paciente.antecedentes_personales,
-                        antecedentesFamiliares: historial.paciente.antecedentes_familiares,
-                        patologias: historial.paciente.patologias,
-                        patologiaOcular: historial.paciente.patologia_ocular
+                        medico: user_medico_plain,
                     },
 
                     examenOcular: {
@@ -261,16 +230,13 @@ const HistorialMedicoController = {
 
                     conformidad: {
                         notaConformidad: historial.conformidad_nota,
-                        firmaPaciente: historial.conformidad_firma_paciente,
-                        firmaMedico: historial.conformidad_firma_medico,
-                        firmaAsesor: historial.conformidad_firma_asesor,
                     },
 
                     auditoria: {
                         fechaCreacion: historial.created_at,
                         fechaActualizacion: historial.updated_at,
-                        creadoPor: historial.created_by,
-                        actualizadoPor: historial.updated_by,
+                        creadoPor: user_creador_plain,
+                        actualizadoPor: user_modificador_plain,
                     }
                 });
             }
@@ -297,33 +263,35 @@ const HistorialMedicoController = {
 
             let historiales_output = [];
             for(let historial of historiales_bd) {
+                const user_medico = await Usuario.findOne({
+                    where: { cedula: historial.medico },
+                    attributes: ['cedula','nombre','cargo_id'],
+                    include: ['cargo']
+                });
+                const user_creador = await Usuario.findOne({
+                    where: { cedula: historial.created_by },
+                    attributes: ['cedula','nombre','cargo_id'],
+                    include: ['cargo']
+                });
+                const user_modificador = await Usuario.findOne({
+                    where: { cedula: historial.updated_by },
+                    attributes: ['cedula','nombre','cargo_id'],
+                    include: ['cargo']
+                });
+
+                let user_medico_plain = {cedula: user_medico.cedula, nombre: user_medico.nombre, cargo: user_medico.cargo.nombre};
+                let user_creador_plain = {cedula: user_creador.cedula, nombre: user_creador.nombre, cargo: user_creador.cargo.nombre};
+                let user_modificador_plain = {cedula: user_modificador.cedula, nombre: user_modificador.nombre, cargo: user_modificador.cargo.nombre};
+
                 historiales_output.push({
                     id: historial.id,
                     nHistoria: historial.numero,
-                    fecha: historial.fecha,
-                    horaEvaluacion: historial.hora,
                     pacienteId: historial.paciente_id,
 
                     datosConsulta: {
                         motivo: historial.motivo_consulta,
                         otroMotivo: historial.otro_motivo_consulta,
-                        medico: historial.medico,
-                        asesor: historial.asesor,
-                        cedulaAsesor: historial.cedula_asesor,
-                    },
-
-                    antecedentes: {
-                        usuarioLentes: historial.paciente.tiene_lentes,
-                        fotofobia: historial.paciente.fotofobia,
-                        traumatismoOcular: historial.paciente.traumatismo_ocular,
-                        traumatismoOcularDescripcion: historial.paciente.traumatismo_ocular_descripcion,
-                        cirugiaOcular: historial.paciente.cirugia_ocular,
-                        cirugiaOcularDescripcion: historial.paciente.cirugia_ocular_descripcion,
-                        alergicoA: historial.paciente.alergias,
-                        antecedentesPersonales: historial.paciente.antecedentes_personales,
-                        antecedentesFamiliares: historial.paciente.antecedentes_familiares,
-                        patologias: historial.paciente.patologias,
-                        patologiaOcular: historial.paciente.patologia_ocular
+                        medico: user_medico_plain,
                     },
 
                     examenOcular: {
@@ -342,16 +310,13 @@ const HistorialMedicoController = {
 
                     conformidad: {
                         notaConformidad: historial.conformidad_nota,
-                        firmaPaciente: historial.conformidad_firma_paciente,
-                        firmaMedico: historial.conformidad_firma_medico,
-                        firmaAsesor: historial.conformidad_firma_asesor,
                     },
 
                     auditoria: {
                         fechaCreacion: historial.created_at,
                         fechaActualizacion: historial.updated_at,
-                        creadoPor: historial.created_by,
-                        actualizadoPor: historial.updated_by,
+                        creadoPor: user_creador_plain,
+                        actualizadoPor: user_modificador_plain,
                     }
                 });
             }
