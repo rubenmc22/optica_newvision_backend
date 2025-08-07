@@ -177,14 +177,12 @@ const UsuarioController = {
                 cedula: nueva_cedula,
                 nombre: nombre_temp,
                 email: correo_temp,
-                phone: telefono_temp,
                 fechaRegistro: fecha_nacimiento_temp,
             } = req.body;
 
               
             const nombre = (nombre_temp == "") ? null : nombre_temp;
             const correo = (correo_temp == "") ? null : correo_temp;
-            const telefono = (telefono_temp == "") ? null : telefono_temp;
             const fecha_nacimiento = (fecha_nacimiento_temp == "") ? null : fecha_nacimiento_temp;
 
             if(req.user.cedula == cedula && rol_id != 'admin') {
@@ -206,9 +204,6 @@ const UsuarioController = {
             }
             if (correo != null && !VerificationUtils.verify_correo(correo)) {
                 throw { message: "El correo no es valido." };
-            }
-            if (telefono != null && !VerificationUtils.verify_telefono(telefono)) {
-                throw { message: "El telefono debe contener 11 digitos." };
             }
             if (fecha_nacimiento != null && !VerificationUtils.verify_fecha(fecha_nacimiento)) {
                 throw { message: "La fecha no tiene el formato correcto" };
@@ -253,7 +248,6 @@ const UsuarioController = {
             user.cedula = nueva_cedula;
             user.nombre = nombre;
             user.correo = correo;
-            user.telefono = telefono;
             user.fecha_nacimiento = fecha_nacimiento;
             await user.save();
 
