@@ -391,7 +391,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rolId\": \"admin\",\r\n    \"cargoId\": \"gerente\",\r\n    \"representativeId\": \"25409904\",\r\n    \"representativeName\": \"Jefferson Torres\",\r\n    \"representativeEmail\": \"jeffersonjtorresu@gmail.com\",\r\n    \"representativePhone\": \"04128977574\",\r\n    \"representativeDate\": \"1996-06-11\"\r\n}",
+							"raw": "{\r\n    \"rolId\": \"admin\",\r\n    \"cargoId\": \"gerente\",\r\n    \"cedula\": \"25409904\",\r\n    \"nombre\": \"Jefferson Torres\",\r\n    \"email\": \"jeffersonjtorresu@gmail.com\",\r\n    \"phone\": \"04128977574\",\r\n    \"fechaRegistro\": \"1996-06-11\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
