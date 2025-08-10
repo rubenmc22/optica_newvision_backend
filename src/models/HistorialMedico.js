@@ -13,6 +13,10 @@ const HistorialMedico = sequelize.define('HistorialMedico', {
     allowNull: false,
     collate: 'utf8mb4_general_ci'
   },
+  fecha: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
   paciente_id: {
     type: DataTypes.STRING(70),
     allowNull: false,
@@ -28,6 +32,16 @@ const HistorialMedico = sequelize.define('HistorialMedico', {
   },
   otro_motivo_consulta: {
     type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  tipo_cristal_actual: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
+  ultima_graduacion: {
+    type: DataTypes.DATE,
     allowNull: true,
     collate: 'utf8mb4_general_ci'
   },

@@ -36,10 +36,13 @@ const HistorialMedicoController = {
             const objHistorial = await HistorialMedico.create({
                 // ========================================
                 numero: `H-${fecha_especial}-${count_especial}`,
+                fecha: fecha,
                 paciente_id: objPaciente.pkey,
                 // ========================================
                 motivo_consulta: datosConsulta.motivo,
                 otro_motivo_consulta: datosConsulta.otroMotivo,
+                tipo_cristal_actual: datosConsulta.tipoCristalActual,
+                ultima_graduacion: datosConsulta.fechaUltimaGraduacion,
                 medico: datosConsulta.medico,
                 // ========================================
                 examen_ocular_lensometria: examenOcular.lensometria,
@@ -68,6 +71,8 @@ const HistorialMedicoController = {
                 datosConsulta: {
                     motivo: historial.motivo_consulta,
                     otroMotivo: historial.otro_motivo_consulta,
+                    tipoCristalActual: historial.tipo_cristal_actual,
+                    fechaUltimaGraduacion: historial.ultima_graduacion,
                     medico: historial.medico,
                 },
 
@@ -136,6 +141,8 @@ const HistorialMedicoController = {
             // ========================================
             objHistorial.motivo_consulta = datosConsulta.motivo;
             objHistorial.otro_motivo_consulta = datosConsulta.otroMotivo;
+            objHistorial.tipo_cristal_actual = datosConsulta.tipoCristalActual;
+            objHistorial.ultima_graduacion = datosConsulta.fechaUltimaGraduacion;
             objHistorial.medico = datosConsulta.medico;
             // ========================================
             objHistorial.examen_ocular_lensometria = examenOcular.lensometria;
@@ -211,6 +218,8 @@ const HistorialMedicoController = {
                     datosConsulta: {
                         motivo: historial.motivo_consulta,
                         otroMotivo: historial.otro_motivo_consulta,
+                        tipoCristalActual: historial.tipo_cristal_actual,
+                        fechaUltimaGraduacion: historial.ultima_graduacion,
                         medico: user_medico_plain,
                     },
 
@@ -291,6 +300,8 @@ const HistorialMedicoController = {
                     datosConsulta: {
                         motivo: historial.motivo_consulta,
                         otroMotivo: historial.otro_motivo_consulta,
+                        tipoCristalActual: historial.tipo_cristal_actual,
+                        fechaUltimaGraduacion: historial.ultima_graduacion,
                         medico: user_medico_plain,
                     },
 

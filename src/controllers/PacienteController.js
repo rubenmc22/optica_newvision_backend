@@ -59,6 +59,9 @@ const PacienteController = {
             if(historiaClinica.fotofobia !== null && typeof historiaClinica.fotofobia !== 'string') {
                 throw { message: "El parametro 'historiaClinica.fotofobia' debe ser nula o una cadena de texto." };
             }
+            if(historiaClinica.usoDispositivo !== null && typeof historiaClinica.usoDispositivo !== 'string') {
+                throw { message: "El parametro 'historiaClinica.usoDispositivo' debe ser nula o una cadena de texto." };
+            }
             if(historiaClinica.traumatismoOcular !== null && typeof historiaClinica.traumatismoOcular !== 'string') {
                 throw { message: "El parametro 'historiaClinica.traumatismoOcular' debe ser nula o una cadena de texto." };
             }
@@ -101,6 +104,7 @@ const PacienteController = {
                 redes_sociales: redes_sociales,
                 tiene_lentes: historiaClinica.usuarioLentes,
                 fotofobia: historiaClinica.fotofobia,
+                uso_dispositivo_electronico: historiaClinica.usoDispositivo,
                 traumatismo_ocular: historiaClinica.traumatismoOcular,
                 traumatismo_ocular_descripcion: historiaClinica.traumatismoOcularDescripcion,
                 cirugia_ocular: historiaClinica.cirugiaOcular,
@@ -131,6 +135,7 @@ const PacienteController = {
                 historiaClinica: {
                     usuarioLentes: paciente.tiene_lentes,
                     fotofobia: paciente.fotofobia,
+                    usoDispositivo: paciente.uso_dispositivo_electronico,
                     traumatismoOcular: paciente.traumatismo_ocular,
                     traumatismoOcularDescripcion: paciente.traumatismo_ocular_descripcion,
                     cirugiaOcular: paciente.cirugia_ocular,
@@ -209,6 +214,9 @@ const PacienteController = {
             if(historiaClinica.fotofobia !== null && typeof historiaClinica.fotofobia !== 'string') {
                 throw { message: "El parametro 'historiaClinica.fotofobia' debe ser nula o una cadena de texto." };
             }
+            if(historiaClinica.usoDispositivo !== null && typeof historiaClinica.usoDispositivo !== 'string') {
+                throw { message: "El parametro 'historiaClinica.usoDispositivo' debe ser nula o una cadena de texto." };
+            }
             if(historiaClinica.traumatismoOcular !== null && typeof historiaClinica.traumatismoOcular !== 'string') {
                 throw { message: "El parametro 'historiaClinica.traumatismoOcular' debe ser nula o una cadena de texto." };
             }
@@ -258,6 +266,7 @@ const PacienteController = {
             objPaciente.redes_sociales = redes_sociales;
             objPaciente.tiene_lentes = historiaClinica.usuarioLentes;
             objPaciente.fotofobia = historiaClinica.fotofobia;
+            objPaciente.uso_dispositivo_electronico = historiaClinica.usoDispositivo;
             objPaciente.traumatismo_ocular = historiaClinica.traumatismoOcular;
             objPaciente.traumatismo_ocular_descripcion = historiaClinica.traumatismoOcularDescripcion;
             objPaciente.cirugia_ocular = historiaClinica.cirugiaOcular;
@@ -289,6 +298,7 @@ const PacienteController = {
                 historiaClinica: {
                     usuarioLentes: paciente.tiene_lentes,
                     fotofobia: paciente.fotofobia,
+                    usoDispositivo: paciente.uso_dispositivo_electronico,
                     traumatismoOcular: paciente.traumatismo_ocular,
                     traumatismoOcularDescripcion: paciente.traumatismo_ocular_descripcion,
                     cirugiaOcular: paciente.cirugia_ocular,
@@ -318,7 +328,7 @@ const PacienteController = {
             let pacientes_db = [];
             const attributes = [
                 'pkey','cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
-                'tiene_lentes','fotofobia','traumatismo_ocular','traumatismo_ocular_descripcion','cirugia_ocular','cirugia_ocular_descripcion','alergias',
+                'tiene_lentes','fotofobia','uso_dispositivo_electronico','traumatismo_ocular','traumatismo_ocular_descripcion','cirugia_ocular','cirugia_ocular_descripcion','alergias',
                 'antecedentes_personales','antecedentes_familiares','patologias','patologia_ocular'
             ];
 
@@ -355,6 +365,7 @@ const PacienteController = {
                     historiaClinica: {
                         usuarioLentes: paciente.tiene_lentes,
                         fotofobia: paciente.fotofobia,
+                        usoDispositivo: paciente.uso_dispositivo_electronico,
                         traumatismoOcular: paciente.traumatismo_ocular,
                         traumatismoOcularDescripcion: paciente.traumatismo_ocular_descripcion,
                         cirugiaOcular: paciente.cirugia_ocular,
@@ -419,6 +430,7 @@ function validar_estructura_historia_clinica(objeto) {
         objeto && typeof objeto === 'object' &&
         'usuarioLentes' in objeto &&
         'fotofobia' in objeto &&
+        'usoDispositivo' in objeto &&
         'traumatismoOcular' in objeto &&
         'traumatismoOcularDescripcion' in objeto &&
         'cirugiaOcular' in objeto &&

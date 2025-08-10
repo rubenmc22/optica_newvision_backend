@@ -102,6 +102,11 @@ const Paciente = sequelize.define('Paciente', {
     allowNull: true,
     collate: 'utf8mb4_general_ci'
   },
+  uso_dispositivo_electronico: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    collate: 'utf8mb4_general_ci'
+  },
   traumatismo_ocular: {
     type: DataTypes.STRING(100),
     allowNull: true,
