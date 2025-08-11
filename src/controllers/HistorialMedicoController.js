@@ -299,9 +299,20 @@ const HistorialMedicoController = {
                     include: ['cargo']
                 });
 
-                let user_medico_plain = {cedula: user_medico.cedula, nombre: user_medico.nombre, cargo: user_medico.cargo.nombre};
-                let user_creador_plain = {cedula: user_creador.cedula, nombre: user_creador.nombre, cargo: user_creador.cargo.nombre};
-                let user_modificador_plain = {cedula: user_modificador.cedula, nombre: user_modificador.nombre, cargo: user_modificador.cargo.nombre};
+                let user_medico_plain = null;
+                if(user_medico) {
+                    user_medico_plain = {cedula: user_medico.cedula, nombre: user_medico.nombre, cargo: user_medico.cargo.nombre};
+                }
+
+                let user_creador_plain = null;
+                if(user_creador) {
+                    user_creador_plain = {cedula: user_creador.cedula, nombre: user_creador.nombre, cargo: user_creador.cargo.nombre};
+                }
+
+                let user_modificador_plain = null;
+                if(user_modificador) {
+                    user_modificador_plain = {cedula: user_modificador.cedula, nombre: user_modificador.nombre, cargo: user_modificador.cargo.nombre};
+                }
 
                 historiales_output.push({
                     id: historial.id,
