@@ -63,7 +63,39 @@ const HistorialMedicoController = {
             });
 
             const historial = objHistorial.get({ plain: true });
-            const historial_medico = {
+
+            const user_medico = await Usuario.findOne({
+                where: { cedula: historial.medico },
+                attributes: ['cedula','nombre','cargo_id'],
+                include: ['cargo']
+            });
+            const user_creador = await Usuario.findOne({
+                where: { cedula: historial.created_by },
+                attributes: ['cedula','nombre','cargo_id'],
+                include: ['cargo']
+            });
+            const user_modificador = await Usuario.findOne({
+                where: { cedula: historial.updated_by },
+                attributes: ['cedula','nombre','cargo_id'],
+                include: ['cargo']
+            });
+
+            let user_medico_plain = null;
+            if(user_medico) {
+                user_medico_plain = {cedula: user_medico.cedula, nombre: user_medico.nombre, cargo: user_medico.cargo.nombre};
+            }
+
+            let user_creador_plain = null;
+            if(user_creador) {
+                user_creador_plain = {cedula: user_creador.cedula, nombre: user_creador.nombre, cargo: user_creador.cargo.nombre};
+            }
+
+            let user_modificador_plain = null;
+            if(user_modificador) {
+                user_modificador_plain = {cedula: user_modificador.cedula, nombre: user_modificador.nombre, cargo: user_modificador.cargo.nombre};
+            }
+            
+            const historial_output = {
                 id: historial.id,
                 nHistoria: historial.numero,
                 pacienteId: historial.paciente_id,
@@ -73,7 +105,7 @@ const HistorialMedicoController = {
                     otroMotivo: historial.otro_motivo_consulta,
                     tipoCristalActual: historial.tipo_cristal_actual,
                     fechaUltimaGraduacion: historial.ultima_graduacion,
-                    medico: historial.medico,
+                    medico: user_medico_plain,
                 },
 
                 examenOcular: {
@@ -97,12 +129,12 @@ const HistorialMedicoController = {
                 auditoria: {
                     fechaCreacion: historial.created_at,
                     fechaActualizacion: historial.updated_at,
-                    creadoPor: historial.created_by,
-                    actualizadoPor: historial.updated_by,
+                    creadoPor: user_creador_plain,
+                    actualizadoPor: user_modificador_plain,
                 }
             };
 
-            res.status(200).json({ message: 'ok', historial_medico: historial_medico });
+            res.status(200).json({ message: 'ok', historial_medico: historial_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
@@ -160,8 +192,80 @@ const HistorialMedicoController = {
             objHistorial.updated_by = req.user.cedula;
             // ========================================
             objHistorial.save();
+            
+            const historial = objHistorial.get({ plain: true });
+            
+            const user_medico = await Usuario.findOne({
+                where: { cedula: historial.medico },
+                attributes: ['cedula','nombre','cargo_id'],
+                include: ['cargo']
+            });
+            const user_creador = await Usuario.findOne({
+                where: { cedula: historial.created_by },
+                attributes: ['cedula','nombre','cargo_id'],
+                include: ['cargo']
+            });
+            const user_modificador = await Usuario.findOne({
+                where: { cedula: historial.updated_by },
+                attributes: ['cedula','nombre','cargo_id'],
+                include: ['cargo']
+            });
 
-            res.status(200).json({ message: 'ok', historial_medico: objHistorial });
+            let user_medico_plain = null;
+            if(user_medico) {
+                user_medico_plain = {cedula: user_medico.cedula, nombre: user_medico.nombre, cargo: user_medico.cargo.nombre};
+            }
+
+            let user_creador_plain = null;
+            if(user_creador) {
+                user_creador_plain = {cedula: user_creador.cedula, nombre: user_creador.nombre, cargo: user_creador.cargo.nombre};
+            }
+
+            let user_modificador_plain = null;
+            if(user_modificador) {
+                user_modificador_plain = {cedula: user_modificador.cedula, nombre: user_modificador.nombre, cargo: user_modificador.cargo.nombre};
+            }
+
+            const historial_output = {
+                id: historial.id,
+                nHistoria: historial.numero,
+                pacienteId: historial.paciente_id,
+
+                datosConsulta: {
+                    motivo: historial.motivo_consulta,
+                    otroMotivo: historial.otro_motivo_consulta,
+                    tipoCristalActual: historial.tipo_cristal_actual,
+                    fechaUltimaGraduacion: historial.ultima_graduacion,
+                    medico: user_medico_plain,
+                },
+
+                examenOcular: {
+                    lensometria: historial.examen_ocular_lensometria,
+                    refraccion: historial.examen_ocular_refraccion,
+                    refraccionFinal: historial.examen_ocular_refraccion_final,
+                    avsc_avae_otros: historial.examen_ocular_avsc_avae_otros,
+                },
+
+                diagnosticoTratamiento: {
+                    diagnostico: historial.diagnostico,
+                    tratamiento: historial.tratamiento,
+                },
+
+                recomendaciones: historial.recomendaciones,
+
+                conformidad: {
+                    notaConformidad: historial.conformidad_nota,
+                },
+
+                auditoria: {
+                    fechaCreacion: historial.created_at,
+                    fechaActualizacion: historial.updated_at,
+                    creadoPor: user_creador_plain,
+                    actualizadoPor: user_modificador_plain,
+                }
+            };
+
+            res.status(200).json({ message: 'ok', historial_medico: historial_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
