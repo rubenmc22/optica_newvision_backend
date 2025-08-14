@@ -65,8 +65,4 @@ router.post('/historial-medico-add/', authMiddleware, HistorialMedicoController.
 router.put('/historial-medico-update/:id?', authMiddleware, HistorialMedicoController.update);
 router.delete('/historial-medico-delete/:id?', authMiddleware, HistorialMedicoController.delete);
 
-router.get('/', authMiddleware, (req, res) => {
-  res.json({ message: 'Bienvenido a la página de inicio.' });
-});
-
 module.exports = router;
