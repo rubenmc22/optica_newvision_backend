@@ -1,4 +1,4 @@
-const Tasa = require("../models/tasa");
+const Tasa = require("../models/Tasa");
 const VerificationUtils = require("../utils/VerificationUtils");
 const axios = require('axios');
 const cheerio = require('cheerio');
