@@ -21,7 +21,7 @@ app.use('/public', express.static(path.join(__dirname, '../public')));
 
 // Rutas
 app.get('/', async (req, res) => {
-  res.json({ message: "Hello world" });
+  res.json({ message: "Hello world: 2025-08-18" });
 });
 
 app.use('/api', routes);
