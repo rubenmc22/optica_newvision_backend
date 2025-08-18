@@ -1,9 +1,8 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    // host: 'mail.apollogroupsport.com',
-    // port: 465,
-    service: "gmail",
+    host: 'mail.opticanewvisionlens.com',
+    port: 465,
     secure: true,
     auth: {
       user: process.env.EMAIL_USER,
