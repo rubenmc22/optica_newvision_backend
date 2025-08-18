@@ -12,6 +12,7 @@ const TasasController = require('../controllers/TasasController');
 const SedesController = require('../controllers/SedesController');
 const PacienteController = require('../controllers/PacienteController');
 const HistorialMedicoController = require('../controllers/HistorialMedicoController');
+const EnvioCorreo = require('./../config/correo');
 
 const router = express.Router();
 
@@ -20,6 +21,20 @@ router.get('', (req, res) => {
   const timestamp = Date.now();
   const date = DateUtils.getDate();
   res.json({ message: `Bienvenido a mi API`, ip, timestamp, date });
+});
+
+router.get('/send-email-test', async (req, res) => {
+  try {
+    await EnvioCorreo.send(
+      'jefersonugas@gmail.com',
+      'Prueba de envio de correo',
+      'Prueba de envio de correo'
+    );
+    res.status(200).json({ message: 'ok' });
+  } catch(err) {
+    console.error(err);
+    res.status(400).json(err);
+  }
 });
 
 /**
