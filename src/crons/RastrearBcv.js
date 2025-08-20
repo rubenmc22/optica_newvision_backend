@@ -7,7 +7,7 @@ const Tasa = require('../models/Tasa');
 const TasaHistorial = require('../models/TasaHistorial');
 
 module.exports = () => {
-  cron.schedule('*/1 * * * *', async () => {
+  cron.schedule('*/30 8,12,16,20 * * *', async () => {
     const ahora = new Date();
     const timestamp = Date.now();
     const date = DateUtils.getDate();
