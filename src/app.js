@@ -6,6 +6,8 @@ const cors = require('cors');
 const Usuario = require('./models/Usuario');
 const path = require('path');
 
+require('./crons/RastrearBcv')();
+
 const app = express();
 const port = process.env.PORT || 3000;
 

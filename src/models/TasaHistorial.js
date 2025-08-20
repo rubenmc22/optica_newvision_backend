@@ -19,7 +19,7 @@ const TasaHistorial = sequelize.define('TasaHistorial', {
   },
   usu_cedula: {
     type: DataTypes.STRING(20),
-    allowNull: false,
+    allowNull: true,
     collate: 'utf8mb4_general_ci',
   },
   tipo_cambio: {
