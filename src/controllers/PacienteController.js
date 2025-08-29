@@ -137,11 +137,11 @@ const PacienteController = {
             const paciente = objPaciente.get({ plain: true });
             const paciente_output = {
                 key: paciente.pkey,
+                sedeId: paciente.sede_id,
                 created_at: paciente.created_at,
                 updated_at: paciente.updated_at,
                 informacionPersonal: {
                     esMenorSinCedula: paciente.sin_cedula,
-                    sedeId: paciente.sede_id,
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
                     telefono: paciente.telefono,
@@ -317,11 +317,11 @@ const PacienteController = {
             const paciente = objPaciente.get({ plain: true });
             const paciente_output = {
                 key: paciente.pkey,
+                sedeId: paciente.sede_id,
                 created_at: paciente.created_at,
                 updated_at: paciente.updated_at,
                 informacionPersonal: {
                     esMenorSinCedula: paciente.sin_cedula,
-                    sedeId: paciente.sede_id,
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
                     telefono: paciente.telefono,
@@ -386,11 +386,11 @@ const PacienteController = {
             for(let paciente of pacientes_db) {
                 pacientes_output.push({
                     key: paciente.pkey,
+                    sedeId: paciente.sede_id,
                     created_at: paciente.created_at,
                     updated_at: paciente.updated_at,
                     informacionPersonal: {
                         esMenorSinCedula: paciente.sin_cedula,
-                        sedeId: paciente.sede_id,
                         nombreCompleto: paciente.nombre,
                         cedula: paciente.cedula,
                         telefono: paciente.telefono,
