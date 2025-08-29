@@ -141,6 +141,7 @@ const PacienteController = {
                 updated_at: paciente.updated_at,
                 informacionPersonal: {
                     esMenorSinCedula: paciente.sin_cedula,
+                    sedeId: paciente.sede_id,
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
                     telefono: paciente.telefono,
@@ -319,6 +320,7 @@ const PacienteController = {
                 updated_at: paciente.updated_at,
                 informacionPersonal: {
                     esMenorSinCedula: paciente.sin_cedula,
+                    sedeId: paciente.sede_id,
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
                     telefono: paciente.telefono,
