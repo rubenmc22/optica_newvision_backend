@@ -169,6 +169,7 @@ const PacienteController = {
             };
             res.status(200).json({ message: 'ok', paciente: paciente_output });
         } catch (err) {
+            console.error(err);
             res.status(400).json(err);
         }
     },
