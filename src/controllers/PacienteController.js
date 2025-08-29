@@ -1,5 +1,7 @@
 const VerificationUtils = require('../utils/VerificationUtils');
 const Paciente = require('./../models/Paciente');
+const HashUtils = require('../utils/HashUtil');
+const { Op } = require('sequelize');
 
 const PacienteController = {
     add: async (req, res) => {
@@ -14,17 +16,14 @@ const PacienteController = {
                 historiaClinica: historiaClinica,
             } = req.body;
 
-            const paciente_id = `${req.sede.id}-${informacionPersonal.cedula}`;
-
             if(!validar_estructura_informacion_personal(informacionPersonal)) {
                 throw { message: "La estructura de 'informacionPersonal' es incorrecta." };
             }
             if(!validar_estructura_historia_clinica(historiaClinica)) {
                 throw { message: "La estructura de 'historiaClinica' es incorrecta." };
             }
-            const cant = await Paciente.count({ where: { pkey: paciente_id } });
-            if(cant > 0) {
-                throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}'.` };
+            if (informacionPersonal.esMenorSinCedula !== false && informacionPersonal.esMenorSinCedula !== true && informacionPersonal.esMenorSinCedula !== null) {
+                throw { message: "EL parametro 'esMenorSinCedula' debe ser true, false o null" };
             }
             if (!VerificationUtils.verify_cedula(informacionPersonal.cedula)) {
                 throw { message: "La cedula no es valida." };
@@ -89,11 +88,30 @@ const PacienteController = {
             if(historiaClinica.patologiaOcular !== null && !Array.isArray(historiaClinica.patologiaOcular)) {
                 throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o un array." };
             }
+            
+            const sin_cedula = (informacionPersonal.esMenorSinCedula === true) ? true : false;
+            let paciente_id = null;
+            if(!sin_cedula) {
+                paciente_id = HashUtils.generate(`${req.sede.id}-${informacionPersonal.cedula}`);
+            }
+            else {
+                paciente_id = HashUtils.generate(`${req.sede.id}-${informacionPersonal.cedula}-${informacionPersonal.nombreCompleto}`);
+            }
+
+            const cant = await Paciente.count({ where: { pkey: paciente_id } });
+            if(cant > 0) {
+                if(!sin_cedula) {
+                    throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}'.` };
+                } else {
+                    throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}' como menor de edad.` };
+                }
+            }
 
             const objPaciente = await Paciente.create({
                 pkey: paciente_id,
                 sede_id: req.sede.id,
                 cedula: informacionPersonal.cedula,
+                sin_cedula: sin_cedula,
                 nombre: informacionPersonal.nombreCompleto,
                 fecha_nacimiento: informacionPersonal.fechaNacimiento,
                 telefono: (informacionPersonal.telefono == null) ? "" : informacionPersonal.telefono,
@@ -122,6 +140,7 @@ const PacienteController = {
                 created_at: paciente.created_at,
                 updated_at: paciente.updated_at,
                 informacionPersonal: {
+                    esMenorSinCedula: paciente.sin_cedula,
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
                     telefono: paciente.telefono,
@@ -181,6 +200,9 @@ const PacienteController = {
             if(!validar_estructura_historia_clinica(historiaClinica)) {
                 throw { message: "La estructura de 'historiaClinica' es incorrecta." };
             }
+            if (informacionPersonal.esMenorSinCedula !== false && informacionPersonal.esMenorSinCedula !== true && informacionPersonal.esMenorSinCedula !== null) {
+                throw { message: "EL parametro 'esMenorSinCedula' debe ser true, false o null" };
+            }
             if (!VerificationUtils.verify_cedula(informacionPersonal.cedula)) {
                 throw { message: "La cedula no es valida." };
             }
@@ -245,17 +267,29 @@ const PacienteController = {
                 throw { message: "El parametro 'historiaClinica.patologiaOcular' debe ser nula o un array." };
             }
 
-            if(objPaciente.cedula != informacionPersonal.cedula) {
-                const paciente_id = `${req.sede.id}-${informacionPersonal.cedula}`;
-                const cant = await Paciente.count({ where: { pkey: paciente_id } });
-                if(cant > 0) {
-                    throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}'.` };
+            const sin_cedula = (informacionPersonal.esMenorSinCedula === true) ? true : false;
+            if(objPaciente.cedula != informacionPersonal.cedula || objPaciente.sin_cedula != sin_cedula || objPaciente.nombre != informacionPersonal.nombreCompleto) {
+                let paciente_id = null;
+                if(!sin_cedula) {
+                    paciente_id = HashUtils.generate(`${objPaciente.sede_id}-${informacionPersonal.cedula}`);
+                    const cant = await Paciente.count({ where: { pkey: paciente_id, id: { [Op.ne]: objPaciente.id } } });
+                    if(cant > 0) {
+                        throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}'.` };
+                    }
+                }
+                else {
+                    paciente_id = HashUtils.generate(`${objPaciente.sede_id}-${informacionPersonal.cedula}-${informacionPersonal.nombreCompleto}`);
+                    const cant = await Paciente.count({ where: { pkey: paciente_id, id: { [Op.ne]: objPaciente.id } } });
+                    if(cant > 0) {
+                        throw { message: `Ya esta registrada la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.nombre}' como menor de edad a nombre de '${informacionPersonal.nombreCompleto}'.` };
+                    }
                 }
 
                 objPaciente.pkey = paciente_id;
-                objPaciente.cedula = informacionPersonal.cedula;
             }
 
+            objPaciente.cedula = informacionPersonal.cedula;
+            objPaciente.sin_cedula = sin_cedula;
             objPaciente.nombre = informacionPersonal.nombreCompleto;
             objPaciente.fecha_nacimiento = informacionPersonal.fechaNacimiento;
             objPaciente.telefono = (informacionPersonal.telefono == null) ? "" : informacionPersonal.telefono;
@@ -285,6 +319,7 @@ const PacienteController = {
                 created_at: paciente.created_at,
                 updated_at: paciente.updated_at,
                 informacionPersonal: {
+                    esMenorSinCedula: paciente.sin_cedula,
                     nombreCompleto: paciente.nombre,
                     cedula: paciente.cedula,
                     telefono: paciente.telefono,
@@ -327,7 +362,7 @@ const PacienteController = {
             const paciente_id = req.params.id;
             let pacientes_db = [];
             const attributes = [
-                'pkey','cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
+                'pkey','cedula','sin_cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
                 'tiene_lentes','fotofobia','uso_dispositivo_electronico','traumatismo_ocular','traumatismo_ocular_descripcion','cirugia_ocular','cirugia_ocular_descripcion','alergias',
                 'antecedentes_personales','antecedentes_familiares','patologias','patologia_ocular'
             ];
@@ -352,6 +387,7 @@ const PacienteController = {
                     created_at: paciente.created_at,
                     updated_at: paciente.updated_at,
                     informacionPersonal: {
+                        esMenorSinCedula: paciente.sin_cedula,
                         nombreCompleto: paciente.nombre,
                         cedula: paciente.cedula,
                         telefono: paciente.telefono,
@@ -414,6 +450,7 @@ const PacienteController = {
 function validar_estructura_informacion_personal(objeto) {
     return (
         objeto && typeof objeto === 'object' &&
+        'esMenorSinCedula' in objeto &&
         'nombreCompleto' in objeto &&
         'cedula' in objeto &&
         'telefono' in objeto &&

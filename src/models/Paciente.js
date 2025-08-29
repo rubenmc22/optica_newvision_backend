@@ -23,6 +23,17 @@ const Paciente = sequelize.define('Paciente', {
     allowNull: false,
     collate: 'utf8mb4_general_ci'
   },
+  sin_cedula: {
+    type: DataTypes.TINYINT(4),
+    allowNull: false,
+    defaultValue: 1,
+    get() {
+      return this.getDataValue('sin_cedula') === 1;
+    },
+    set(value) {
+      this.setDataValue('sin_cedula', value ? 1 : 0);
+    }
+  },
   nombre: {
     type: DataTypes.STRING(255),
     allowNull: false,

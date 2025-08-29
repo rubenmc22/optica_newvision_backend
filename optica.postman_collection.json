@@ -27,12 +27,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/login",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/auth/login",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"auth",
@@ -60,12 +58,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/forgot-password",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/auth/forgot-password",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"auth",
@@ -104,12 +100,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/account/edit-profile",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/account/edit-profile",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"account",
@@ -183,12 +177,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/account/change-password--verify-otp",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/account/change-password--verify-otp",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"account",
@@ -222,12 +214,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/account/change-password--change-password",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/account/change-password--change-password",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"account",
@@ -302,12 +292,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/get-usuarios",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/get-usuarios",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"get-usuarios"
@@ -328,12 +316,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/get-usuarios/25409904",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/get-usuarios/25409904",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"get-usuarios",
@@ -364,12 +350,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/add-usuarios",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/add-usuarios",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"add-usuarios"
@@ -399,12 +383,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/update-usuarios/25409904",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/update-usuarios/25409904",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"update-usuarios",
@@ -426,12 +408,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/delete-usuarios/11554570",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/delete-usuarios/11554570",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"delete-usuarios",
@@ -462,12 +442,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/activar-usuarios/11554570",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/activar-usuarios/11554570",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"activar-usuarios",
@@ -494,12 +472,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/cargos-get",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/cargos-get",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"cargos-get"
@@ -520,12 +496,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/cargos-get/adminsitrador",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/cargos-get/adminsitrador",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"cargos-get",
@@ -552,12 +526,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/roles-get",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/roles-get",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"roles-get"
@@ -578,12 +550,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/roles-get/admin",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/roles-get/admin",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"roles-get",
@@ -610,12 +580,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/tasas/",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas/",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas",
@@ -638,12 +606,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/get-tasa-bcv/",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/get-tasa-bcv/",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"get-tasa-bcv",
@@ -665,12 +631,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/tasas/dolar",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas/dolar",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas",
@@ -701,12 +665,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tasas-update/euro",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas-update/euro",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas-update",
@@ -728,12 +690,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/tasas-update-with-bcv",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas-update-with-bcv",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas-update-with-bcv"
@@ -763,12 +723,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tasas-update-with-bcv/euro",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas-update-with-bcv/euro",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas-update-with-bcv",
@@ -790,12 +748,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/tasas-history/euro",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas-history/euro",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas-history",
@@ -826,12 +782,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tasas-rastreo-automatico/euro",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/tasas-rastreo-automatico/euro",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"tasas-rastreo-automatico",
@@ -853,17 +807,15 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTMyNTM1NzMsImV4cCI6MTc1MzMzOTk3M30.3d-pbVT3JKUv0GQdbKA6IgzahZpeH0ZWtIG1w-IR5F4",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY0NTk5NDEsImV4cCI6MTc1NjU0NjM0MX0.MLdTduWPJh81vOS1_v1wvWNjvkq4CJwK9WYcxWEcV78",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/paciente-get/",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/paciente-get/",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"paciente-get",
@@ -880,17 +832,15 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTMyNTM1NzMsImV4cCI6MTc1MzMzOTk3M30.3d-pbVT3JKUv0GQdbKA6IgzahZpeH0ZWtIG1w-IR5F4",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY0NTk5NDEsImV4cCI6MTc1NjU0NjM0MX0.MLdTduWPJh81vOS1_v1wvWNjvkq4CJwK9WYcxWEcV78",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/paciente-get/guarenas-25409904",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/paciente-get/guarenas-25409904",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"paciente-get",
@@ -907,13 +857,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTMyNTM1NzMsImV4cCI6MTc1MzMzOTk3M30.3d-pbVT3JKUv0GQdbKA6IgzahZpeH0ZWtIG1w-IR5F4",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY0NTk5NDEsImV4cCI6MTc1NjU0NjM0MX0.MLdTduWPJh81vOS1_v1wvWNjvkq4CJwK9WYcxWEcV78",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"nombreCompleto\": \"Ruben Martinez\",\r\n        \"cedula\": \"24367965\",\r\n        \"telefono\": \"04123920817\",\r\n        \"email\": \"rubemm18@gmail.com\",\r\n        \"fechaNacimiento\": \"2025-07-01\",\r\n        \"ocupacion\": \"fgdfgdf\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Las rosas, conj res, country villas\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"asdadasda\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Sí\",\r\n        \"fotofobia\": \"No\",\r\n        \"usoDispositivo\": \"Si, 3 a 6 horas\",\r\n        \"traumatismoOcular\": \"No\",\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": \"Sí\",\r\n        \"cirugiaOcularDescripcion\": \"catarata\",\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": null,\r\n        \"antecedentesFamiliares\": [\r\n            \"Diabetes\"\r\n        ],\r\n        \"patologias\": [\r\n            \"Astigmatismo\",\r\n            \"Miopía\"\r\n        ],\r\n        \"patologiaOcular\": null\r\n    }\r\n}",
+							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"esMenorSinCedula\": true, // true - false - null\r\n        \"nombreCompleto\": \"Ruben Martinez\",\r\n        \"cedula\": \"25409904\",\r\n        \"telefono\": \"04123920817\",\r\n        \"email\": \"rubemm18@gmail.com\",\r\n        \"fechaNacimiento\": \"2025-07-01\",\r\n        \"ocupacion\": \"fgdfgdf\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Las rosas, conj res, country villas\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"asdadasda\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Sí\",\r\n        \"fotofobia\": \"No\",\r\n        \"usoDispositivo\": \"Si, 3 a 6 horas\",\r\n        \"traumatismoOcular\": \"No\",\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": \"Sí\",\r\n        \"cirugiaOcularDescripcion\": \"catarata\",\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": null,\r\n        \"antecedentesFamiliares\": [\r\n            \"Diabetes\"\r\n        ],\r\n        \"patologias\": [\r\n            \"Astigmatismo\",\r\n            \"Miopía\"\r\n        ],\r\n        \"patologiaOcular\": null\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -921,12 +871,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/paciente-add",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/paciente-add",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"paciente-add"
@@ -942,13 +890,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTMyNTM1NzMsImV4cCI6MTc1MzMzOTk3M30.3d-pbVT3JKUv0GQdbKA6IgzahZpeH0ZWtIG1w-IR5F4",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY0NTk5NDEsImV4cCI6MTc1NjU0NjM0MX0.MLdTduWPJh81vOS1_v1wvWNjvkq4CJwK9WYcxWEcV78",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"nombreCompleto\": \"Jefferson Torres\",\r\n        \"cedula\": \"25409904\",\r\n        \"telefono\": \"04241738615\",\r\n        \"email\": \"jefersonugas@gmail.com\",\r\n        \"fechaNacimiento\": \"1996-06-11\",\r\n        \"ocupacion\": \"Ingeniero de Sistemas\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Guatire, Castillejo, en una casa.\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Facebook\",\r\n            \"username\": \"maria.gonzalez\"\r\n        },\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"@maria.g\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Si\",\r\n        \"fotofobia\": null,\r\n        \"usoDispositivo\": \"Si, 3 a 6 horas\",\r\n        \"traumatismoOcular\": null,\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": null,\r\n        \"cirugiaOcularDescripcion\": null,\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": [],\r\n        \"antecedentesFamiliares\": [],\r\n        \"patologias\": [\"a\", \"b\", \"c\"],\r\n        \"patologiaOcular\": []\r\n    }\r\n}",
+							"raw": "{\r\n    \"informacionPersonal\": {\r\n        \"esMenorSinCedula\": true, // true - false - null\r\n        \"nombreCompleto\": \"Jefferson Torres\",\r\n        \"cedula\": \"25409904\",\r\n        \"telefono\": \"04241738615\",\r\n        \"email\": \"jefersonugas@gmail.com\",\r\n        \"fechaNacimiento\": \"1996-06-11\",\r\n        \"ocupacion\": \"Ingeniero de Sistemas\",\r\n        \"genero\": \"m\",\r\n        \"direccion\": \"Guatire, Castillejo, en una casa.\"\r\n    },\r\n    \"redesSociales\": [\r\n        {\r\n            \"platform\": \"Facebook\",\r\n            \"username\": \"maria.gonzalez\"\r\n        },\r\n        {\r\n            \"platform\": \"Instagram\",\r\n            \"username\": \"@maria.g\"\r\n        }\r\n    ],\r\n    \"historiaClinica\": {\r\n        \"usuarioLentes\": \"Si\",\r\n        \"fotofobia\": null,\r\n        \"usoDispositivo\": \"Si, 3 a 6 horas\",\r\n        \"traumatismoOcular\": null,\r\n        \"traumatismoOcularDescripcion\": null,\r\n        \"cirugiaOcular\": null,\r\n        \"cirugiaOcularDescripcion\": null,\r\n        \"alergicoA\": null,\r\n        \"antecedentesPersonales\": [],\r\n        \"antecedentesFamiliares\": [],\r\n        \"patologias\": [\"a\", \"b\", \"c\"],\r\n        \"patologiaOcular\": []\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -956,16 +904,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/paciente-update/guarenas-25409904",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/paciente-update/a1ce1e1fb5b77d7aff14e2847501b859",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"paciente-update",
-								"guarenas-25409904"
+								"a1ce1e1fb5b77d7aff14e2847501b859"
 							]
 						}
 					},
@@ -983,12 +929,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/paciente-delete/guarenas-25409904",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/paciente-delete/guarenas-25409904",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"paciente-delete",
@@ -1010,17 +954,15 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTQwNjA4MTYsImV4cCI6MTc1NDE0NzIxNn0.Tkqiiwcl7f6M17JiJ5PBgVVuHNdCgizoMbDz5r9XiHg",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTQ5MTQ5MTcsImV4cCI6MTc1NTAwMTMxN30.GVMr-JiN9MZ1sQ5BGWOOWBA667B89IlRdAJVjIrTJL4",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-all/",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/historial-medico-all/",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"historial-medico-all",
@@ -1042,12 +984,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-all/H-20250801-001",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/historial-medico-all/H-20250801-001",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"historial-medico-all",
@@ -1069,12 +1009,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-paciente/guarenas-25409904",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/historial-medico-paciente/guarenas-25409904",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"historial-medico-paciente",
@@ -1105,12 +1043,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-add",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/historial-medico-add",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"historial-medico-add"
@@ -1140,12 +1076,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-update/H-20250801-001",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/historial-medico-update/H-20250801-001",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"historial-medico-update",
@@ -1167,12 +1101,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/historial-medico-delete/H-20250801-001",
-							"protocol": "http",
+							"raw": "{{baseURL}}/api/historial-medico-delete/H-20250801-001",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"historial-medico-delete",
@@ -1199,12 +1131,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/auth/get_data",
-					"protocol": "http",
+					"raw": "{{baseURL}}/api/auth/get_data",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"auth",
@@ -1223,12 +1153,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/sedes-get",
-					"protocol": "http",
+					"raw": "{{baseURL}}/api/sedes-get",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"sedes-get"
@@ -1236,6 +1164,34 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000"
 		}
 	]
 }
