@@ -363,7 +363,7 @@ const PacienteController = {
             const paciente_id = req.params.id;
             let pacientes_db = [];
             const attributes = [
-                'pkey','cedula','sin_cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
+                'pkey','sede_id','cedula','sin_cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
                 'tiene_lentes','fotofobia','uso_dispositivo_electronico','traumatismo_ocular','traumatismo_ocular_descripcion','cirugia_ocular','cirugia_ocular_descripcion','alergias',
                 'antecedentes_personales','antecedentes_familiares','patologias','patologia_ocular'
             ];
