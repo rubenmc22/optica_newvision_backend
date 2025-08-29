@@ -168,7 +168,6 @@ const PacienteController = {
             };
             res.status(200).json({ message: 'ok', paciente: paciente_output });
         } catch (err) {
-            console.error(err);
             res.status(400).json(err);
         }
     },
@@ -388,6 +387,7 @@ const PacienteController = {
                     updated_at: paciente.updated_at,
                     informacionPersonal: {
                         esMenorSinCedula: paciente.sin_cedula,
+                        sedeId: paciente.sede_id,
                         nombreCompleto: paciente.nombre,
                         cedula: paciente.cedula,
                         telefono: paciente.telefono,
