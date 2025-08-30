@@ -136,6 +136,7 @@ const PacienteController = {
             
             const paciente = objPaciente.get({ plain: true });
             const paciente_output = {
+                id: paciente.id,
                 key: paciente.pkey,
                 sedeId: paciente.sede_id,
                 created_at: paciente.created_at,
@@ -316,6 +317,7 @@ const PacienteController = {
             
             const paciente = objPaciente.get({ plain: true });
             const paciente_output = {
+                id: paciente.id,
                 key: paciente.pkey,
                 sedeId: paciente.sede_id,
                 created_at: paciente.created_at,
@@ -364,7 +366,7 @@ const PacienteController = {
             const paciente_id = req.params.id;
             let pacientes_db = [];
             const attributes = [
-                'pkey','sede_id','cedula','sin_cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
+                'id','pkey','sede_id','cedula','sin_cedula','nombre','fecha_nacimiento','telefono','email','ocupacion','genero','direccion','redes_sociales','created_at','updated_at',
                 'tiene_lentes','fotofobia','uso_dispositivo_electronico','traumatismo_ocular','traumatismo_ocular_descripcion','cirugia_ocular','cirugia_ocular_descripcion','alergias',
                 'antecedentes_personales','antecedentes_familiares','patologias','patologia_ocular'
             ];
@@ -385,6 +387,7 @@ const PacienteController = {
             let pacientes_output = [];
             for(let paciente of pacientes_db) {
                 pacientes_output.push({
+                    id: paciente.id,
                     key: paciente.pkey,
                     sedeId: paciente.sede_id,
                     created_at: paciente.created_at,
