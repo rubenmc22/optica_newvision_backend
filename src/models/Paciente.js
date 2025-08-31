@@ -10,7 +10,7 @@ const Paciente = sequelize.define('Paciente', {
   },
   pkey: {
     type: DataTypes.STRING(70),
-    allowNull: false,
+    allowNull: true,
     collate: 'utf8mb4_general_ci'
   },
   sede_id: {
