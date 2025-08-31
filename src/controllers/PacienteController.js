@@ -131,7 +131,7 @@ const PacienteController = {
                 patologias: historiaClinica.patologias,
                 patologia_ocular: historiaClinica.patologiaOcular,
             });
-            
+
             objPaciente.pkey = HashUtils.generate(objPaciente.id);
             objPaciente.save();
             
@@ -274,13 +274,13 @@ const PacienteController = {
 
             // Validamos usuario duplicado
             if(!sin_cedula) {
-                const count = await Paciente.count({ where: { sede_id: req.sede.id, cedula: informacionPersonal.cedula } });
+                const count = await Paciente.count({ where: { id: { [Op.ne]: objPaciente.id }, sede_id: req.sede.id, cedula: informacionPersonal.cedula } });
                 if(count > 0) {
                     throw { message: `Ya esta registrado un paciente con la cedula '${informacionPersonal.cedula}' en la sede '${req.sede.id}'.` };
                 }
             }
             else {
-                const count = await Paciente.count({ where: { sede_id: req.sede.id, cedula: informacionPersonal.cedula, nombre: informacionPersonal.nombreCompleto } });
+                const count = await Paciente.count({ where: { id: { [Op.ne]: objPaciente.id }, sede_id: req.sede.id, cedula: informacionPersonal.cedula, nombre: informacionPersonal.nombreCompleto } });
                 if(count > 0) {
                     throw { message: `Ya esta registrado un paciente menor de edad con la cedula '${req.sede.id}' en la sede '${informacionPersonal.cedula}' a nombre de '${informacionPersonal.nombreCompleto}'.` };
                 }
