@@ -329,6 +329,7 @@ const HistorialMedicoController = {
                     id: historial.id,
                     nHistoria: historial.numero,
                     pacienteId: historial.paciente_id,
+                    sedeId: historial.paciente.sede_id,
 
                     datosConsulta: {
                         motivo: historial.motivo_consulta,
