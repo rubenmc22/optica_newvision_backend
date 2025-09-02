@@ -7,6 +7,7 @@ const Usuario = require('./models/Usuario');
 const path = require('path');
 const HashUtils = require('./utils/HashUtil');
 const Paciente = require('./models/Paciente');
+const HistorialMedico = require('./models/HistorialMedico');
 
 require('./crons/RastrearBcv')();
 
