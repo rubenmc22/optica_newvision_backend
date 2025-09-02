@@ -29,31 +29,34 @@ app.get('/', async (req, res) => {
   res.json({ message: "Hello world: 2025-08-18" });
 });
 
-app.get('/ajustar-id-pacintes', async (req, res) => {
-  let countPacientes = 0;
-  let countHistorias = 0;
+/**
+ * Ajuste para encriptar las keys de pacientes en las tablas de 'pacientes' y 'historias_medicas'
+ */
+// app.get('/ajustar-id-pacintes', async (req, res) => {
+//   let countPacientes = 0;
+//   let countHistorias = 0;
 
-  const pacientes = await Paciente.findAll();
-  for(let paciente of pacientes) {
-    countPacientes++;
+//   const pacientes = await Paciente.findAll();
+//   for(let paciente of pacientes) {
+//     countPacientes++;
 
-    const pkey = paciente.pkey;
-    const new_pkey = HashUtils.generate(paciente.id);
+//     const pkey = paciente.pkey;
+//     const new_pkey = HashUtils.generate(paciente.id);
     
-    paciente.pkey = new_pkey;
-    paciente.save();
+//     paciente.pkey = new_pkey;
+//     paciente.save();
 
-    const historias = await HistorialMedico.findAll({ where: { paciente_id: pkey } });
-    for(let historia of historias) {
-      countHistorias++;
+//     const historias = await HistorialMedico.findAll({ where: { paciente_id: pkey } });
+//     for(let historia of historias) {
+//       countHistorias++;
 
-      historia.paciente_id = new_pkey;
-      historia.save();
-    }
-  }
+//       historia.paciente_id = new_pkey;
+//       historia.save();
+//     }
+//   }
 
-  res.json({ message: "OK", total_pacientes: countPacientes, total_historias: countHistorias });
-});
+//   res.json({ message: "OK", total_pacientes: countPacientes, total_historias: countHistorias });
+// });
 
 app.use('/api', routes);
 
