@@ -4,6 +4,8 @@ const Producto = require('./../models/Producto');
 const { Op } = require('sequelize');
 const upload = require('../config/uploader');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 const ProductoController = {
     add: async (req, res) => {
@@ -89,7 +91,8 @@ const ProductoController = {
                 precio: precio,
                 moneda: objTasa.id,
                 activo: activo,
-                descripcion: descripcion
+                descripcion: descripcion,
+                imagen_url: "/public/images/product-generic-image.jpg?t=" + Date.now()
             });
 
             const producto = objProducto.get({ plain: true });
@@ -296,6 +299,9 @@ const ProductoController = {
 
             let productos_output = [];
             for (let producto of productos_db) {
+                const existe_imagen = (producto.imagen_url !== null && limpiarYValidarRuta(producto.imagen_url));
+                const ruta_imagen = (existe_imagen) ? (producto.imagen_url) : ("/public/images/product-generic-image.jpg?t=" + Date.now());
+
                 productos_output.push({
                     id: producto.id,
                     sede_id: producto.sede_id,
@@ -311,7 +317,7 @@ const ProductoController = {
                     moneda: producto.moneda,
                     activo: producto.activo,
                     descripcion: producto.descripcion,
-                    imagen_url: producto.imagen_url,
+                    imagen_url: ruta_imagen,
                     created_at: producto.created_at,
                     updated_at: producto.updated_at,
                 });
@@ -348,5 +354,18 @@ const ProductoController = {
         }
     },
 };
+
+function limpiarYValidarRuta(inputUrl, baseDir = __dirname) {
+  // Elimina el query string si existe
+  const rutaSinQuery = inputUrl.split('?')[0];
+
+  // Construye la ruta absoluta del archivo
+  const rutaAbsoluta = path.join("./../..", rutaSinQuery);
+
+  // Verifica si el archivo existe
+  const existeArchivo = fs.existsSync(rutaAbsoluta);
+
+  return existeArchivo;
+}
 
 module.exports = ProductoController;
