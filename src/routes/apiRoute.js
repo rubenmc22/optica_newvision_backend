@@ -83,7 +83,6 @@ router.delete('/historial-medico-delete/:id?', authMiddleware, HistorialMedicoCo
 
 router.get('/producto-get/:id?', authMiddleware, ProductoController.get);
 router.post('/producto-add', authMiddleware, ProductoController.add);
-router.post('/producto-upload-image/:id', authMiddleware, ProductoController.upload_image);
 router.put('/producto-update/:id', authMiddleware, ProductoController.update);
 router.delete('/producto-delete/:id', authMiddleware, ProductoController.delete);
 

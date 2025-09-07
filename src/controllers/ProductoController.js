@@ -14,147 +14,137 @@ const ProductoController = {
                 throw { message: "Sesion invalida." };
             }
 
-            const {
-                nombre,
-                marca,
-                color,
-                codigo,
-                material,
-                proveedor,
-                categoria,
-                stock,
-                precio,
-                moneda,
-                activo,
-                descripcion
-            } = req.body;
+            req.nombre_imagen = `product-${Date.now()}`;
+            upload.single('imagen')(req, res, async (err) => {
+                if (err) {
+                    if (err instanceof multer.MulterError) {
+                        return res.status(400).json({ message: err.message });
+                    } else if (err) {
+                        return res.status(400).json({ message: err.message });
+                    }
+                }
 
-            if (!VerificationUtils.verify_nombre(nombre)) {
-                throw { message: "El nombre no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(marca)) {
-                throw { message: "La marca no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(color)) {
-                throw { message: "El color no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(codigo)) {
-                throw { message: "El codigo no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(material)) {
-                throw { message: "El material no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(proveedor)) {
-                throw { message: "El proveedor no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(categoria)) {
-                throw { message: "La categoria no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_numero(stock)) {
-                throw { message: "El stock debe ser numerico" };
-            }
-            if (!VerificationUtils.verify_numero(precio)) {
-                throw { message: "El precio debe ser numerico" };
-            }
-            if (!VerificationUtils.verify_boolean(activo)) {
-                throw { message: "El parametro 'activo' debe ser booleano." };
-            }
+                const {
+                    nombre,
+                    marca,
+                    color,
+                    codigo,
+                    material,
+                    proveedor,
+                    categoria,
+                    stock,
+                    precio,
+                    moneda,
+                    activo: activo_string,
+                    descripcion
+                } = req.body;
 
-            const objTasa = await Tasa.findOne({ where: { id: moneda } });
-            if (!objTasa) {
-                throw { message: "La moneda enviada no existe: " + moneda + "." };
-            }
+                const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
 
-            const count = await Producto.count({
-                where: {
+                if (!VerificationUtils.verify_nombre(nombre)) {
+                    return res.status(400).json({ message: "El nombre no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(marca)) {
+                    return res.status(400).json({ message: "La marca no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(color)) {
+                    return res.status(400).json({ message: "El color no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(codigo)) {
+                    return res.status(400).json({ message: "El codigo no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(material)) {
+                    return res.status(400).json({ message: "El material no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(proveedor)) {
+                    return res.status(400).json({ message: "El proveedor no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(categoria)) {
+                    return res.status(400).json({ message: "La categoria no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_numero(stock)) {
+                    return res.status(400).json({ message: "El stock debe ser numerico" });
+                }
+                if (!VerificationUtils.verify_numero(precio)) {
+                    return res.status(400).json({ message: "El precio debe ser numerico" });
+                }
+                if (!VerificationUtils.verify_boolean(activo)) {
+                    return res.status(400).json({ message: "El parametro 'activo' debe ser booleano." });
+                }
+
+                const objTasa = await Tasa.findOne({ where: { id: moneda } });
+                if (!objTasa) {
+                    return res.status(400).json({ message: "La moneda enviada no existe: " + moneda + "." });
+                }
+
+                const count = await Producto.count({
+                    where: {
+                        sede_id: req.sede.id,
+                        nombre: nombre,
+                        marca: marca,
+                        color: color,
+                        categoria: categoria
+                    }
+                });
+                if (count > 0) {
+                    return res.status(400).json({ message: "Ya existe un producto con el mismo nombre, marca, color y categoria en la sede actual." });
+                }
+
+                const objProducto = await Producto.create({
                     sede_id: req.sede.id,
                     nombre: nombre,
                     marca: marca,
                     color: color,
-                    categoria: categoria
+                    codigo: codigo,
+                    material: material,
+                    proveedor: proveedor,
+                    categoria: categoria,
+                    stock: stock,
+                    precio: precio,
+                    moneda: objTasa.id,
+                    activo: activo,
+                    descripcion: descripcion,
+                    imagen_url: "/public/images/product-generic-image.jpg?t=" + Date.now()
+                });
+
+                const producto = objProducto.get({ plain: true });
+                const producto_output = {
+                    id: producto.id,
+                    sede_id: producto.sede_id,
+                    nombre: producto.nombre,
+                    marca: producto.marca,
+                    color: producto.color,
+                    codigo: producto.codigo,
+                    material: producto.material,
+                    proveedor: producto.proveedor,
+                    categoria: producto.categoria,
+                    stock: producto.stock,
+                    precio: producto.precio,
+                    moneda: producto.moneda,
+                    activo: producto.activo,
+                    descripcion: producto.descripcion,
+                    imagen_url: producto.imagen_url,
+                    created_at: producto.created_at,
+                    updated_at: producto.updated_at,
+                };
+
+                if (req.file) {
+                    // Renombra el archivo subido con el ID del producto
+                    const extension = path.extname(req.file.filename);
+                    const nuevoNombre = `product-${objProducto.id}${extension}`;
+                    const oldPath = path.join("./public/images", req.nombre_imagen + extension);
+                    const newPath = path.join("./public/images", nuevoNombre);
+
+                    // Renombra el archivo en el sistema de archivos
+                    fs.renameSync(oldPath, newPath);
+
+                    // Actualiza la URL de la imagen en el producto
+                    objProducto.imagen_url = `/public/images/${nuevoNombre}?t=${Date.now()}`;
+                    await objProducto.save();
+                    producto_output.imagen_url = objProducto.imagen_url;
                 }
-            });
-            if (count > 0) {
-                throw { message: "Ya existe un producto con el mismo nombre, marca, color y categoria en la sede actual." };
-            }
-
-            const objProducto = await Producto.create({
-                sede_id: req.sede.id,
-                nombre: nombre,
-                marca: marca,
-                color: color,
-                codigo: codigo,
-                material: material,
-                proveedor: proveedor,
-                categoria: categoria,
-                stock: stock,
-                precio: precio,
-                moneda: objTasa.id,
-                activo: activo,
-                descripcion: descripcion,
-                imagen_url: "/public/images/product-generic-image.jpg?t=" + Date.now()
-            });
-
-            const producto = objProducto.get({ plain: true });
-            const producto_output = {
-                id: producto.id,
-                sede_id: producto.sede_id,
-                nombre: producto.nombre,
-                marca: producto.marca,
-                color: producto.color,
-                codigo: producto.codigo,
-                material: producto.material,
-                proveedor: producto.proveedor,
-                categoria: producto.categoria,
-                stock: producto.stock,
-                precio: producto.precio,
-                moneda: producto.moneda,
-                activo: producto.activo,
-                descripcion: producto.descripcion,
-                imagen_url: producto.imagen_url,
-                created_at: producto.created_at,
-                updated_at: producto.updated_at,
-            };
-            res.status(200).json({ message: 'ok', producto: producto_output });
-        } catch (err) {
-            console.error(err);
-            res.status(400).json(err);
-        }
-    },
-
-    upload_image: async (req, res) => {
-        try {
-            if (!req.user) {
-                throw { message: "Sesion invalida." };
-            }
-
-            const id = req.params.id;
-            const objProducto = await Producto.findOne({ where: { id: id } });
-            if (!objProducto) {
-                throw { message: "El producto enviado no existe." };
-            }
-
-            // Usamos el middleware de Multer para manejar la subida
-            req.nombre_imagen = `product-${objProducto.id}`;
-            upload.single('imagen')(req, res, async (err) => {
-                if (err) {
-                    if (err instanceof multer.MulterError) {
-                        return res.status(400).json({ error: err.message });
-                    } else if (err) {
-                        return res.status(400).json({ error: err.message });
-                    }
-                }
-
-                if (!req.file) {
-                    return res.status(400).json({ error: 'No se subió ningún archivo o el formato no es válido' });
-                }
-
-                // La imagen se guardó correctamente
-                const imageUrl = `/public/images/${req.file.filename}`;
-                objProducto.imagen_url = imageUrl+"?t=" + Date.now();
-                objProducto.save();
-
-                res.status(200).json({ message: 'ok', image_url: objProducto.imagen_url });
+                
+                res.status(200).json({ message: 'ok', producto: producto_output });
             });
         } catch (err) {
             console.error(err);
@@ -177,103 +167,132 @@ const ProductoController = {
                 throw { message: "No se puede modificar productos de otras sedes." };
             }
 
-            const {
-                nombre,
-                marca,
-                color,
-                codigo,
-                material,
-                proveedor,
-                categoria,
-                stock,
-                precio,
-                moneda,
-                activo,
-                descripcion
-            } = req.body;
-
-            if (!VerificationUtils.verify_nombre(nombre)) {
-                throw { message: "El nombre no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(marca)) {
-                throw { message: "La marca no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(color)) {
-                throw { message: "El color no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(codigo)) {
-                throw { message: "El codigo no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(material)) {
-                throw { message: "El material no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(proveedor)) {
-                throw { message: "El proveedor no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_nombre(categoria)) {
-                throw { message: "La categoria no puede quedar vacio." };
-            }
-            if (!VerificationUtils.verify_numero(stock)) {
-                throw { message: "El stock debe ser numerico" };
-            }
-            if (!VerificationUtils.verify_numero(precio)) {
-                throw { message: "El precio debe ser numerico" };
-            }
-            if (!VerificationUtils.verify_boolean(activo)) {
-                throw { message: "El parametro 'activo' debe ser booleano." };
-            }
-
-            const count = await Producto.count({
-                where: {
-                    id: { [Op.ne]: objProducto.id },
-                    sede_id: req.sede.id,
-                    nombre: nombre,
-                    marca: marca,
-                    color: color,
-                    categoria: categoria
+            req.nombre_imagen = `product-${Date.now()}`;
+            upload.single('imagen')(req, res, async (err) => {
+                if (err) {
+                    if (err instanceof multer.MulterError) {
+                        return res.status(400).json({ message: err.message });
+                    } else if (err) {
+                        return res.status(400).json({ message: err.message });
+                    }
                 }
+
+                const {
+                    nombre,
+                    marca,
+                    color,
+                    codigo,
+                    material,
+                    proveedor,
+                    categoria,
+                    stock,
+                    precio,
+                    moneda,
+                    activo: activo_string,
+                    descripcion
+                } = req.body;
+
+                const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
+
+                if (!VerificationUtils.verify_nombre(nombre)) {
+                    return res.status(400).json({ message: "El nombre no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(marca)) {
+                    return res.status(400).json({ message: "La marca no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(color)) {
+                    return res.status(400).json({ message: "El color no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(codigo)) {
+                    return res.status(400).json({ message: "El codigo no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(material)) {
+                    return res.status(400).json({ message: "El material no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(proveedor)) {
+                    return res.status(400).json({ message: "El proveedor no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(categoria)) {
+                    return res.status(400).json({ message: "La categoria no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_numero(stock)) {
+                    return res.status(400).json({ message: "El stock debe ser numerico" });
+                }
+                if (!VerificationUtils.verify_numero(precio)) {
+                    return res.status(400).json({ message: "El precio debe ser numerico" });
+                }
+                if (!VerificationUtils.verify_boolean(activo)) {
+                    return res.status(400).json({ message: "El parametro 'activo' debe ser booleano." });
+                }
+
+                const count = await Producto.count({
+                    where: {
+                        id: { [Op.ne]: objProducto.id },
+                        sede_id: req.sede.id,
+                        nombre: nombre,
+                        marca: marca,
+                        color: color,
+                        categoria: categoria
+                    }
+                });
+                if (count > 0) {
+                    return res.status(400).json({ message: "Ya existe un producto con el mismo nombre, marca, color y categoria en la sede actual." });
+                }
+
+                objProducto.nombre = nombre;
+                objProducto.marca = marca;
+                objProducto.color = color;
+                objProducto.codigo = codigo;
+                objProducto.material = material;
+                objProducto.proveedor = proveedor;
+                objProducto.categoria = categoria;
+                objProducto.stock = stock;
+                objProducto.precio = precio;
+                objProducto.moneda = moneda;
+                objProducto.activo = activo;
+                objProducto.descripcion = descripcion;
+
+                await objProducto.save();
+
+                const producto = objProducto.get({ plain: true });
+                const producto_output = {
+                    id: producto.id,
+                    sede_id: producto.sede_id,
+                    nombre: producto.nombre,
+                    marca: producto.marca,
+                    color: producto.color,
+                    codigo: producto.codigo,
+                    material: producto.material,
+                    proveedor: producto.proveedor,
+                    categoria: producto.categoria,
+                    stock: producto.stock,
+                    precio: producto.precio,
+                    moneda: producto.moneda,
+                    activo: producto.activo,
+                    descripcion: producto.descripcion,
+                    imagen_url: producto.imagen_url,
+                    created_at: producto.created_at,
+                    updated_at: producto.updated_at,
+                };
+
+                if (req.file) {
+                    // Renombra el archivo subido con el ID del producto
+                    const extension = path.extname(req.file.filename);
+                    const nuevoNombre = `product-${objProducto.id}${extension}`;
+                    const oldPath = path.join("./public/images", req.nombre_imagen + extension);
+                    const newPath = path.join("./public/images", nuevoNombre);
+
+                    // Renombra el archivo en el sistema de archivos
+                    fs.renameSync(oldPath, newPath);
+
+                    // Actualiza la URL de la imagen en el producto
+                    objProducto.imagen_url = `/public/images/${nuevoNombre}?t=${Date.now()}`;
+                    await objProducto.save();
+                    producto_output.imagen_url = objProducto.imagen_url;
+                }
+
+                res.status(200).json({ message: 'ok', producto: producto_output });
             });
-            if (count > 0) {
-                throw { message: "Ya existe un producto con el mismo nombre, marca, color y categoria en la sede actual." };
-            }
-
-            objProducto.nombre = nombre;
-            objProducto.marca = marca;
-            objProducto.color = color;
-            objProducto.codigo = codigo;
-            objProducto.material = material;
-            objProducto.proveedor = proveedor;
-            objProducto.categoria = categoria;
-            objProducto.stock = stock;
-            objProducto.precio = precio;
-            objProducto.moneda = moneda;
-            objProducto.activo = activo;
-            objProducto.descripcion = descripcion;
-
-            objProducto.save();
-
-            const producto = objProducto.get({ plain: true });
-            const producto_output = {
-                id: producto.id,
-                sede_id: producto.sede_id,
-                nombre: producto.nombre,
-                marca: producto.marca,
-                color: producto.color,
-                codigo: producto.codigo,
-                material: producto.material,
-                proveedor: producto.proveedor,
-                categoria: producto.categoria,
-                stock: producto.stock,
-                precio: producto.precio,
-                moneda: producto.moneda,
-                activo: producto.activo,
-                descripcion: producto.descripcion,
-                imagen_url: producto.imagen_url,
-                created_at: producto.created_at,
-                updated_at: producto.updated_at,
-            };
-
-            res.status(200).json({ message: 'ok', producto: producto_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
