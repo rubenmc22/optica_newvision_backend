@@ -1155,13 +1155,74 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Producto 3\",\r\n    \"marca\": \"Marca Generica 1\",\r\n    \"color\": \"Azul\",\r\n    \"codigo\": \"12345678\",\r\n    \"material\": \"Plastico\",\r\n    \"proveedor\": \"Pepsi\",\r\n    \"categoria\": \"Lentes\",\r\n    \"stock\": 5,\r\n    \"precio\": 5,\r\n    \"moneda\": \"euro\",\r\n    \"activo\": false,\r\n    \"descripcion\": \"Descripcion generica de muestra\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Producto 4",
+									"type": "text"
+								},
+								{
+									"key": "marca",
+									"value": "Marca Generica 1",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "Azul",
+									"type": "text"
+								},
+								{
+									"key": "codigo",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "material",
+									"value": "Plastico",
+									"type": "text"
+								},
+								{
+									"key": "proveedor",
+									"value": "Pepsi",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "Lentes",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "moneda",
+									"value": "euro",
+									"type": "text"
+								},
+								{
+									"key": "activo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Descripcion generica de muestra",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": []
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{baseURL}}/api/producto-add",
@@ -1188,13 +1249,74 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Producto Chevere 1\",\r\n    \"marca\": \"Marca Generica 1\",\r\n    \"color\": \"Azul\",\r\n    \"codigo\": \"12345678\",\r\n    \"material\": \"Plastico\",\r\n    \"proveedor\": \"Pepsi\",\r\n    \"categoria\": \"Lentes\",\r\n    \"stock\": 5,\r\n    \"precio\": 5,\r\n    \"moneda\": \"euro\",\r\n    \"activo\": true,\r\n    \"descripcion\": \"Descripcion generica de muestra\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Producto Chevere 1",
+									"type": "text"
+								},
+								{
+									"key": "marca",
+									"value": "Marca Generica 1",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "Azul",
+									"type": "text"
+								},
+								{
+									"key": "codigo",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "material",
+									"value": "Plastico",
+									"type": "text"
+								},
+								{
+									"key": "proveedor",
+									"value": "Pepsi",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "Lentes",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "moneda",
+									"value": "euro",
+									"type": "text"
+								},
+								{
+									"key": "activo",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Descripcion generica de muestra",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/Personal/OneDrive/Imágenes/2-25632_m.jpg"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{baseURL}}/api/producto-update/1",
@@ -1229,41 +1351,6 @@
 							"path": [
 								"api",
 								"producto-delete",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Upload image",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "imagen",
-									"type": "file",
-									"src": "/C:/Users/Personal/OneDrive/Imágenes/Captura de pantalla 2023-12-02 122551.png"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseURL}}/api/producto-upload-image/1",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"api",
-								"producto-upload-image",
 								"1"
 							]
 						}
