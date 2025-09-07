@@ -38,6 +38,10 @@ const VerificationUtils = {
 
     verify_numero(valor) {
         return !isNaN(valor) && !isNaN(parseFloat(valor));
+    },
+
+    verify_boolean(valor) {
+        return typeof valor === 'boolean';
     }
 };
 

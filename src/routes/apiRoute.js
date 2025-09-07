@@ -12,6 +12,7 @@ const TasasController = require('../controllers/TasasController');
 const SedesController = require('../controllers/SedesController');
 const PacienteController = require('../controllers/PacienteController');
 const HistorialMedicoController = require('../controllers/HistorialMedicoController');
+const ProductoController = require('../controllers/ProductoController');
 const EnvioCorreo = require('./../config/correo');
 
 const router = express.Router();
@@ -79,5 +80,11 @@ router.get('/historial-medico-paciente/:paciente_id', authMiddleware, HistorialM
 router.post('/historial-medico-add/', authMiddleware, HistorialMedicoController.add);
 router.put('/historial-medico-update/:id?', authMiddleware, HistorialMedicoController.update);
 router.delete('/historial-medico-delete/:id?', authMiddleware, HistorialMedicoController.delete);
+
+router.get('/producto-get/:id?', authMiddleware, ProductoController.get);
+router.post('/producto-add', authMiddleware, ProductoController.add);
+router.post('/producto-upload-image/:id', authMiddleware, ProductoController.upload_image);
+router.put('/producto-update/:id', authMiddleware, ProductoController.update);
+router.delete('/producto-delete/:id', authMiddleware, ProductoController.delete);
 
 module.exports = router;

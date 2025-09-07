@@ -5,7 +5,7 @@ const fs = require('fs');
 // Configuración de almacenamiento
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = './public/profile-images';
+    const dir = './public/images';
     
     // Crear el directorio si no existe
     if (!fs.existsSync(dir)) {
@@ -16,8 +16,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     // Nombre único para el archivo
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'profile-' + uniqueSuffix + path.extname(file.originalname));
+    cb(null, req.nombre_imagen + path.extname(file.originalname));
   }
 });
 

@@ -11,6 +11,7 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
 const { Op } = require('sequelize');
 const upload = require('../config/uploader');
+const multer = require('multer');
 
 const accountController = {
   upload_profile_image: async (req, res) => {
@@ -18,9 +19,15 @@ const accountController = {
       if (!req.user) {
         throw { message: "Sesion invalida." };
       }
-
+      
+      const objUser = await Usuario.findOne({ where: { cedula: req.user.cedula } });
+      if(!objUser) {
+        return res.status(400).json({ error: 'Usuario no encontrado.' });
+      }
+      
       // Usamos el middleware de Multer para manejar la subida
-      upload.single('profileImage')(req, res, async (err) => {
+      req.nombre_imagen = `profile-${objUser.cedula}`;
+      upload.single('imagen')(req, res, async (err) => {
         if (err) {
           if (err instanceof multer.MulterError) {
             return res.status(400).json({ error: err.message });
@@ -34,16 +41,12 @@ const accountController = {
         }
 
         // La imagen se guardó correctamente
-        const imageUrl = `/public/profile-images/${req.file.filename}`;
+        const imageUrl = `/public/images/${req.file.filename}`;
 
-        const objUser = await Usuario.findOne({ where: { cedula: req.user.cedula } });
-        if(!objUser) {
-          return res.status(400).json({ error: 'Usuario no encontrado.' });
-        }
-        objUser.ruta_imagen = imageUrl;
+        objUser.ruta_imagen = imageUrl+"?t=" + Date.now();
         objUser.save();
 
-        res.status(200).json({ message: 'ok', image_url: imageUrl });
+        res.status(200).json({ message: 'ok', image_url: objUser.ruta_imagen });
       });
     } catch (err) {
       console.error(err);
