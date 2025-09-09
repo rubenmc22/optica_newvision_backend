@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 09-09-2025 a las 02:59:51
+-- Tiempo de generación: 09-09-2025 a las 21:54:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -283,6 +283,7 @@ CREATE TABLE `productos` (
   `material` varchar(255) NOT NULL,
   `proveedor` varchar(255) NOT NULL,
   `categoria` varchar(255) NOT NULL,
+  `modelo` varchar(255) DEFAULT NULL,
   `stock` int(11) NOT NULL,
   `precio` double NOT NULL,
   `moneda` varchar(20) NOT NULL,
@@ -298,11 +299,11 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `stock`, `precio`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-1.jpg?t=1757237818490', '2025-09-07 08:52:58', '2025-09-07 09:36:58', NULL),
-(2, 'guarenas', 'Producto 2', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235205448', '2025-09-07 08:53:25', '2025-09-07 08:53:25', NULL),
-(3, 'guarenas', 'Producto 3', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235215650', '2025-09-07 08:53:35', '2025-09-07 08:53:35', NULL),
-(4, 'guarenas', 'Producto 4', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235223527', '2025-09-07 08:53:43', '2025-09-07 08:53:43', NULL);
+INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-1.jpg?t=1757237818490', '2025-09-07 08:52:58', '2025-09-07 09:36:58', NULL),
+(2, 'guarenas', 'Producto 2', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235205448', '2025-09-07 08:53:25', '2025-09-07 08:53:25', NULL),
+(3, 'guarenas', 'Producto 3', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235215650', '2025-09-07 08:53:35', '2025-09-07 08:53:35', NULL),
+(4, 'guarenas', 'Producto 4', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235223527', '2025-09-07 08:53:43', '2025-09-07 08:53:43', NULL);
 
 -- --------------------------------------------------------
 

@@ -32,6 +32,7 @@ const ProductoController = {
                     material,
                     proveedor,
                     categoria,
+                    modelo,
                     stock,
                     precio,
                     moneda,
@@ -58,6 +59,9 @@ const ProductoController = {
                 }
                 if (!VerificationUtils.verify_nombre(categoria)) {
                     return res.status(400).json({ message: "La categoria no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(modelo)) {
+                    return res.status(400).json({ message: "El modelo no puede quedar vacio." });
                 }
                 if (!VerificationUtils.verify_numero(stock)) {
                     return res.status(400).json({ message: "El stock debe ser numerico" });
@@ -96,6 +100,7 @@ const ProductoController = {
                     material: material,
                     proveedor: proveedor,
                     categoria: categoria,
+                    modelo: modelo,
                     stock: stock,
                     precio: precio,
                     moneda: objTasa.id,
@@ -118,6 +123,7 @@ const ProductoController = {
                     material: producto.material,
                     proveedor: producto.proveedor,
                     categoria: producto.categoria,
+                    modelo: producto.modelo,
                     stock: producto.stock,
                     precio: producto.precio,
                     moneda: producto.moneda,
@@ -184,6 +190,7 @@ const ProductoController = {
                     material,
                     proveedor,
                     categoria,
+                    modelo,
                     stock,
                     precio,
                     moneda,
@@ -210,6 +217,9 @@ const ProductoController = {
                 }
                 if (!VerificationUtils.verify_nombre(categoria)) {
                     return res.status(400).json({ message: "La categoria no puede quedar vacio." });
+                }
+                if (!VerificationUtils.verify_nombre(modelo)) {
+                    return res.status(400).json({ message: "El modelo no puede quedar vacio." });
                 }
                 if (!VerificationUtils.verify_numero(stock)) {
                     return res.status(400).json({ message: "El stock debe ser numerico" });
@@ -241,6 +251,7 @@ const ProductoController = {
                 objProducto.material = material;
                 objProducto.proveedor = proveedor;
                 objProducto.categoria = categoria;
+                objProducto.modelo = modelo;
                 objProducto.stock = stock;
                 objProducto.precio = precio;
                 objProducto.moneda = moneda;
@@ -260,6 +271,7 @@ const ProductoController = {
                     material: producto.material,
                     proveedor: producto.proveedor,
                     categoria: producto.categoria,
+                    modelo: producto.modelo,
                     stock: producto.stock,
                     precio: producto.precio,
                     moneda: producto.moneda,
@@ -326,6 +338,7 @@ const ProductoController = {
                     material: producto.material,
                     proveedor: producto.proveedor,
                     categoria: producto.categoria,
+                    modelo: producto.modelo,
                     stock: producto.stock,
                     precio: producto.precio,
                     moneda: producto.moneda,

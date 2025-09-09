@@ -48,6 +48,11 @@ const Producto = sequelize.define('Producto', {
         allowNull: false,
         collate: 'utf8mb4_general_ci'
     },
+    modelo: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        collate: 'utf8mb4_general_ci'
+    },
     stock: {
         type: DataTypes.INTEGER(11),
         allowNull: false
