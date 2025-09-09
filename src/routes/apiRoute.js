@@ -82,6 +82,7 @@ router.put('/historial-medico-update/:id?', authMiddleware, HistorialMedicoContr
 router.delete('/historial-medico-delete/:id?', authMiddleware, HistorialMedicoController.delete);
 
 router.get('/producto-get/:id?', authMiddleware, ProductoController.get);
+router.get('/categorias-get', authMiddleware, ProductoController.get_categorias);
 router.post('/producto-add', authMiddleware, ProductoController.add);
 router.put('/producto-update/:id', authMiddleware, ProductoController.update);
 router.delete('/producto-delete/:id', authMiddleware, ProductoController.delete);

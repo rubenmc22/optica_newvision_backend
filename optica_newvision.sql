@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 07-09-2025 a las 03:07:49
+-- Tiempo de generación: 09-09-2025 a las 02:59:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -43,6 +43,29 @@ INSERT INTO `cargos` (`id`, `nombre`) VALUES
 ('gerente', 'Gerente'),
 ('oftalmologo', 'Oftalmologo'),
 ('optometrista', 'Optometrista');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(1, 'Monturas'),
+(2, 'Lentes'),
+(3, 'Líquidos'),
+(4, 'Estuches'),
+(5, 'Misceláneos'),
+(6, 'Lentes de contacto');
 
 -- --------------------------------------------------------
 
@@ -171,7 +194,8 @@ INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`
 (14, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY1OTEwMjEsImV4cCI6MTc1NjY3NzQyMX0.efwcCIZT1ZGjBYQZunECl9yEp8AZJQx72AHkMpjWSR4', '::1', '2025-08-30 21:57:01', '2025-08-30 21:57:01'),
 (15, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY2NTY1NTEsImV4cCI6MTc1Njc0Mjk1MX0.iwn4zgRsvOt56tGqi0YynWvW0Ve0Q41fNfIqIebBzpE', '::1', '2025-08-31 16:09:11', '2025-08-31 16:09:11'),
 (16, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY3NDM5NzcsImV4cCI6MTc1NjgzMDM3N30.c1WSYN7oi86Qe0tgyVriuqAK97v-LUBZzJOeVusATtQ', '::1', '2025-09-01 16:26:17', '2025-09-01 16:26:17'),
-(17, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40', '::1', '2025-09-06 21:28:27', '2025-09-06 21:28:27');
+(17, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40', '::1', '2025-09-06 21:28:27', '2025-09-06 21:28:27'),
+(18, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4', '::1', '2025-09-09 00:59:14', '2025-09-09 00:59:14');
 
 -- --------------------------------------------------------
 
@@ -255,7 +279,7 @@ CREATE TABLE `productos` (
   `nombre` varchar(255) NOT NULL,
   `marca` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `codigo` varchar(255) NOT NULL,
+  `codigo` varchar(255) DEFAULT NULL,
   `material` varchar(255) NOT NULL,
   `proveedor` varchar(255) NOT NULL,
   `categoria` varchar(255) NOT NULL,
@@ -275,9 +299,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `stock`, `precio`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-1.png?t=1757207114871', '2025-09-06 22:31:13', '2025-09-07 01:05:14', NULL),
-(3, 'guarenas', 'Producto 2', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'dolar', 1, 'Descripcion generica de muestra', NULL, '2025-09-06 22:34:12', '2025-09-06 22:34:12', NULL),
-(4, 'guarenas', 'Producto 3', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 0, 'Descripcion generica de muestra', NULL, '2025-09-06 22:34:35', '2025-09-06 22:34:35', NULL);
+(1, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-1.jpg?t=1757237818490', '2025-09-07 08:52:58', '2025-09-07 09:36:58', NULL),
+(2, 'guarenas', 'Producto 2', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235205448', '2025-09-07 08:53:25', '2025-09-07 08:53:25', NULL),
+(3, 'guarenas', 'Producto 3', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235215650', '2025-09-07 08:53:35', '2025-09-07 08:53:35', NULL),
+(4, 'guarenas', 'Producto 4', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235223527', '2025-09-07 08:53:43', '2025-09-07 08:53:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -427,6 +452,12 @@ ALTER TABLE `cargos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `historiales_medicos`
 --
 ALTER TABLE `historiales_medicos`
@@ -504,6 +535,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `historiales_medicos`
 --
 ALTER TABLE `historiales_medicos`
@@ -519,7 +556,7 @@ ALTER TABLE `historial_rastreo_bcv`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`

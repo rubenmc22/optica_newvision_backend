@@ -1,6 +1,7 @@
 const Tasa = require('../models/Tasa');
 const VerificationUtils = require('../utils/VerificationUtils');
 const Producto = require('./../models/Producto');
+const Categoria = require('./../models/Categoria');
 const { Op } = require('sequelize');
 const upload = require('../config/uploader');
 const multer = require('multer');
@@ -28,7 +29,6 @@ const ProductoController = {
                     nombre,
                     marca,
                     color,
-                    codigo,
                     material,
                     proveedor,
                     categoria,
@@ -49,9 +49,6 @@ const ProductoController = {
                 }
                 if (!VerificationUtils.verify_nombre(color)) {
                     return res.status(400).json({ message: "El color no puede quedar vacio." });
-                }
-                if (!VerificationUtils.verify_nombre(codigo)) {
-                    return res.status(400).json({ message: "El codigo no puede quedar vacio." });
                 }
                 if (!VerificationUtils.verify_nombre(material)) {
                     return res.status(400).json({ message: "El material no puede quedar vacio." });
@@ -95,7 +92,7 @@ const ProductoController = {
                     nombre: nombre,
                     marca: marca,
                     color: color,
-                    codigo: codigo,
+                    codigo: null,
                     material: material,
                     proveedor: proveedor,
                     categoria: categoria,
@@ -106,6 +103,9 @@ const ProductoController = {
                     descripcion: descripcion,
                     imagen_url: "/public/images/product-generic-image.jpg?t=" + Date.now()
                 });
+
+                objProducto.codigo = `PR-${objProducto.id.toString().padStart(6, '0')}`;
+                await objProducto.save();
 
                 const producto = objProducto.get({ plain: true });
                 const producto_output = {
@@ -181,7 +181,6 @@ const ProductoController = {
                     nombre,
                     marca,
                     color,
-                    codigo,
                     material,
                     proveedor,
                     categoria,
@@ -202,9 +201,6 @@ const ProductoController = {
                 }
                 if (!VerificationUtils.verify_nombre(color)) {
                     return res.status(400).json({ message: "El color no puede quedar vacio." });
-                }
-                if (!VerificationUtils.verify_nombre(codigo)) {
-                    return res.status(400).json({ message: "El codigo no puede quedar vacio." });
                 }
                 if (!VerificationUtils.verify_nombre(material)) {
                     return res.status(400).json({ message: "El material no puede quedar vacio." });
@@ -242,7 +238,6 @@ const ProductoController = {
                 objProducto.nombre = nombre;
                 objProducto.marca = marca;
                 objProducto.color = color;
-                objProducto.codigo = codigo;
                 objProducto.material = material;
                 objProducto.proveedor = proveedor;
                 objProducto.categoria = categoria;
@@ -343,6 +338,21 @@ const ProductoController = {
             }
 
             res.status(200).json({ message: 'ok', productos: productos_output });
+        } catch (err) {
+            console.error(err);
+            res.status(400).json(err);
+        }
+    },
+
+    get_categorias: async (req, res) => {
+        try {
+            if (!req.user) {
+                throw { message: "Sesion invalida." };
+            }
+
+            const categorias_db = await Categoria.findAll({});
+
+            res.status(200).json({ message: 'ok', categorias: categorias_db });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);

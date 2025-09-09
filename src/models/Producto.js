@@ -30,7 +30,7 @@ const Producto = sequelize.define('Producto', {
     },
     codigo: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
         collate: 'utf8mb4_general_ci'
     },
     material: {

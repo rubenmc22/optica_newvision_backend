@@ -1173,11 +1173,6 @@
 									"type": "text"
 								},
 								{
-									"key": "codigo",
-									"value": "12345678",
-									"type": "text"
-								},
-								{
 									"key": "material",
 									"value": "Plastico",
 									"type": "text"
@@ -1267,11 +1262,6 @@
 									"type": "text"
 								},
 								{
-									"key": "codigo",
-									"value": "12345678",
-									"type": "text"
-								},
-								{
 									"key": "material",
 									"value": "Plastico",
 									"type": "text"
@@ -1352,6 +1342,30 @@
 								"api",
 								"producto-delete",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get categorias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/categorias-get",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"categorias-get"
 							]
 						}
 					},
