@@ -402,7 +402,7 @@ function limpiarYValidarRuta(inputUrl, baseDir = __dirname) {
   const rutaSinQuery = inputUrl.split('?')[0];
 
   // Construye la ruta absoluta del archivo
-  const rutaAbsoluta = path.join("./../..", rutaSinQuery);
+  const rutaAbsoluta = path.join(__dirname + "/../..", rutaSinQuery);
 
   // Verifica si el archivo existe
   const existeArchivo = fs.existsSync(rutaAbsoluta);
