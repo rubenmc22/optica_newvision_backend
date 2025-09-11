@@ -25,7 +25,7 @@ const Producto = sequelize.define('Producto', {
     },
     color: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
         collate: 'utf8mb4_general_ci'
     },
     codigo: {
@@ -40,7 +40,7 @@ const Producto = sequelize.define('Producto', {
     },
     proveedor: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
         collate: 'utf8mb4_general_ci'
     },
     categoria: {
@@ -79,7 +79,7 @@ const Producto = sequelize.define('Producto', {
     },
     descripcion: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         collate: 'utf8mb4_general_ci'
     },
     imagen_url: {
