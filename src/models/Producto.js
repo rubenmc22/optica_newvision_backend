@@ -61,6 +61,21 @@ const Producto = sequelize.define('Producto', {
         type: DataTypes.DOUBLE,
         allowNull: false
     },
+    aplica_iva: {
+        type: DataTypes.TINYINT(4),
+        allowNull: false,
+        defaultValue: 0,
+        get() {
+            return this.getDataValue('aplica_iva') === 1;
+        },
+        set(value) {
+            this.setDataValue('aplica_iva', value ? 1 : 0);
+        }
+    },
+    precio_con_iva: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+    },
     moneda: {
         type: DataTypes.STRING(20),
         allowNull: false,

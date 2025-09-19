@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 09-09-2025 a las 21:54:22
+-- Tiempo de generación: 19-09-2025 a las 21:59:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -195,7 +195,9 @@ INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`
 (15, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY2NTY1NTEsImV4cCI6MTc1Njc0Mjk1MX0.iwn4zgRsvOt56tGqi0YynWvW0Ve0Q41fNfIqIebBzpE', '::1', '2025-08-31 16:09:11', '2025-08-31 16:09:11'),
 (16, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTY3NDM5NzcsImV4cCI6MTc1NjgzMDM3N30.c1WSYN7oi86Qe0tgyVriuqAK97v-LUBZzJOeVusATtQ', '::1', '2025-09-01 16:26:17', '2025-09-01 16:26:17'),
 (17, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40', '::1', '2025-09-06 21:28:27', '2025-09-06 21:28:27'),
-(18, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4', '::1', '2025-09-09 00:59:14', '2025-09-09 00:59:14');
+(18, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4', '::1', '2025-09-09 00:59:14', '2025-09-09 00:59:14'),
+(19, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTc1NTI2NjMsImV4cCI6MTc1NzYzOTA2M30.Wu0bULJGmBvp3QVTTWKshQsuBHKrKHPKDqWpBOiroNw', '::1', '2025-09-11 01:04:23', '2025-09-11 01:04:23'),
+(20, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w', '::1', '2025-09-19 19:35:28', '2025-09-19 19:35:28');
 
 -- --------------------------------------------------------
 
@@ -278,17 +280,19 @@ CREATE TABLE `productos` (
   `sede_id` varchar(50) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `marca` varchar(255) NOT NULL,
-  `color` varchar(255) NOT NULL,
+  `color` varchar(255) DEFAULT NULL,
   `codigo` varchar(255) DEFAULT NULL,
   `material` varchar(255) NOT NULL,
-  `proveedor` varchar(255) NOT NULL,
+  `proveedor` varchar(255) DEFAULT NULL,
   `categoria` varchar(255) NOT NULL,
   `modelo` varchar(255) DEFAULT NULL,
   `stock` int(11) NOT NULL,
   `precio` double NOT NULL,
+  `aplica_iva` tinyint(4) NOT NULL,
+  `precio_con_iva` double NOT NULL,
   `moneda` varchar(20) NOT NULL,
   `activo` tinyint(4) NOT NULL,
-  `descripcion` text NOT NULL,
+  `descripcion` text DEFAULT NULL,
   `imagen_url` text DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -299,11 +303,9 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-1.jpg?t=1757237818490', '2025-09-07 08:52:58', '2025-09-07 09:36:58', NULL),
-(2, 'guarenas', 'Producto 2', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235205448', '2025-09-07 08:53:25', '2025-09-07 08:53:25', NULL),
-(3, 'guarenas', 'Producto 3', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235215650', '2025-09-07 08:53:35', '2025-09-07 08:53:35', NULL),
-(4, 'guarenas', 'Producto 4', 'Marca Generica 1', 'Azul', '12345678', 'Plastico', 'Pepsi', 'Lentes', NULL, 5, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1757235223527', '2025-09-07 08:53:43', '2025-09-07 08:53:43', NULL);
+INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `aplica_iva`, `precio_con_iva`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-09-19 19:55:07', NULL),
+(6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-09-19 19:55:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -366,6 +368,7 @@ CREATE TABLE `tasas` (
 --
 
 INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `rastreo_bcv`, `ultimo_tipo_cambio`, `created_at`, `updated_at`) VALUES
+('bolivar', 'Bolivar', 'bs', 1, 0, NULL, '2025-09-09 21:56:54', '2025-09-09 21:56:54'),
 ('dolar', 'Dolar', '$', 138.1283, 0, 'Automatico con BCV', '2025-06-14 16:18:23', '2025-08-20 02:53:00'),
 ('euro', 'Euro', '€', 161.222, 0, 'Automatico con BCV', '2025-06-14 16:18:23', '2025-08-20 02:53:00');
 
@@ -557,7 +560,7 @@ ALTER TABLE `historial_rastreo_bcv`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`
@@ -575,7 +578,7 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tasas_historial`

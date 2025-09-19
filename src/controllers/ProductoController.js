@@ -37,10 +37,12 @@ const ProductoController = {
                     precio,
                     moneda,
                     activo: activo_string,
-                    descripcion
+                    descripcion,
+                    aplicaIva: aplicaIva_string
                 } = req.body;
 
                 const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
+                const aplicaIva = (aplicaIva_string === 'true' || aplicaIva_string === true || aplicaIva_string === 1 || aplicaIva_string === "1");
 
                 if (!VerificationUtils.verify_nombre(nombre)) {
                     return res.status(400).json({ message: "El nombre no puede quedar vacio." });
@@ -72,6 +74,9 @@ const ProductoController = {
                 if (!VerificationUtils.verify_boolean(activo)) {
                     return res.status(400).json({ message: "El parametro 'activo' debe ser booleano." });
                 }
+                if (!VerificationUtils.verify_boolean(aplicaIva)) {
+                    return res.status(400).json({ message: "El parametro 'aplicaIva' debe ser booleano." });
+                }
 
                 const objTasa = await Tasa.findOne({ where: { id: moneda } });
                 if (!objTasa) {
@@ -91,6 +96,12 @@ const ProductoController = {
                     return res.status(400).json({ message: "Ya existe un producto con el mismo nombre, marca, color y categoria en la sede actual." });
                 }
 
+                let precio_number = Number(precio);
+                let precioConIva = Number(precio_number);
+                if(aplicaIva) {
+                    precioConIva = Number(precio_number * 1.16);
+                }
+
                 const objProducto = await Producto.create({
                     sede_id: req.sede.id,
                     nombre: nombre,
@@ -102,7 +113,9 @@ const ProductoController = {
                     categoria: categoria,
                     modelo: modelo,
                     stock: stock,
-                    precio: precio,
+                    precio: Number(precio_number.toFixed(2)),
+                    aplica_iva: aplicaIva,
+                    precio_con_iva: Number(precioConIva.toFixed(2)),
                     moneda: objTasa.id,
                     activo: activo,
                     descripcion: descripcion,
@@ -126,6 +139,8 @@ const ProductoController = {
                     modelo: producto.modelo,
                     stock: producto.stock,
                     precio: producto.precio,
+                    aplicaIva: producto.aplica_iva,
+                    precioConIva: producto.precio_con_iva,
                     moneda: producto.moneda,
                     activo: producto.activo,
                     descripcion: producto.descripcion,
@@ -195,10 +210,12 @@ const ProductoController = {
                     precio,
                     moneda,
                     activo: activo_string,
-                    descripcion
+                    descripcion,
+                    aplicaIva: aplicaIva_string
                 } = req.body;
 
                 const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
+                const aplicaIva = (aplicaIva_string === 'true' || aplicaIva_string === true || aplicaIva_string === 1 || aplicaIva_string === "1");
 
                 if (!VerificationUtils.verify_nombre(nombre)) {
                     return res.status(400).json({ message: "El nombre no puede quedar vacio." });
@@ -230,6 +247,9 @@ const ProductoController = {
                 if (!VerificationUtils.verify_boolean(activo)) {
                     return res.status(400).json({ message: "El parametro 'activo' debe ser booleano." });
                 }
+                if (!VerificationUtils.verify_boolean(aplicaIva)) {
+                    return res.status(400).json({ message: "El parametro 'aplicaIva' debe ser booleano." });
+                }
 
                 const count = await Producto.count({
                     where: {
@@ -245,6 +265,12 @@ const ProductoController = {
                     return res.status(400).json({ message: "Ya existe un producto con el mismo nombre, marca, color y categoria en la sede actual." });
                 }
 
+                let precio_number = Number(precio);
+                let precioConIva = Number(precio_number);
+                if(aplicaIva) {
+                    precioConIva = Number(precio_number * 1.16);
+                }
+
                 objProducto.nombre = nombre;
                 objProducto.marca = marca;
                 objProducto.color = color;
@@ -253,7 +279,9 @@ const ProductoController = {
                 objProducto.categoria = categoria;
                 objProducto.modelo = modelo;
                 objProducto.stock = stock;
-                objProducto.precio = precio;
+                objProducto.precio = Number(precio_number.toFixed(2));
+                objProducto.aplica_iva = aplicaIva;
+                objProducto.precio_con_iva = Number(precioConIva.toFixed(2));
                 objProducto.moneda = moneda;
                 objProducto.activo = activo;
                 objProducto.descripcion = descripcion;
@@ -274,6 +302,8 @@ const ProductoController = {
                     modelo: producto.modelo,
                     stock: producto.stock,
                     precio: producto.precio,
+                    aplicaIva: producto.aplica_iva,
+                    precioConIva: producto.precio_con_iva,
                     moneda: producto.moneda,
                     activo: producto.activo,
                     descripcion: producto.descripcion,
@@ -341,6 +371,8 @@ const ProductoController = {
                     modelo: producto.modelo,
                     stock: producto.stock,
                     precio: producto.precio,
+                    aplicaIva: producto.aplica_iva,
+                    precioConIva: producto.precio_con_iva,
                     moneda: producto.moneda,
                     activo: producto.activo,
                     descripcion: producto.descripcion,

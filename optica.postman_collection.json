@@ -1126,7 +1126,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w",
 								"type": "text"
 							}
 						],
@@ -1150,7 +1150,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTc5NDA1MDAsImV4cCI6MTc1ODAyNjkwMH0.zwZuwFu9P1qCzEUrhMN24A16eeS9i12Im7MlwZIQEk4",
 								"type": "text"
 							}
 						],
@@ -1174,7 +1174,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w",
 								"type": "text"
 							}
 						],
@@ -1183,7 +1183,7 @@
 							"formdata": [
 								{
 									"key": "nombre",
-									"value": "Producto 4",
+									"value": "Producto 1",
 									"type": "text"
 								},
 								{
@@ -1227,6 +1227,11 @@
 									"type": "text"
 								},
 								{
+									"key": "aplicaIva",
+									"value": "0",
+									"type": "text"
+								},
+								{
 									"key": "moneda",
 									"value": "euro",
 									"type": "text"
@@ -1244,7 +1249,8 @@
 								{
 									"key": "imagen",
 									"type": "file",
-									"src": []
+									"src": [],
+									"disabled": true
 								}
 							]
 						},
@@ -1268,7 +1274,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w",
 								"type": "text"
 							}
 						],
@@ -1277,7 +1283,7 @@
 							"formdata": [
 								{
 									"key": "nombre",
-									"value": "Producto Chevere 1",
+									"value": "Producto Chevere 2",
 									"type": "text"
 								},
 								{
@@ -1317,7 +1323,12 @@
 								},
 								{
 									"key": "precio",
-									"value": "5",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "aplicaIva",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -1338,19 +1349,20 @@
 								{
 									"key": "imagen",
 									"type": "file",
-									"src": "/C:/Users/Personal/OneDrive/Imágenes/2-25632_m.jpg"
+									"src": "/C:/Users/Personal/OneDrive/Imágenes/2-25632_m.jpg",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/producto-update/1",
+							"raw": "{{baseURL}}/api/producto-update/6",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"api",
 								"producto-update",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -1459,6 +1471,14 @@
 		{
 			"key": "baseURL",
 			"value": "http://localhost:3000"
+		},
+		{
+			"key": "baseURL2",
+			"value": ""
+		},
+		{
+			"key": "baseURL3",
+			"value": ""
 		}
 	]
 }
