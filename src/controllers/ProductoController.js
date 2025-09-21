@@ -165,7 +165,7 @@ const ProductoController = {
                     producto_output.imagen_url = objProducto.imagen_url;
                 }
                 
-                res.status(200).json({ message: 'ok', producto: producto_output });
+                res.status(200).json({ message: 'ok', iva: 16, producto: producto_output });
             });
         } catch (err) {
             console.error(err);
@@ -328,7 +328,7 @@ const ProductoController = {
                     producto_output.imagen_url = objProducto.imagen_url;
                 }
 
-                res.status(200).json({ message: 'ok', producto: producto_output });
+                res.status(200).json({ message: 'ok', iva: 16, producto: producto_output });
             });
         } catch (err) {
             console.error(err);
@@ -382,7 +382,7 @@ const ProductoController = {
                 });
             }
 
-            res.status(200).json({ message: 'ok', productos: productos_output });
+            res.status(200).json({ message: 'ok', iva: 16, productos: productos_output });
         } catch (err) {
             console.error(err);
             res.status(400).json(err);
