@@ -97,9 +97,9 @@ const ProductoController = {
                 }
 
                 let precio_number = Number(precio);
-                let precioConIva = Number(precio_number);
+                let precio_sin_iva = Number(precio_number);
                 if(aplicaIva) {
-                    precioConIva = Number(precio_number * 1.16);
+                    precio_sin_iva = Number(precio_number * ( 100 / 116 ));
                 }
 
                 const objProducto = await Producto.create({
@@ -113,9 +113,9 @@ const ProductoController = {
                     categoria: categoria,
                     modelo: modelo,
                     stock: stock,
-                    precio: Number(precio_number.toFixed(2)),
+                    precio: Number(precio_sin_iva.toFixed(2)),
                     aplica_iva: aplicaIva,
-                    precio_con_iva: Number(precioConIva.toFixed(2)),
+                    precio_con_iva: Number(precio_number.toFixed(2)),
                     moneda: objTasa.id,
                     activo: activo,
                     descripcion: descripcion,
@@ -266,9 +266,9 @@ const ProductoController = {
                 }
 
                 let precio_number = Number(precio);
-                let precioConIva = Number(precio_number);
+                let precio_sin_iva = Number(precio_number);
                 if(aplicaIva) {
-                    precioConIva = Number(precio_number * 1.16);
+                    precio_sin_iva = Number(precio_number * ( 100 / 116 ));
                 }
 
                 objProducto.nombre = nombre;
@@ -279,9 +279,9 @@ const ProductoController = {
                 objProducto.categoria = categoria;
                 objProducto.modelo = modelo;
                 objProducto.stock = stock;
-                objProducto.precio = Number(precio_number.toFixed(2));
+                objProducto.precio = Number(precio_sin_iva.toFixed(2));
                 objProducto.aplica_iva = aplicaIva;
-                objProducto.precio_con_iva = Number(precioConIva.toFixed(2));
+                objProducto.precio_con_iva = Number(precio_number.toFixed(2));
                 objProducto.moneda = moneda;
                 objProducto.activo = activo;
                 objProducto.descripcion = descripcion;
