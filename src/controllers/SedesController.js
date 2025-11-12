@@ -9,7 +9,11 @@ const SedesController = {
             for(const sede of sedes) {
                 sedes_output.push({
                     key: sede.id,
-                    nombre: sede.nombre
+                    nombre: sede.nombre,
+                    direccion: sede.direccion,
+                    telefono: sede.telefono,
+                    email: sede.email,
+                    direccion_fiscal: sede.direccion_fiscal
                 });
             }
             

@@ -1,0 +1,36 @@
+Sedes:
+    Agregar los campos:
+        direccion
+        telefono
+        email
+        direccion_fiscal
+
+Autenticacion
+    Carga de imagen para usuarios
+        Cargar
+        Quitar
+    OTP
+
+Productos:
+    Quitar fotos
+
+Ventas:
+    Agregar
+        Guardar registro
+        Generar PDF:
+            Recibo de pago
+            Recibo de abono
+    Anular:
+        Cambiar estatus venta
+        Revertir inventario
+    Abonar:
+        Generar abono sobre venta incompleta
+    Generar Recibo:
+        Vuelve a generar el recibo de pago o abono de "Agregar"
+    Obtener informacion
+        Un get sencillo con filtros como:
+            Filtrar por usuario
+            Filtrar por estatus
+            Filtrar por fecha
+
+Presupuesto (Pendiente por definir con Ruben)
