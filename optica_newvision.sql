@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 19-09-2025 a las 21:59:38
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 12-11-2025 a las 18:35:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -197,7 +197,11 @@ INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`
 (17, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTcxOTQxMDcsImV4cCI6MTc1NzI4MDUwN30.iyeNnGw0EX7_h09FPyEXMLoBEuwdDa2mM9KrhEAsB40', '::1', '2025-09-06 21:28:27', '2025-09-06 21:28:27'),
 (18, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4', '::1', '2025-09-09 00:59:14', '2025-09-09 00:59:14'),
 (19, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTc1NTI2NjMsImV4cCI6MTc1NzYzOTA2M30.Wu0bULJGmBvp3QVTTWKshQsuBHKrKHPKDqWpBOiroNw', '::1', '2025-09-11 01:04:23', '2025-09-11 01:04:23'),
-(20, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w', '::1', '2025-09-19 19:35:28', '2025-09-19 19:35:28');
+(20, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w', '::1', '2025-09-19 19:35:28', '2025-09-19 19:35:28'),
+(21, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5NjUzMjgsImV4cCI6MTc2MzA1MTcyOH0.fBnRDJwgRKcF7bU_DQcl-uD85ob_93kfXxjO6cHjNC8', '::1', '2025-11-12 16:35:28', '2025-11-12 16:35:28'),
+(22, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc2Mjk2NTYyNSwiZXhwIjoxNzYzMDUyMDI1fQ.n3Y4qq9Q7akNgxNhjiUnkNT15n6FyCJlDs2bUbbvrFA', '::1', '2025-11-12 16:40:25', '2025-11-12 16:40:25'),
+(23, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5NjU3OTIsImV4cCI6MTc2MzA1MjE5Mn0.hg7of0lQioE4h8reRgN-5yuKdZo6M0bgTbvCfuhlMjg', '::1', '2025-11-12 16:43:12', '2025-11-12 16:43:12'),
+(24, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5Njg3NDgsImV4cCI6MTc2MzA1NTE0OH0.SUZlV7Ui-JQyWa_nnF1WZPFOvGvSY6C4WSovDET34Ng', '::1', '2025-11-12 17:32:28', '2025-11-12 17:32:28');
 
 -- --------------------------------------------------------
 
@@ -304,7 +308,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `aplica_iva`, `precio_con_iva`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-09-19 19:55:07', NULL),
+(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', NULL, '2025-09-19 19:50:14', '2025-11-12 17:34:21', NULL),
 (6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-09-19 19:55:26', NULL);
 
 -- --------------------------------------------------------
@@ -335,16 +339,20 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 
 CREATE TABLE `sedes` (
   `id` varchar(50) NOT NULL,
-  `nombre` varchar(255) NOT NULL
+  `nombre` varchar(255) NOT NULL,
+  `direccion` text DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `direccion_fiscal` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `sedes`
 --
 
-INSERT INTO `sedes` (`id`, `nombre`) VALUES
-('guarenas', 'Sede Guarenas'),
-('guatire', 'Sede Guatire');
+INSERT INTO `sedes` (`id`, `nombre`, `direccion`, `telefono`, `email`, `direccion_fiscal`) VALUES
+('guarenas', 'Sede Guarenas', NULL, NULL, NULL, NULL),
+('guatire', 'Sede Guatire', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -560,7 +568,7 @@ ALTER TABLE `historial_rastreo_bcv`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`

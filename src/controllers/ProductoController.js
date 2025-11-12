@@ -173,6 +173,32 @@ const ProductoController = {
         }
     },
 
+    remove_image: async (req, res) => {
+        try {
+            if (!req.user) {
+                throw { message: "Sesion invalida." };
+            }
+
+            const producto_id = req.params.id;
+
+            const objProducto = await Producto.findOne({ where: { id: producto_id } });
+            if (!objProducto) {
+                throw { message: "Producto no existe." };
+            }
+            if (objProducto.sede_id != req.sede.id) {
+                throw { message: "No se puede modificar productos de otras sedes." };
+            }
+
+            objProducto.imagen_url = null;
+            await objProducto.save();
+
+            res.status(200).json({ message: 'ok' });
+        } catch (err) {
+            console.error(err);
+            res.status(400).json(err);
+        }
+    },
+
     update: async (req, res) => {
         try {
             if (!req.user) {

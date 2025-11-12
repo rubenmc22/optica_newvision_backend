@@ -1126,7 +1126,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTg0OTA4OTEsImV4cCI6MTc1ODU3NzI5MX0.V_f4VSDSmsIsNzfPAa3Go2isrnqxOqO64kNzkuonXfE",
 								"type": "text"
 							}
 						],
@@ -1388,6 +1388,35 @@
 								"api",
 								"producto-delete",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove-image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5Njg3NDgsImV4cCI6MTc2MzA1NTE0OH0.SUZlV7Ui-JQyWa_nnF1WZPFOvGvSY6C4WSovDET34Ng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/producto-remove-image/5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"producto-remove-image",
+								"5"
 							]
 						}
 					},

@@ -86,5 +86,6 @@ router.get('/categorias-get', authMiddleware, ProductoController.get_categorias)
 router.post('/producto-add', authMiddleware, ProductoController.add);
 router.put('/producto-update/:id', authMiddleware, ProductoController.update);
 router.delete('/producto-delete/:id', authMiddleware, ProductoController.delete);
+router.put('/producto-remove-image/:id', authMiddleware, ProductoController.remove_image);
 
 module.exports = router;
