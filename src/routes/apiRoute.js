@@ -48,6 +48,7 @@ router.get('/auth/get_data', authMiddleware, authController.get_data);
 router.post('/auth/forgot-password', noAuthMiddleware, authController.forgot_password);
 
 router.post('/account/upload-profile-image', authMiddleware, accountController.upload_profile_image);
+router.put('/account/remove-profile-image', authMiddleware, accountController.remove_profile_image);
 router.post('/account/edit-profile', authMiddleware, accountController.edit_profile);
 router.post('/account/change-password--send-otp', authMiddleware, accountController.change_password__send_otp);
 router.post('/account/change-password--verify-otp', authMiddleware, accountController.change_password__verify_otp);

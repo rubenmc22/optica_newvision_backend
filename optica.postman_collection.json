@@ -231,15 +231,17 @@
 					"name": "Mi Cuenta - Cargar imagen",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMwNDU1OTAsImV4cCI6MTc2MzEzMTk5MH0.8ks-Y9zAKJVuKy2k1UixslzMm1LV3HaBvsR6YEJ6Oh4",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDM2MjkwOTUsImV4cCI6MTc0MzcxNTQ5NX0.zvEyZtGS-s8oSVWMPCgw4lIO51oTLNEj9S2-sKWFZb8",
-								"type": "text"
-							},
 							{
 								"key": "Content-Type",
 								"value": "multipart/form-data",
@@ -251,25 +253,58 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "profileImage",
+									"key": "imagen",
 									"description": "[type: File]",
 									"type": "file",
-									"src": "/C:/Users/Personal/OneDrive/Imágenes/2-25632_m.jpg"
+									"src": "/C:/Users/Personal/OneDrive/Imágenes/1.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "https://api.apollogroupsport.com/api/account/upload-profile-image",
-							"protocol": "https",
+							"raw": "{{baseURL}}/api/account/upload-profile-image",
 							"host": [
-								"api",
-								"apollogroupsport",
-								"com"
+								"{{baseURL}}"
 							],
 							"path": [
 								"api",
 								"account",
 								"upload-profile-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mi Cuenta - Eliminar imagen",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMwNDU1OTAsImV4cCI6MTc2MzEzMTk5MH0.8ks-Y9zAKJVuKy2k1UixslzMm1LV3HaBvsR6YEJ6Oh4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/account/remove-profile-image",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"remove-profile-image"
 							]
 						}
 					},

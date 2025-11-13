@@ -44,7 +44,7 @@ const accountController = {
         const imageUrl = `/public/images/${req.file.filename}`;
 
         objUser.ruta_imagen = imageUrl+"?t=" + Date.now();
-        objUser.save();
+        await objUser.save();
 
         res.status(200).json({ message: 'ok', image_url: objUser.ruta_imagen });
       });
@@ -53,6 +53,28 @@ const accountController = {
       res.status(400).json(err);
     }
   },
+
+  remove_profile_image: async (req, res) => {
+    try {
+      if (!req.user) {
+          throw { message: "Sesion invalida." };
+      }
+    
+      const objUser = await Usuario.findOne({ where: { cedula: req.user.cedula } });
+      if(!objUser) {
+        return res.status(400).json({ error: 'Usuario no encontrado.' });
+      }
+      
+      objUser.ruta_imagen = null;
+      await objUser.save();
+
+      res.status(200).json({ message: 'ok' });
+    } catch (err) {
+        console.error(err);
+        res.status(400).json(err);
+    }
+  },
+
   edit_profile: async (req, res) => {
     try {
       if (!req.user) {
