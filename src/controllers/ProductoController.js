@@ -221,11 +221,11 @@ const ProductoController = {
                 const {
                     nombre,
                     marca,
-                    color,
+                    color: colorPar,
                     material,
-                    proveedor,
+                    proveedor: proveedorPar,
                     categoria,
-                    modelo,
+                    modelo: modeloPar,
                     stock,
                     precio,
                     moneda,
@@ -236,6 +236,9 @@ const ProductoController = {
 
                 const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
                 const aplicaIva = (aplicaIva_string === 'true' || aplicaIva_string === true || aplicaIva_string === 1 || aplicaIva_string === "1");
+                const color = (colorPar.trim() != '') ? colorPar : null;
+                const proveedor = (proveedorPar.trim() != '') ? proveedorPar : null;
+                const modelo = (modeloPar.trim() != '') ? modeloPar : null;
 
                 if (!VerificationUtils.verify_nombre(nombre)) {
                     return res.status(400).json({ message: "El nombre no puede quedar vacio." });
@@ -243,20 +246,11 @@ const ProductoController = {
                 if (!VerificationUtils.verify_nombre(marca)) {
                     return res.status(400).json({ message: "La marca no puede quedar vacio." });
                 }
-                if (color != null && !VerificationUtils.verify_nombre(color)) {
-                    return res.status(400).json({ message: "El color no tiene formato valido." });
-                }
                 if (!VerificationUtils.verify_nombre(material)) {
                     return res.status(400).json({ message: "El material no puede quedar vacio." });
                 }
-                if (proveedor != null && !VerificationUtils.verify_nombre(proveedor)) {
-                    return res.status(400).json({ message: "El proveedor no tiene formato valido." });
-                }
                 if (!VerificationUtils.verify_nombre(categoria)) {
                     return res.status(400).json({ message: "La categoria no puede quedar vacio." });
-                }
-                if (modelo != null && !VerificationUtils.verify_nombre(modelo)) {
-                    return res.status(400).json({ message: "El modelo no tiene formato valido." });
                 }
                 if (!VerificationUtils.verify_numero(stock)) {
                     return res.status(400).json({ message: "El stock debe ser numerico" });
