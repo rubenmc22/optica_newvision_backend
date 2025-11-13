@@ -1,18 +1,18 @@
 Sedes:
-    Agregar los campos:
+    [LISTO] Agregar los campos:
         direccion
         telefono
         email
         direccion_fiscal
 
 Autenticacion
-    Carga de imagen para usuarios
+    [LISTO] Carga de imagen para usuarios
         Cargar
         Quitar
     OTP
 
 Productos:
-    Quitar fotos
+    [LISTO] Quitar fotos
 
 Ventas:
     Agregar

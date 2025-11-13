@@ -54,14 +54,8 @@ const ProductoController = {
                 if (!VerificationUtils.verify_nombre(material)) {
                     return res.status(400).json({ message: "El material no puede quedar vacio." });
                 }
-                if (proveedor != null && !VerificationUtils.verify_nombre(proveedor)) {
-                    return res.status(400).json({ message: "El proveedor no tiene formato valido." });
-                }
                 if (!VerificationUtils.verify_nombre(categoria)) {
                     return res.status(400).json({ message: "La categoria no puede quedar vacio." });
-                }
-                if (modelo != null && !VerificationUtils.verify_nombre(modelo)) {
-                    return res.status(400).json({ message: "El modelo no tiene formato valido." });
                 }
                 if (!VerificationUtils.verify_numero(stock)) {
                     return res.status(400).json({ message: "El stock debe ser numerico" });
