@@ -30,9 +30,9 @@ const ProductoController = {
                     marca,
                     color: colorPar,
                     material,
-                    proveedor,
+                    proveedor: proveedorPar,
                     categoria,
-                    modelo,
+                    modelo: modeloPar,
                     stock,
                     precio,
                     moneda,
@@ -44,6 +44,8 @@ const ProductoController = {
                 const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
                 const aplicaIva = (aplicaIva_string === 'true' || aplicaIva_string === true || aplicaIva_string === 1 || aplicaIva_string === "1");
                 const color = (colorPar.trim() != '') ? colorPar : null;
+                const proveedor = (proveedorPar.trim() != '') ? proveedorPar : null;
+                const modelo = (modeloPar.trim() != '') ? modeloPar : null;
 
                 if (!VerificationUtils.verify_nombre(nombre)) {
                     return res.status(400).json({ message: "El nombre no puede quedar vacio." });
