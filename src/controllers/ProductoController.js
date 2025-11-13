@@ -28,7 +28,7 @@ const ProductoController = {
                 const {
                     nombre,
                     marca,
-                    color,
+                    color: colorPar,
                     material,
                     proveedor,
                     categoria,
@@ -43,15 +43,13 @@ const ProductoController = {
 
                 const activo = (activo_string === 'true' || activo_string === true || activo_string === 1 || activo_string === "1");
                 const aplicaIva = (aplicaIva_string === 'true' || aplicaIva_string === true || aplicaIva_string === 1 || aplicaIva_string === "1");
+                const color = (colorPar.trim() != '') ? colorPar : null;
 
                 if (!VerificationUtils.verify_nombre(nombre)) {
                     return res.status(400).json({ message: "El nombre no puede quedar vacio." });
                 }
                 if (!VerificationUtils.verify_nombre(marca)) {
                     return res.status(400).json({ message: "La marca no puede quedar vacio." });
-                }
-                if (color != null && !VerificationUtils.verify_nombre(color)) {
-                    return res.status(400).json({ message: "El color no tiene formato valido." });
                 }
                 if (!VerificationUtils.verify_nombre(material)) {
                     return res.status(400).json({ message: "El material no puede quedar vacio." });
