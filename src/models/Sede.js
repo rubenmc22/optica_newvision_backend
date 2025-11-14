@@ -13,6 +13,16 @@ const Sede = sequelize.define('Sede', {
     allowNull: false,
     collate: 'utf8mb4_general_ci'
   },
+  nombre_optica: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    collate: 'utf8mb4_general_ci'
+  },
+  rif: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+    collate: 'utf8mb4_general_ci'
+  },
   direccion: {
     type: DataTypes.TEXT,
     allowNull: true,

@@ -10,6 +10,8 @@ const SedesController = {
                 sedes_output.push({
                     key: sede.id,
                     nombre: sede.nombre,
+                    nombre_optica: sede.nombre_optica,
+                    rif: sede.rif,
                     direccion: sede.direccion,
                     telefono: sede.telefono,
                     email: sede.email,
