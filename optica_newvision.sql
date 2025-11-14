@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2025 a las 18:35:29
+-- Servidor: 127.0.0.1:3307
+-- Tiempo de generación: 14-11-2025 a las 15:38:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -198,10 +198,12 @@ INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`
 (18, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTczNzk1NTQsImV4cCI6MTc1NzQ2NTk1NH0.lYfP-AjdAmDPoBXlzyitCuiKW0NOZzKiDmEKgg2-II4', '::1', '2025-09-09 00:59:14', '2025-09-09 00:59:14'),
 (19, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTc1NTI2NjMsImV4cCI6MTc1NzYzOTA2M30.Wu0bULJGmBvp3QVTTWKshQsuBHKrKHPKDqWpBOiroNw', '::1', '2025-09-11 01:04:23', '2025-09-11 01:04:23'),
 (20, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w', '::1', '2025-09-19 19:35:28', '2025-09-19 19:35:28'),
-(21, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5NjUzMjgsImV4cCI6MTc2MzA1MTcyOH0.fBnRDJwgRKcF7bU_DQcl-uD85ob_93kfXxjO6cHjNC8', '::1', '2025-11-12 16:35:28', '2025-11-12 16:35:28'),
-(22, 'guatire', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhdGlyZSIsInVzZXJDZWR1bGEiOiIyNTQwOTkwNCIsImlhdCI6MTc2Mjk2NTYyNSwiZXhwIjoxNzYzMDUyMDI1fQ.n3Y4qq9Q7akNgxNhjiUnkNT15n6FyCJlDs2bUbbvrFA', '::1', '2025-11-12 16:40:25', '2025-11-12 16:40:25'),
-(23, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5NjU3OTIsImV4cCI6MTc2MzA1MjE5Mn0.hg7of0lQioE4h8reRgN-5yuKdZo6M0bgTbvCfuhlMjg', '::1', '2025-11-12 16:43:12', '2025-11-12 16:43:12'),
-(24, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjI5Njg3NDgsImV4cCI6MTc2MzA1NTE0OH0.SUZlV7Ui-JQyWa_nnF1WZPFOvGvSY6C4WSovDET34Ng', '::1', '2025-11-12 17:32:28', '2025-11-12 17:32:28');
+(21, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTg0OTA4OTEsImV4cCI6MTc1ODU3NzI5MX0.V_f4VSDSmsIsNzfPAa3Go2isrnqxOqO64kNzkuonXfE', '::1', '2025-09-21 21:41:31', '2025-09-21 21:41:31'),
+(22, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMwNDU1OTAsImV4cCI6MTc2MzEzMTk5MH0.8ks-Y9zAKJVuKy2k1UixslzMm1LV3HaBvsR6YEJ6Oh4', '::1', '2025-11-13 14:53:10', '2025-11-13 14:53:10'),
+(23, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjU5NDEsImV4cCI6MTc2MzIxMjM0MX0.hauZvrz90QgzNQ54itY_gdZGKZc0XHDqNey5NPGebyw', '::1', '2025-11-14 13:12:21', '2025-11-14 13:12:21'),
+(24, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjU5NjksImV4cCI6MTc2MzIxMjM2OX0.yb4lHUhj-MkX6VM9Lg-8s4Yh2OiDDhE-NEjTI2NEOvE', '::1', '2025-11-14 13:12:49', '2025-11-14 13:12:49'),
+(25, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjYzMTYsImV4cCI6MTc2MzIxMjcxNn0.cqUUoKiAYEWbB41-yfJJNtogCBJCr7HC_lpL17TrfZI', '::1', '2025-11-14 13:18:36', '2025-11-14 13:18:36'),
+(26, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjY5NzYsImV4cCI6MTc2MzIxMzM3Nn0.FissUhyhMGe3CYHukqDWfcryTYigq1PeGLIftpunBIY', '::1', '2025-11-14 13:29:36', '2025-11-14 13:29:36');
 
 -- --------------------------------------------------------
 
@@ -221,6 +223,13 @@ CREATE TABLE `otps` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `otps`
+--
+
+INSERT INTO `otps` (`id`, `usu_cedula`, `otp`, `ip`, `correo`, `activo`, `verificado`, `historial`, `created_at`, `updated_at`) VALUES
+(2, '25409904', '887011', '::1', 'jeffersonjtorresu@gmail.com', 0, 1, '[{\"accion\":\"verificado\",\"datetime\":\"2025-11-14 09:28:54\"},{\"accion\":\"desactivado\",\"datetime\":\"2025-11-14 09:29:14\"}]', '2025-11-14 13:28:40', '2025-11-14 13:29:14');
 
 -- --------------------------------------------------------
 
@@ -308,7 +317,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `aplica_iva`, `precio_con_iva`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', NULL, '2025-09-19 19:50:14', '2025-11-12 17:34:21', NULL),
+(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-09-19 19:55:07', NULL),
 (6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-09-19 19:55:26', NULL);
 
 -- --------------------------------------------------------
@@ -340,6 +349,8 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES
 CREATE TABLE `sedes` (
   `id` varchar(50) NOT NULL,
   `nombre` varchar(255) NOT NULL,
+  `nombre_optica` varchar(255) NOT NULL,
+  `rif` varchar(100) NOT NULL,
   `direccion` text DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -350,9 +361,9 @@ CREATE TABLE `sedes` (
 -- Volcado de datos para la tabla `sedes`
 --
 
-INSERT INTO `sedes` (`id`, `nombre`, `direccion`, `telefono`, `email`, `direccion_fiscal`) VALUES
-('guarenas', 'Sede Guarenas', NULL, NULL, NULL, NULL),
-('guatire', 'Sede Guatire', NULL, NULL, NULL, NULL);
+INSERT INTO `sedes` (`id`, `nombre`, `nombre_optica`, `rif`, `direccion`, `telefono`, `email`, `direccion_fiscal`) VALUES
+('guarenas', 'Sede Guarenas', 'Optica New Vision', 'rifJ50016164-6', 'Centro comercial candelaria plaza, planta baja local Pb-04, Guarenas estado Miranda', '0412-365-99-29', 'newvisionlens2020@gmail.com', NULL),
+('guatire', 'Sede Guatire', 'Optica New Vision', 'rifJ50173124-1', 'Centro comercial Buenaventura vista place piso 1 nivel mirador, local M52 Guatire Estado Miranda.', '04127042837', 'opticanewvisionlensii@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -450,7 +461,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `rol_id`, `cargo_id`, `cedula`, `nombre`, `password`, `correo`, `telefono`, `fecha_nacimiento`, `ruta_imagen`, `avatar_url`, `activo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'admin', 'gerente', '25409904', 'Jefferson Torres', '$2b$10$7KuJRh76glMvnAPw7l.S9ebE2y6lalWWui7R3Znwyjk4pqStyPnOy', 'jeffersonjtorresu@gmail.com', '04128977574', '1996-06-11', '/public/images/profile-25409904.png?t=1757206117655', NULL, 1, '2025-03-28 18:31:30', '2025-09-07 00:48:37', NULL),
+(4, 'admin', 'gerente', '25409904', 'Jefferson Torres', '$2b$10$rVR3GakmyWh.aJylX4Lv0eNPUFtwDCGClViFXHnXglrdajmoEBLca', 'jeffersonjtorresu@gmail.com', '04128977574', '1996-06-11', NULL, NULL, 1, '2025-03-28 18:31:30', '2025-11-14 13:29:14', NULL),
 (24, 'asesor-optico', 'asesor-optico-1', '11554570', 'Heriberto Torres', '$2b$10$7KuJRh76glMvnAPw7l.S9ebE2y6lalWWui7R3Znwyjk4pqStyPnOy', 'heriberto@gmail.com', '04241738615', '1996-06-11', NULL, NULL, 1, '2025-07-27 15:19:32', '2025-07-27 15:19:32', NULL);
 
 --
@@ -568,13 +579,13 @@ ALTER TABLE `historial_rastreo_bcv`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`
 --
 ALTER TABLE `otps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`

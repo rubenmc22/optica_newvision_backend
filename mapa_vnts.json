@@ -1,0 +1,98 @@
+
+ventas: {
+    "id": 1,
+    "venta_key": "d3d9446802a44259755d38e6d163e820",
+    "numero_control": 10,
+
+    "sede":"guatire",
+    "paciente_key": "c9f0f895fb98ab9159f51fd0297e236d",
+    
+    "moneda":"dolar",
+    "formaPago":"cashea",
+    "descuento":10,
+    "observaciones":"",
+    "asesor":5,
+    "subtotal":140.36,
+    "totalDescuento":14.59,
+    "total":131.29,
+    "pagoCompleto":false,
+    "financiado":true,
+    "nivelCashea":"nivel3",
+    "montoInicial":58.35,
+    "cantidadCuotas":6,
+    "montoPorCuota":12.16,
+    "totalAdelantado":36.480000000000004,
+    "historiaMedicaId":28,
+
+    "created_by": "25409904",
+    "estatus": "pagado|pendiente|anulado",
+    "created_at": "2025-10-28 16:31:31",
+    "updated_at": "2025-10-28 16:31:31"
+}
+
+ventas_metodos_pago: [
+    {
+        "venta_key":"d3d9446802a44259755d38e6d163e820",
+        "tipo":"efectivo",
+        "monto":50
+    },
+    {
+        "venta_key":"d3d9446802a44259755d38e6d163e820",
+        "tipo":"debito",
+        "monto":8.350000000000001
+    }
+]
+
+ventas_productos: [
+    {
+        "venta_key":"d3d9446802a44259755d38e6d163e820",
+        "producto_id":"17",
+        "cantidad":1,
+        "precio":36.67,
+        "precioConIva":36.67,
+        "subtotal":36.67,
+        "total":36.67
+    },
+    {
+        "venta_key":"d3d9446802a44259755d38e6d163e820",
+        "producto_id":"18",
+        "cantidad":1,
+        "precio":34.48,
+        "precioConIva":40,
+        "subtotal":34.48,
+        "total":40
+    },
+    {
+        "venta_key":"d3d9446802a44259755d38e6d163e820",
+        "producto_id":"19",
+        "cantidad":1,
+        "precio":69.21,
+        "precioConIva":69.21,
+        "subtotal":69.21,
+        "total":69.21
+    }
+]
+
+ventas_pagos: [
+    {
+        "numero":1,
+        "monto":12.16,
+        "fechaVencimiento":"2025-11-11T00:00:00.000Z",
+        "created_by": "25409904",
+        "created_at": "2025-10-28 16:31:31"
+    },
+    {
+        "numero":2,
+        "monto":12.16,
+        "fechaVencimiento":"2025-11-25T00:00:00.000Z",
+        "created_by": "25409904",
+        "created_at": "2025-10-28 16:31:31"
+    },
+    {
+        "numero":3,
+        "monto":12.16,
+        "fechaVencimiento":"2025-12-09T00:00:00.000Z",
+        "created_by": "25409904",
+        "created_at": "2025-10-28 16:31:31"
+    }
+]
