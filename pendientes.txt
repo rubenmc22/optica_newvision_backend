@@ -4,12 +4,15 @@ Sedes:
         telefono
         email
         direccion_fiscal
+        nombre_optica
+        rif
+    [LISTO] Llenar los campos nuevos
 
 Autenticacion
     [LISTO] Carga de imagen para usuarios
         Cargar
         Quitar
-    OTP
+    [LISTO] OTP
 
 Productos:
     [LISTO] Quitar fotos
