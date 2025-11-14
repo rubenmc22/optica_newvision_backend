@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8795353c-050b-4f90-9d0c-be818628dd58",
+		"_postman_id": "62104e40-82eb-4815-8b0e-c3e0302e0151",
 		"name": "optica",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13401550"
@@ -117,16 +117,17 @@
 					"name": "Mi Cuenta - Cambiar clave - Enviar OTP",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjYzMTYsImV4cCI6MTc2MzIxMjcxNn0.cqUUoKiAYEWbB41-yfJJNtogCBJCr7HC_lpL17TrfZI",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDM2OTM0NTIsImV4cCI6MTc0Mzc3OTg1Mn0.HTgbldWOqKuNbldwN0RJPdXH1tlb3sXMQRimQ8JAQvM",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -137,12 +138,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.apollogroupsport.com/api/account/change-password--send-otp",
-							"protocol": "https",
+							"raw": "{{baseURL}}/api/account/change-password--send-otp",
 							"host": [
-								"api",
-								"apollogroupsport",
-								"com"
+								"{{baseURL}}"
 							],
 							"path": [
 								"api",
@@ -157,19 +155,20 @@
 					"name": "Mi Cuenta - Cambiar clave - Verificar OTP",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjU5NjksImV4cCI6MTc2MzIxMjM2OX0.yb4lHUhj-MkX6VM9Lg-8s4Yh2OiDDhE-NEjTI2NEOvE",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDMxOTIzNTAsImV4cCI6MTc0MzI3ODc1MH0.FT-89nBNl2pQKAXlUqHVLsTIsuhyE583OBmCuo1gUlA",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"otp\": \"347839\"\r\n}",
+							"raw": "{\r\n    \"otp\": \"887011\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,19 +193,20 @@
 					"name": "Mi Cuenta - Cambiar clave - Cambiar clave",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjU5NjksImV4cCI6MTc2MzIxMjM2OX0.yb4lHUhj-MkX6VM9Lg-8s4Yh2OiDDhE-NEjTI2NEOvE",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NDMxOTIzNTAsImV4cCI6MTc0MzI3ODc1MH0.FT-89nBNl2pQKAXlUqHVLsTIsuhyE583OBmCuo1gUlA",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"otp\": \"347839\",\r\n    \"newPassword\": \"admin123\"\r\n}",
+							"raw": "{\r\n    \"otp\": \"887011\",\r\n    \"newPassword\": \"11554570\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
