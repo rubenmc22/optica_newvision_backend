@@ -1,3 +1,0 @@
-
-Usuarios:
-    Agregar clave extraordinaria, se requeire OTP para asignarla o cambiarla, entre 4-8 digitos, no es aleatoria. Exclusivo del admin.

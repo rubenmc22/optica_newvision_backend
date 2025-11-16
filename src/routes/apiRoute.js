@@ -14,6 +14,8 @@ const PacienteController = require('../controllers/PacienteController');
 const HistorialMedicoController = require('../controllers/HistorialMedicoController');
 const ProductoController = require('../controllers/ProductoController');
 const EnvioCorreo = require('./../config/correo');
+const CatchGeneric = require('../utils/CatchGeneric');
+const VentaController = require('../controllers/VentaController');
 
 const router = express.Router();
 
@@ -88,5 +90,8 @@ router.post('/producto-add', authMiddleware, ProductoController.add);
 router.put('/producto-update/:id', authMiddleware, ProductoController.update);
 router.delete('/producto-delete/:id', authMiddleware, ProductoController.delete);
 router.put('/producto-remove-image/:id', authMiddleware, ProductoController.remove_image);
+
+router.post('/ventas-add', authMiddleware, CatchGeneric(VentaController.add));
+router.get('/ventas-get', authMiddleware, CatchGeneric(VentaController.get));
 
 module.exports = router;
