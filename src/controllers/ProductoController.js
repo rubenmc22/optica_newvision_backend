@@ -7,6 +7,7 @@ const upload = require('../config/uploader');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const ConfiguracionService = require('../services/ConfiguracionService');
 
 const ProductoController = {
     add: async (req, res) => {
@@ -35,7 +36,6 @@ const ProductoController = {
                     modelo: modeloPar,
                     stock,
                     precio,
-                    moneda,
                     activo: activo_string,
                     descripcion,
                     aplicaIva: aplicaIva_string
@@ -72,6 +72,9 @@ const ProductoController = {
                     return res.status(400).json({ message: "El parametro 'aplicaIva' debe ser booleano." });
                 }
 
+                const moneda_base = await ConfiguracionService.get_moneda_base(req.sede.id);
+                const moneda = moneda_base.valor;
+                
                 const objTasa = await Tasa.findOne({ where: { id: moneda } });
                 if (!objTasa) {
                     return res.status(400).json({ message: "La moneda enviada no existe: " + moneda + "." });
@@ -228,7 +231,6 @@ const ProductoController = {
                     modelo: modeloPar,
                     stock,
                     precio,
-                    moneda,
                     activo: activo_string,
                     descripcion,
                     aplicaIva: aplicaIva_string
@@ -296,7 +298,6 @@ const ProductoController = {
                 objProducto.precio = Number(precio_sin_iva.toFixed(2));
                 objProducto.aplica_iva = aplicaIva;
                 objProducto.precio_con_iva = Number(precio_number.toFixed(2));
-                objProducto.moneda = moneda;
                 objProducto.activo = activo;
                 objProducto.descripcion = descripcion;
 

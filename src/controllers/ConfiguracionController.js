@@ -1,18 +1,10 @@
-const Configuracion = require('../models/Configuracion');
-const Sede = require('../models/Sede');
 const Tasa = require('../models/Tasa');
+const ConfiguracionService = require('../services/ConfiguracionService');
+const { sequelize } = require('../config/db');
 
 const ConfiguracionController = {
     consultar_moneda_base: async (req, res) => {
-        let moneda_base = await Configuracion.findOne({ where: { sede: req.sede.id, clave: 'moneda_base' } });
-        if(!moneda_base) {
-            moneda_base = await Configuracion.create({
-                sede: req.sede.id,
-                clave: 'moneda_base',
-                valor: 'dolar',
-                descripcion: 'Moneda base del sistema para la sede de ${req.sede.nombre}.'
-            });
-        }
+        const moneda_base = await ConfiguracionService.get_moneda_base(req.sede.id);
         res.status(200).json({ moneda_base: moneda_base.valor });
     },
 
@@ -25,19 +17,22 @@ const ConfiguracionController = {
         if(!objTasa) {
             throw { message: `La tasa ${monedaBase} no existe.` };
         }
-        
-        let moneda_base = await Configuracion.findOne({ where: { sede: req.sede.id, clave: 'moneda_base' } });
-        if(moneda_base) {
+
+        const t = await sequelize.transaction();
+        let moneda_base;
+
+        try {
+            moneda_base = await ConfiguracionService.get_moneda_base(req.sede.id);
             moneda_base.valor = objTasa.id;
-            await moneda_base.save();
+            await moneda_base.save({ transaction: t });
+            
+            await ConfiguracionService.actualizar_monedas_productos(req.sede.id, objTasa, t);
+
+            await t.commit();
         }
-        else {
-            moneda_base = await Configuracion.create({
-                sede: req.sede.id,
-                clave: 'moneda_base',
-                valor: objTasa.id,
-                descripcion: 'Moneda base del sistema para la sede de ${req.sede.nombre}.'
-            });
+        catch (error) {
+            await t.rollback();
+            throw { message: error.message || error.toString() };
         }
         
         res.status(200).json({ moneda_base: moneda_base.valor });
