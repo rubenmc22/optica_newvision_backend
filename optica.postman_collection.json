@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "62104e40-82eb-4815-8b0e-c3e0302e0151",
+		"_postman_id": "189c24ee-c555-439a-b59d-719581bcbb38",
 		"name": "optica",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13401550"
@@ -305,6 +305,78 @@
 								"api",
 								"account",
 								"remove-profile-image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuraciones",
+			"item": [
+				{
+					"name": "Get Moneda base",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/configuracion/moneda_base-get",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"configuracion",
+								"moneda_base-get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Moneda base",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"monedaBase\": \"dolar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/configuracion/moneda_base-update",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"configuracion",
+								"moneda_base-update"
 							]
 						}
 					},
@@ -1452,6 +1524,76 @@
 								"api",
 								"producto-remove-image",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ventas",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNTU5NjgsImV4cCI6MTc2MzM0MjM2OH0.fwblYdFQuiENRGerbjI3sDuFVERUyE3cTnSbRwu0mvI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ventas-get",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ventas-get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNTU5NjgsImV4cCI6MTc2MzM0MjM2OH0.fwblYdFQuiENRGerbjI3sDuFVERUyE3cTnSbRwu0mvI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"fecha\":\"2025-10-28\",\r\n   \"sede\":\"guatire\",\r\n   \"moneda\":\"dolar\",\r\n   \"formaPago\":\"cashea\",\r\n   \"descuento\":10,\r\n   \"observaciones\":\"\",\r\n   \"asesor\":5,\r\n   \"paciente\":{\r\n      \"key\":\"c9f0f895fb98ab9159f51fd0297e236d\"\r\n   },\r\n   \"productos\":[\r\n      {\r\n         \"id\":\"5\",\r\n         \"cantidad\":1,\r\n         \"precio\":36.67,\r\n         \"precioConIva\":36.67,\r\n         \"subtotal\":36.67,\r\n         \"total\":36.67\r\n      },\r\n      {\r\n         \"id\":\"6\",\r\n         \"cantidad\":1,\r\n         \"precio\":34.48,\r\n         \"precioConIva\":40,\r\n         \"subtotal\":34.48,\r\n         \"total\":40\r\n      },\r\n      {\r\n         \"id\":\"7\",\r\n         \"cantidad\":1,\r\n         \"precio\":69.21,\r\n         \"precioConIva\":69.21,\r\n         \"subtotal\":69.21,\r\n         \"total\":69.21\r\n      }\r\n   ],\r\n   \"subtotal\":140.36,\r\n   \"totalDescuento\":14.59,\r\n   \"total\":131.29,\r\n   \"metodosDePago\":[\r\n      {\r\n         \"tipo\":\"efectivo\",\r\n         \"monto\":50\r\n      },\r\n      {\r\n         \"tipo\":\"debito\",\r\n         \"monto\":8.350000000000001\r\n      }\r\n   ],\r\n   \"pagoCompleto\":false,\r\n   \"financiado\":true,\r\n   \"nivelCashea\":\"nivel3\",\r\n   \"montoInicial\":58.35,\r\n   \"cantidadCuotas\":6,\r\n   \"montoPorCuota\":12.16,\r\n   \"cuotasAdelantadas\":[\r\n      {\r\n         \"numero\":1,\r\n         \"monto\":12.16,\r\n         \"fechaVencimiento\":\"2025-11-11T00:00:00.000Z\"\r\n      },\r\n      {\r\n         \"numero\":2,\r\n         \"monto\":12.16,\r\n         \"fechaVencimiento\":\"2025-11-25T00:00:00.000Z\"\r\n      },\r\n      {\r\n         \"numero\":3,\r\n         \"monto\":12.16,\r\n         \"fechaVencimiento\":\"2025-12-09T00:00:00.000Z\"\r\n      }\r\n   ],\r\n   \"totalAdelantado\":36.480000000000004,\r\n   \"historiaMedicaId\":28\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ventas-add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ventas-add"
 							]
 						}
 					},

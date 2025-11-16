@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 14-11-2025 a las 15:38:54
+-- Tiempo de generación: 16-11-2025 a las 19:03:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -66,6 +66,30 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 (4, 'Estuches'),
 (5, 'Misceláneos'),
 (6, 'Lentes de contacto');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `configuraciones`
+--
+
+CREATE TABLE `configuraciones` (
+  `id` int(11) NOT NULL,
+  `sede` varchar(50) NOT NULL,
+  `clave` varchar(50) NOT NULL,
+  `valor` varchar(100) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `configuraciones`
+--
+
+INSERT INTO `configuraciones` (`id`, `sede`, `clave`, `valor`, `descripcion`) VALUES
+(1, 'guarenas', 'numero_control', '10', 'Siguiente numero de control para la sede de Guarenas.'),
+(2, 'guatire', 'numero_control', '10', 'Siguiente numero de control para la sede de Guatire.'),
+(3, 'guarenas', 'moneda_base', 'dolar', 'Moneda base del sistema para la sede de Guarenas.'),
+(4, 'guatire', 'moneda_base', 'dolar', 'Moneda base del sistema para la sede de Guatire.');
 
 -- --------------------------------------------------------
 
@@ -203,7 +227,10 @@ INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`
 (23, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjU5NDEsImV4cCI6MTc2MzIxMjM0MX0.hauZvrz90QgzNQ54itY_gdZGKZc0XHDqNey5NPGebyw', '::1', '2025-11-14 13:12:21', '2025-11-14 13:12:21'),
 (24, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjU5NjksImV4cCI6MTc2MzIxMjM2OX0.yb4lHUhj-MkX6VM9Lg-8s4Yh2OiDDhE-NEjTI2NEOvE', '::1', '2025-11-14 13:12:49', '2025-11-14 13:12:49'),
 (25, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjYzMTYsImV4cCI6MTc2MzIxMjcxNn0.cqUUoKiAYEWbB41-yfJJNtogCBJCr7HC_lpL17TrfZI', '::1', '2025-11-14 13:18:36', '2025-11-14 13:18:36'),
-(26, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjY5NzYsImV4cCI6MTc2MzIxMzM3Nn0.FissUhyhMGe3CYHukqDWfcryTYigq1PeGLIftpunBIY', '::1', '2025-11-14 13:29:36', '2025-11-14 13:29:36');
+(26, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjY5NzYsImV4cCI6MTc2MzIxMzM3Nn0.FissUhyhMGe3CYHukqDWfcryTYigq1PeGLIftpunBIY', '::1', '2025-11-14 13:29:36', '2025-11-14 13:29:36'),
+(27, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNTU5NjgsImV4cCI6MTc2MzM0MjM2OH0.fwblYdFQuiENRGerbjI3sDuFVERUyE3cTnSbRwu0mvI', '::1', '2025-11-16 01:19:28', '2025-11-16 01:19:28'),
+(28, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNzU1MzYsImV4cCI6MTc2MzM2MTkzNn0.YjIgAUl4oWd73lKKwwNqxdHJXhZZoNc31V6a7daPfpM', '::1', '2025-11-16 06:45:36', '2025-11-16 06:45:36'),
+(29, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs', '::1', '2025-11-16 17:58:23', '2025-11-16 17:58:23');
 
 -- --------------------------------------------------------
 
@@ -317,8 +344,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `aplica_iva`, `precio_con_iva`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-09-19 19:55:07', NULL),
-(6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-09-19 19:55:26', NULL);
+(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-11-16 09:44:49', NULL),
+(6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-11-16 09:44:49', NULL),
+(7, 'guarenas', 'Producto Chevere 3', 'Marca Generica 2', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-11-16 09:44:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -464,6 +492,139 @@ INSERT INTO `usuarios` (`id`, `rol_id`, `cargo_id`, `cedula`, `nombre`, `passwor
 (4, 'admin', 'gerente', '25409904', 'Jefferson Torres', '$2b$10$rVR3GakmyWh.aJylX4Lv0eNPUFtwDCGClViFXHnXglrdajmoEBLca', 'jeffersonjtorresu@gmail.com', '04128977574', '1996-06-11', NULL, NULL, 1, '2025-03-28 18:31:30', '2025-11-14 13:29:14', NULL),
 (24, 'asesor-optico', 'asesor-optico-1', '11554570', 'Heriberto Torres', '$2b$10$7KuJRh76glMvnAPw7l.S9ebE2y6lalWWui7R3Znwyjk4pqStyPnOy', 'heriberto@gmail.com', '04241738615', '1996-06-11', NULL, NULL, 1, '2025-07-27 15:19:32', '2025-07-27 15:19:32', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` bigint(20) NOT NULL,
+  `venta_key` varchar(100) NOT NULL,
+  `numero_control` bigint(20) NOT NULL,
+  `sede` varchar(50) NOT NULL,
+  `paciente_key` varchar(70) NOT NULL,
+  `moneda` varchar(20) NOT NULL,
+  `forma_pago` varchar(255) NOT NULL,
+  `historia_medica_id` varchar(14) NOT NULL,
+  `descuento` float NOT NULL,
+  `subtotal` float NOT NULL,
+  `total_descuento` float NOT NULL,
+  `total` float NOT NULL,
+  `observaciones` text DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `pago_completo` tinyint(4) NOT NULL,
+  `financiado` tinyint(4) NOT NULL,
+  `created_by` varchar(20) NOT NULL,
+  `estatus_venta` varchar(50) NOT NULL,
+  `estatus_pago` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `venta_key`, `numero_control`, `sede`, `paciente_key`, `moneda`, `forma_pago`, `historia_medica_id`, `descuento`, `subtotal`, `total_descuento`, `total`, `observaciones`, `fecha`, `pago_completo`, `financiado`, `created_by`, `estatus_venta`, `estatus_pago`, `created_at`, `updated_at`) VALUES
+(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 12, 'guarenas', 'c9f0f895fb98ab9159f51fd0297e236d', 'dolar', 'cashea', '28', 10, 140.36, 14.59, 131.29, '', '2025-10-28', 1, 1, '25409904', 'completado', 'pagado_por_cashea', '2025-11-16 09:44:49', '2025-11-16 09:44:49');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_cashea`
+--
+
+CREATE TABLE `ventas_cashea` (
+  `id` bigint(20) NOT NULL,
+  `venta_key` varchar(100) NOT NULL,
+  `nivel_cashea` varchar(50) NOT NULL,
+  `monto_inicial` float NOT NULL,
+  `cantidad_cuotas` int(11) NOT NULL,
+  `monto_por_cuota` float NOT NULL,
+  `total_adelantado` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_cashea`
+--
+
+INSERT INTO `ventas_cashea` (`id`, `venta_key`, `nivel_cashea`, `monto_inicial`, `cantidad_cuotas`, `monto_por_cuota`, `total_adelantado`) VALUES
+(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 'nivel3', 58.35, 6, 12.16, 36.48);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_cashea_cuotas`
+--
+
+CREATE TABLE `ventas_cashea_cuotas` (
+  `id` bigint(20) NOT NULL,
+  `venta_key` varchar(100) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `monto` float NOT NULL,
+  `fecha_vencimiento` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_cashea_cuotas`
+--
+
+INSERT INTO `ventas_cashea_cuotas` (`id`, `venta_key`, `numero`, `monto`, `fecha_vencimiento`) VALUES
+(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 1, 12.16, '2025-11-10'),
+(2, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 2, 12.16, '2025-11-24'),
+(3, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 3, 12.16, '2025-12-08');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_pagos`
+--
+
+CREATE TABLE `ventas_pagos` (
+  `id` bigint(20) NOT NULL,
+  `venta_key` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `monto` float NOT NULL,
+  `created_by` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_pagos`
+--
+
+INSERT INTO `ventas_pagos` (`id`, `venta_key`, `tipo`, `monto`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 'efectivo', 50, '25409904', '2025-11-16 09:44:49', '2025-11-16 09:44:49'),
+(2, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 'debito', 8.35, '25409904', '2025-11-16 09:44:49', '2025-11-16 09:44:49');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_productos`
+--
+
+CREATE TABLE `ventas_productos` (
+  `id` bigint(20) NOT NULL,
+  `venta_key` varchar(100) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  `precio_con_iva` float NOT NULL,
+  `subtotal` float NOT NULL,
+  `total` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_productos`
+--
+
+INSERT INTO `ventas_productos` (`id`, `venta_key`, `producto_id`, `cantidad`, `precio`, `precio_con_iva`, `subtotal`, `total`) VALUES
+(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 5, 1, 36.67, 36.67, 36.67, 36.67),
+(2, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 6, 1, 34.48, 40, 34.48, 40),
+(3, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 7, 1, 69.21, 69.21, 69.21, 69.21);
+
 --
 -- Índices para tablas volcadas
 --
@@ -478,6 +639,12 @@ ALTER TABLE `cargos`
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `configuraciones`
+--
+ALTER TABLE `configuraciones`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -554,6 +721,44 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `venta_key` (`venta_key`),
+  ADD KEY `sede` (`sede`),
+  ADD KEY `paciente_key` (`paciente_key`),
+  ADD KEY `created_by` (`created_by`);
+
+--
+-- Indices de la tabla `ventas_cashea`
+--
+ALTER TABLE `ventas_cashea`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `venta_key` (`venta_key`);
+
+--
+-- Indices de la tabla `ventas_cashea_cuotas`
+--
+ALTER TABLE `ventas_cashea_cuotas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `venta_key` (`venta_key`);
+
+--
+-- Indices de la tabla `ventas_pagos`
+--
+ALTER TABLE `ventas_pagos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `venta_key` (`venta_key`);
+
+--
+-- Indices de la tabla `ventas_productos`
+--
+ALTER TABLE `ventas_productos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `venta_key` (`venta_key`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -562,6 +767,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `configuraciones`
+--
+ALTER TABLE `configuraciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `historiales_medicos`
@@ -579,7 +790,7 @@ ALTER TABLE `historial_rastreo_bcv`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`
@@ -597,7 +808,7 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tasas_historial`
@@ -610,6 +821,36 @@ ALTER TABLE `tasas_historial`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_cashea`
+--
+ALTER TABLE `ventas_cashea`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_cashea_cuotas`
+--
+ALTER TABLE `ventas_cashea_cuotas`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_pagos`
+--
+ALTER TABLE `ventas_pagos`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_productos`
+--
+ALTER TABLE `ventas_productos`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
