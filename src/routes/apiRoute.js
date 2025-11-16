@@ -16,6 +16,7 @@ const ProductoController = require('../controllers/ProductoController');
 const EnvioCorreo = require('./../config/correo');
 const CatchGeneric = require('../utils/CatchGeneric');
 const VentaController = require('../controllers/VentaController');
+const ConfiguracionController = require('../controllers/ConfiguracionController');
 
 const router = express.Router();
 
@@ -59,6 +60,9 @@ router.post('/account/change-password--change-password', authMiddleware, account
 router.get('/roles-get/:id?', authMiddleware, RolController.get);
 
 router.get('/cargos-get/:id?', authMiddleware, CargoController.get);
+
+router.get('/configuracion/moneda_base-get', authMiddleware, CatchGeneric(ConfiguracionController.consultar_moneda_base));
+router.put('/configuracion/moneda_base-update', authMiddleware, CatchGeneric(ConfiguracionController.modificar_moneda_base));
 
 router.get('/get-usuarios/:cedula?', authMiddleware, UsuarioController.get);
 router.post('/add-usuarios/', authMiddleware, UsuarioController.add);
