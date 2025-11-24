@@ -361,7 +361,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"monedaBase\": \"dolar\"\r\n}",
+							"raw": "{\r\n    \"monedaBase\": \"bolivar\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1233,7 +1233,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTg0OTA4OTEsImV4cCI6MTc1ODU3NzI5MX0.V_f4VSDSmsIsNzfPAa3Go2isrnqxOqO64kNzkuonXfE",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs",
 								"type": "text"
 							}
 						],
@@ -1281,7 +1281,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs",
 								"type": "text"
 							}
 						],
@@ -1290,7 +1290,7 @@
 							"formdata": [
 								{
 									"key": "nombre",
-									"value": "Producto 1",
+									"value": "Producto 6",
 									"type": "text"
 								},
 								{
@@ -1341,7 +1341,9 @@
 								{
 									"key": "moneda",
 									"value": "euro",
-									"type": "text"
+									"description": "Ya no es necesaria",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "activo",
@@ -1381,7 +1383,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NTgzMTA1MjgsImV4cCI6MTc1ODM5NjkyOH0.U91voKCA6aAqdB9pQvUDkWRSrKVqkaNVnvi9nZ1lD_w",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs",
 								"type": "text"
 							}
 						],
@@ -1390,7 +1392,7 @@
 							"formdata": [
 								{
 									"key": "nombre",
-									"value": "Producto Chevere 2",
+									"value": "Producto Chevere 6",
 									"type": "text"
 								},
 								{
@@ -1441,7 +1443,9 @@
 								{
 									"key": "moneda",
 									"value": "euro",
-									"type": "text"
+									"description": "Ya no es necesaria",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "activo",
@@ -1462,14 +1466,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/producto-update/6",
+							"raw": "{{baseURL}}/api/producto-update/9",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"api",
 								"producto-update",
-								"6"
+								"9"
 							]
 						}
 					},
@@ -1542,7 +1546,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNTU5NjgsImV4cCI6MTc2MzM0MjM2OH0.fwblYdFQuiENRGerbjI3sDuFVERUyE3cTnSbRwu0mvI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
 									"type": "string"
 								}
 							]
@@ -1557,6 +1561,62 @@
 							"path": [
 								"api",
 								"ventas-get"
+							],
+							"query": [
+								{
+									"key": "p",
+									"value": "2",
+									"description": "Numero de pagina",
+									"disabled": true
+								},
+								{
+									"key": "key",
+									"value": "ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d",
+									"description": "Key de la venta",
+									"disabled": true
+								},
+								{
+									"key": "fecha_inicio",
+									"value": "2025-11-01",
+									"description": "Rango fecha: fecha minima",
+									"disabled": true
+								},
+								{
+									"key": "fecha_final",
+									"value": "2025-11-30",
+									"description": "Rango fecha: fecha maxima",
+									"disabled": true
+								},
+								{
+									"key": "cedula",
+									"value": "25409904",
+									"description": "Cedula del cliente",
+									"disabled": true
+								},
+								{
+									"key": "asesor_id",
+									"value": "1",
+									"description": "ID del usuario del asesor",
+									"disabled": true
+								},
+								{
+									"key": "forma_pago",
+									"value": "cashea",
+									"description": "cashea | contado | abono",
+									"disabled": true
+								},
+								{
+									"key": "estatus_venta",
+									"value": "completada",
+									"description": "completada | pendiente | anulada",
+									"disabled": true
+								},
+								{
+									"key": "estatus_pago",
+									"value": "completada",
+									"description": "completada | pagado_por_cashea | pendiente",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -1570,7 +1630,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNTU5NjgsImV4cCI6MTc2MzM0MjM2OH0.fwblYdFQuiENRGerbjI3sDuFVERUyE3cTnSbRwu0mvI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
 									"type": "string"
 								}
 							]
@@ -1579,7 +1639,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"fecha\":\"2025-10-28\",\r\n   \"sede\":\"guatire\",\r\n   \"moneda\":\"dolar\",\r\n   \"formaPago\":\"cashea\",\r\n   \"descuento\":10,\r\n   \"observaciones\":\"\",\r\n   \"asesor\":5,\r\n   \"paciente\":{\r\n      \"key\":\"c9f0f895fb98ab9159f51fd0297e236d\"\r\n   },\r\n   \"productos\":[\r\n      {\r\n         \"id\":\"5\",\r\n         \"cantidad\":1,\r\n         \"precio\":36.67,\r\n         \"precioConIva\":36.67,\r\n         \"subtotal\":36.67,\r\n         \"total\":36.67\r\n      },\r\n      {\r\n         \"id\":\"6\",\r\n         \"cantidad\":1,\r\n         \"precio\":34.48,\r\n         \"precioConIva\":40,\r\n         \"subtotal\":34.48,\r\n         \"total\":40\r\n      },\r\n      {\r\n         \"id\":\"7\",\r\n         \"cantidad\":1,\r\n         \"precio\":69.21,\r\n         \"precioConIva\":69.21,\r\n         \"subtotal\":69.21,\r\n         \"total\":69.21\r\n      }\r\n   ],\r\n   \"subtotal\":140.36,\r\n   \"totalDescuento\":14.59,\r\n   \"total\":131.29,\r\n   \"metodosDePago\":[\r\n      {\r\n         \"tipo\":\"efectivo\",\r\n         \"monto\":50\r\n      },\r\n      {\r\n         \"tipo\":\"debito\",\r\n         \"monto\":8.350000000000001\r\n      }\r\n   ],\r\n   \"pagoCompleto\":false,\r\n   \"financiado\":true,\r\n   \"nivelCashea\":\"nivel3\",\r\n   \"montoInicial\":58.35,\r\n   \"cantidadCuotas\":6,\r\n   \"montoPorCuota\":12.16,\r\n   \"cuotasAdelantadas\":[\r\n      {\r\n         \"numero\":1,\r\n         \"monto\":12.16,\r\n         \"fechaVencimiento\":\"2025-11-11T00:00:00.000Z\"\r\n      },\r\n      {\r\n         \"numero\":2,\r\n         \"monto\":12.16,\r\n         \"fechaVencimiento\":\"2025-11-25T00:00:00.000Z\"\r\n      },\r\n      {\r\n         \"numero\":3,\r\n         \"monto\":12.16,\r\n         \"fechaVencimiento\":\"2025-12-09T00:00:00.000Z\"\r\n      }\r\n   ],\r\n   \"totalAdelantado\":36.480000000000004,\r\n   \"historiaMedicaId\":28\r\n}",
+							"raw": "{\r\n    \"venta\": {\r\n        \"fecha\": \"2025-11-21T02:28:42.761Z\",\r\n        \"estado\": \"pendiente\",\r\n        \"formaPago\": \"abono\",\r\n        \"moneda\": \"euro\",\r\n        \"observaciones\": null,\r\n        \"impuesto\": 16\r\n    },\r\n    \"totales\": {\r\n        \"subtotal\": 25.09,\r\n        \"descuento\": 2.5090000000000003,\r\n        \"iva\": 0,\r\n        \"total\": 22.58,\r\n        \"totalPagado\": 20\r\n    },\r\n    \"cliente\": {\r\n        \"tipo\": \"cliente_general\",\r\n        \"informacion\": {\r\n            \"tipoPersona\": \"natural\",\r\n            \"nombreCompleto\": \"Ana\",\r\n            \"cedula\": \"Castro\",\r\n            \"telefono\": \"021235440511\",\r\n            \"email\": \"rubemm18@gmail.com\"\r\n        }\r\n    },\r\n    \"asesor\": {\r\n        \"id\": 24\r\n    },\r\n    \"productos\": [\r\n        {\r\n            \"productoId\": \"5\",\r\n            \"cantidad\": 1,\r\n            \"moneda\": \"euro\"\r\n        }\r\n    ],\r\n    \"metodosPago\": [\r\n        {\r\n            \"tipo\": \"efectivo\",\r\n            \"monto\": 22.75,\r\n            \"moneda\": \"dolar\",\r\n            \"referencia\": null,\r\n            \"bancoCodigo\": null,\r\n            \"bancoNombre\": null\r\n        }\r\n    ],\r\n    \"formaPago\": {\r\n        \"tipo\": \"abono\",\r\n        \"montoTotal\": 22.58,\r\n        \"montoInicial\": 20,\r\n        \"cantidadCuotas\": \"0\",\r\n        \"montoPorCuota\": 0,\r\n        \"cuotasAdelantadas\": 0,\r\n        \"montoAdelantado\": 0,\r\n        \"totalPagadoAhora\": 20,\r\n        \"deudaPendiente\": 2.5799999999999983,\r\n        \"cuotas\": []\r\n    },\r\n    \"auditoria\": {\r\n        \"usuarioCreacion\": 5,\r\n        \"fechaCreacion\": \"2025-11-21T02:28:42.761Z\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1594,6 +1654,73 @@
 							"path": [
 								"api",
 								"ventas-add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Anular",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ventas-anular/587e0345-769f-41c1-83ae-26cc0d98e19c",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ventas-anular",
+								"587e0345-769f-41c1-83ae-26cc0d98e19c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Abonar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\":\"efectivo\",\r\n    \"monto\":6.2,\r\n    \"moneda\":\"euro\",\r\n    \"referencia\":null,\r\n    \"bancoCodigo\":null,\r\n    \"bancoNombre\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ventas-abonar/ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ventas-abonar",
+								"ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d"
 							]
 						}
 					},

@@ -4,6 +4,7 @@ const VentaPago = require('./VentaPago');
 const VentaProducto = require('./VentaProducto');
 const VentaCashea = require('./VentaCashea');
 const VentaCasheaCuota = require('./VentaCasheaCuota');
+const Usuario = require('./Usuario');
 
 const Venta = sequelize.define('Venta', {
   id: {
@@ -26,18 +27,46 @@ const Venta = sequelize.define('Venta', {
   },
   paciente_key: {
     type: DataTypes.STRING(70),
+    allowNull: true
+  },
+  cliente_tipo: {
+    type: DataTypes.STRING(20),
     allowNull: false
+  },
+  cliente_informacion_persona: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  cliente_informacion_nombre: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  cliente_informacion_cedula: {
+    type: DataTypes.STRING(20),
+    allowNull: true
+  },
+  cliente_informacion_telefono: {
+    type: DataTypes.STRING(20),
+    allowNull: true
+  },
+  cliente_informacion_email: {
+    type: DataTypes.STRING(255),
+    allowNull: true
   },
   moneda: {
     type: DataTypes.STRING(70),
+    allowNull: false
+  },
+  tasa_moneda: {
+    type: DataTypes.FLOAT,
     allowNull: false
   },
   forma_pago: {
     type: DataTypes.STRING(255),
     allowNull: false
   },
-  historia_medica_id: {
-    type: DataTypes.STRING(14),
+  iva_porcentaje: {
+    type: DataTypes.FLOAT,
     allowNull: false
   },
   descuento: {
@@ -48,7 +77,7 @@ const Venta = sequelize.define('Venta', {
     type: DataTypes.FLOAT,
     allowNull: false
   },
-  total_descuento: {
+  iva: {
     type: DataTypes.FLOAT,
     allowNull: false
   },
@@ -61,19 +90,19 @@ const Venta = sequelize.define('Venta', {
     allowNull: true
   },
   fecha: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.DATE,
     allowNull: false
   },
   pago_completo: {
     type: DataTypes.TINYINT,
     allowNull: false
   },
-  financiado: {
-    type: DataTypes.TINYINT,
-    allowNull: false
-  },
   created_by: {
     type: DataTypes.STRING(20),
+    allowNull: false
+  },
+  asesor_id: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   estatus_venta: {
@@ -121,6 +150,18 @@ Venta.hasMany(VentaProducto, {
   foreignKey: 'venta_key',
   sourceKey: 'venta_key',
   as: 'array_productos'
+});
+
+Venta.belongsTo(Usuario, {
+  foreignKey: 'created_by',
+  targetKey: 'cedula',
+  as: 'creater_user'
+});
+
+Venta.belongsTo(Usuario, {
+  foreignKey: 'asesor_id',
+  targetKey: 'id',
+  as: 'asesor_user'
 });
 
 module.exports = Venta;

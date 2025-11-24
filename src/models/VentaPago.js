@@ -20,6 +20,30 @@ const VentaPago = sequelize.define('VentaPago', {
     type: DataTypes.FLOAT,
     allowNull: false
   },
+  moneda_id: {
+    type: DataTypes.STRING(20),
+    allowNull: false
+  },
+  tasa_moneda: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  monto_moneda_base: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  referencia: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  bancoCodigo: {
+    type: DataTypes.STRING(4),
+    allowNull: true
+  },
+  bancoNombre: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
   created_by: {
     type: DataTypes.STRING(20),
     allowNull: false

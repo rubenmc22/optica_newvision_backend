@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 16-11-2025 a las 19:03:14
+-- Tiempo de generación: 24-11-2025 a las 02:11:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -86,10 +86,10 @@ CREATE TABLE `configuraciones` (
 --
 
 INSERT INTO `configuraciones` (`id`, `sede`, `clave`, `valor`, `descripcion`) VALUES
-(1, 'guarenas', 'numero_control', '10', 'Siguiente numero de control para la sede de Guarenas.'),
+(1, 'guarenas', 'numero_control', '42', 'Siguiente numero de control para la sede de Guarenas.'),
 (2, 'guatire', 'numero_control', '10', 'Siguiente numero de control para la sede de Guatire.'),
-(3, 'guarenas', 'moneda_base', 'dolar', 'Moneda base del sistema para la sede de Guarenas.'),
-(4, 'guatire', 'moneda_base', 'dolar', 'Moneda base del sistema para la sede de Guatire.');
+(4, 'guatire', 'moneda_base', 'dolar', 'Moneda base del sistema para la sede de Guatire.'),
+(6, 'guarenas', 'moneda_base', 'bolivar', 'Moneda base del sistema para la sede de ${req.sede.nombre}.');
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,8 @@ INSERT INTO `logins` (`id`, `sede_id`, `usu_cedula`, `token`, `ip`, `created_at`
 (26, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMxMjY5NzYsImV4cCI6MTc2MzIxMzM3Nn0.FissUhyhMGe3CYHukqDWfcryTYigq1PeGLIftpunBIY', '::1', '2025-11-14 13:29:36', '2025-11-14 13:29:36'),
 (27, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNTU5NjgsImV4cCI6MTc2MzM0MjM2OH0.fwblYdFQuiENRGerbjI3sDuFVERUyE3cTnSbRwu0mvI', '::1', '2025-11-16 01:19:28', '2025-11-16 01:19:28'),
 (28, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMyNzU1MzYsImV4cCI6MTc2MzM2MTkzNn0.YjIgAUl4oWd73lKKwwNqxdHJXhZZoNc31V6a7daPfpM', '::1', '2025-11-16 06:45:36', '2025-11-16 06:45:36'),
-(29, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs', '::1', '2025-11-16 17:58:23', '2025-11-16 17:58:23');
+(29, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjMzMTU5MDMsImV4cCI6MTc2MzQwMjMwM30.DAnserMMmeGRf4eDu7895sS_VRCkpwqmp8WUZ3zZRgs', '::1', '2025-11-16 17:58:23', '2025-11-16 17:58:23'),
+(30, 'guarenas', '25409904', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU', '::1', '2025-11-23 20:13:18', '2025-11-23 20:13:18');
 
 -- --------------------------------------------------------
 
@@ -344,9 +345,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `sede_id`, `nombre`, `marca`, `color`, `codigo`, `material`, `proveedor`, `categoria`, `modelo`, `stock`, `precio`, `aplica_iva`, `precio_con_iva`, `moneda`, `activo`, `descripcion`, `imagen_url`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 5, 0, 5, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-11-16 09:44:49', NULL),
-(6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-11-16 09:44:49', NULL),
-(7, 'guarenas', 'Producto Chevere 3', 'Marca Generica 2', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 10, 1, 11.6, 'euro', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-11-16 09:44:49', NULL);
+(5, 'guarenas', 'Producto Chevere 1', 'Marca Generica 1', 'Azul', 'PR-000005', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -30, 862.07, 0, 1000, 'bolivar', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311414341', '2025-09-19 19:50:14', '2025-11-24 00:54:45', NULL),
+(6, 'guarenas', 'Producto Chevere 2', 'Marca Generica 1', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -21, 2000, 1, 2320, 'bolivar', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-11-23 22:46:57', NULL),
+(7, 'guarenas', 'Producto Chevere 3', 'Marca Generica 2', 'Azul', 'PR-000006', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', -1, 2000, 1, 2320, 'bolivar', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1758311675271', '2025-09-19 19:54:35', '2025-11-16 19:01:25', NULL),
+(8, 'guarenas', 'Producto 5', 'Marca Generica 1', 'Azul', 'PR-000008', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 431.03, 0, 500, 'bolivar', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1763317141933', '2025-11-16 18:19:01', '2025-11-16 19:01:25', NULL),
+(9, 'guarenas', 'Producto Chevere 6', 'Marca Generica 1', 'Azul', 'PR-000009', 'Plastico', 'Pepsi', 'Lentes', 'Modelo de prueba', 5, 1724.14, 1, 2000, 'bolivar', 1, 'Descripcion generica de muestra', '/public/images/product-generic-image.jpg?t=1763317167002', '2025-11-16 18:19:27', '2025-11-16 19:01:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -416,8 +419,8 @@ CREATE TABLE `tasas` (
 
 INSERT INTO `tasas` (`id`, `nombre`, `simbolo`, `valor`, `rastreo_bcv`, `ultimo_tipo_cambio`, `created_at`, `updated_at`) VALUES
 ('bolivar', 'Bolivar', 'bs', 1, 0, NULL, '2025-09-09 21:56:54', '2025-09-09 21:56:54'),
-('dolar', 'Dolar', '$', 138.1283, 0, 'Automatico con BCV', '2025-06-14 16:18:23', '2025-08-20 02:53:00'),
-('euro', 'Euro', '€', 161.222, 0, 'Automatico con BCV', '2025-06-14 16:18:23', '2025-08-20 02:53:00');
+('dolar', 'Dolar', '$', 100, 0, 'Automatico con BCV', '2025-06-14 16:18:23', '2025-08-20 02:53:00'),
+('euro', 'Euro', '€', 200, 0, 'Automatico con BCV', '2025-06-14 16:18:23', '2025-08-20 02:53:00');
 
 -- --------------------------------------------------------
 
@@ -503,19 +506,26 @@ CREATE TABLE `ventas` (
   `venta_key` varchar(100) NOT NULL,
   `numero_control` bigint(20) NOT NULL,
   `sede` varchar(50) NOT NULL,
-  `paciente_key` varchar(70) NOT NULL,
+  `paciente_key` varchar(70) DEFAULT NULL,
+  `cliente_tipo` varchar(20) NOT NULL,
+  `cliente_informacion_persona` varchar(100) DEFAULT NULL,
+  `cliente_informacion_nombre` varchar(255) DEFAULT NULL,
+  `cliente_informacion_cedula` varchar(20) DEFAULT NULL,
+  `cliente_informacion_telefono` varchar(20) DEFAULT NULL,
+  `cliente_informacion_email` varchar(255) DEFAULT NULL,
   `moneda` varchar(20) NOT NULL,
+  `tasa_moneda` float NOT NULL,
   `forma_pago` varchar(255) NOT NULL,
-  `historia_medica_id` varchar(14) NOT NULL,
+  `iva_porcentaje` float NOT NULL,
   `descuento` float NOT NULL,
   `subtotal` float NOT NULL,
-  `total_descuento` float NOT NULL,
+  `iva` float NOT NULL,
   `total` float NOT NULL,
   `observaciones` text DEFAULT NULL,
-  `fecha` date NOT NULL,
+  `fecha` datetime NOT NULL,
   `pago_completo` tinyint(4) NOT NULL,
-  `financiado` tinyint(4) NOT NULL,
   `created_by` varchar(20) NOT NULL,
+  `asesor_id` int(11) NOT NULL,
   `estatus_venta` varchar(50) NOT NULL,
   `estatus_pago` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -526,8 +536,10 @@ CREATE TABLE `ventas` (
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `venta_key`, `numero_control`, `sede`, `paciente_key`, `moneda`, `forma_pago`, `historia_medica_id`, `descuento`, `subtotal`, `total_descuento`, `total`, `observaciones`, `fecha`, `pago_completo`, `financiado`, `created_by`, `estatus_venta`, `estatus_pago`, `created_at`, `updated_at`) VALUES
-(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 12, 'guarenas', 'c9f0f895fb98ab9159f51fd0297e236d', 'dolar', 'cashea', '28', 10, 140.36, 14.59, 131.29, '', '2025-10-28', 1, 1, '25409904', 'completado', 'pagado_por_cashea', '2025-11-16 09:44:49', '2025-11-16 09:44:49');
+INSERT INTO `ventas` (`id`, `venta_key`, `numero_control`, `sede`, `paciente_key`, `cliente_tipo`, `cliente_informacion_persona`, `cliente_informacion_nombre`, `cliente_informacion_cedula`, `cliente_informacion_telefono`, `cliente_informacion_email`, `moneda`, `tasa_moneda`, `forma_pago`, `iva_porcentaje`, `descuento`, `subtotal`, `iva`, `total`, `observaciones`, `fecha`, `pago_completo`, `created_by`, `asesor_id`, `estatus_venta`, `estatus_pago`, `created_at`, `updated_at`) VALUES
+(1, '587e0345-769f-41c1-83ae-26cc0d98e19c', 38, 'guarenas', NULL, 'cliente_general', 'juridica', 'EMPRESAS POLAR', '100025456', '02124567858', 'polar@gmail.com', 'dolar', 100, 'contado', 16, 0, 28.54, 0, 28.54, NULL, '2025-11-21 06:24:52', 1, '25409904', 24, 'anulada', 'completada', '2025-11-23 22:44:08', '2025-11-24 00:43:35'),
+(2, '78a8c4bd-9125-405d-aab6-d57edb27254b', 39, 'guarenas', NULL, 'cliente_general', 'natural', 'Ana', '25409904', '021235440511', 'rubemm18@gmail.com', 'dolar', 100, 'abono', 16, 0, 87.38, 0, 87.38, NULL, '2025-11-21 06:30:02', 1, '25409904', 24, 'completada', 'completada', '2025-11-23 22:46:57', '2025-11-23 22:46:57'),
+(4, 'ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d', 41, 'guarenas', NULL, 'cliente_general', 'natural', 'Ana', 'Castro', '021235440511', 'rubemm18@gmail.com', 'euro', 200, 'abono', 16, 2.51, 25.09, 0, 22.58, NULL, '2025-11-21 06:28:42', 1, '25409904', 24, 'completada', 'completada', '2025-11-24 00:54:45', '2025-11-24 01:00:49');
 
 -- --------------------------------------------------------
 
@@ -545,13 +557,6 @@ CREATE TABLE `ventas_cashea` (
   `total_adelantado` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `ventas_cashea`
---
-
-INSERT INTO `ventas_cashea` (`id`, `venta_key`, `nivel_cashea`, `monto_inicial`, `cantidad_cuotas`, `monto_por_cuota`, `total_adelantado`) VALUES
-(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 'nivel3', 58.35, 6, 12.16, 36.48);
-
 -- --------------------------------------------------------
 
 --
@@ -563,17 +568,10 @@ CREATE TABLE `ventas_cashea_cuotas` (
   `venta_key` varchar(100) NOT NULL,
   `numero` int(11) NOT NULL,
   `monto` float NOT NULL,
-  `fecha_vencimiento` date NOT NULL
+  `fecha_vencimiento` varchar(50) NOT NULL,
+  `pagada` tinyint(4) NOT NULL,
+  `seleccionada` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `ventas_cashea_cuotas`
---
-
-INSERT INTO `ventas_cashea_cuotas` (`id`, `venta_key`, `numero`, `monto`, `fecha_vencimiento`) VALUES
-(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 1, 12.16, '2025-11-10'),
-(2, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 2, 12.16, '2025-11-24'),
-(3, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 3, 12.16, '2025-12-08');
 
 -- --------------------------------------------------------
 
@@ -586,6 +584,12 @@ CREATE TABLE `ventas_pagos` (
   `venta_key` varchar(100) NOT NULL,
   `tipo` varchar(100) NOT NULL,
   `monto` float NOT NULL,
+  `moneda_id` varchar(20) NOT NULL,
+  `tasa_moneda` float NOT NULL,
+  `monto_moneda_base` float NOT NULL,
+  `referencia` varchar(100) DEFAULT NULL,
+  `bancoCodigo` varchar(4) DEFAULT NULL,
+  `bancoNombre` varchar(255) DEFAULT NULL,
   `created_by` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -595,9 +599,12 @@ CREATE TABLE `ventas_pagos` (
 -- Volcado de datos para la tabla `ventas_pagos`
 --
 
-INSERT INTO `ventas_pagos` (`id`, `venta_key`, `tipo`, `monto`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 'efectivo', 50, '25409904', '2025-11-16 09:44:49', '2025-11-16 09:44:49'),
-(2, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 'debito', 8.35, '25409904', '2025-11-16 09:44:49', '2025-11-16 09:44:49');
+INSERT INTO `ventas_pagos` (`id`, `venta_key`, `tipo`, `monto`, `moneda_id`, `tasa_moneda`, `monto_moneda_base`, `referencia`, `bancoCodigo`, `bancoNombre`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, '587e0345-769f-41c1-83ae-26cc0d98e19c', 'transferencia', 6894.64, 'bolivar', 1, 68.95, '3424234', '0134', 'Banesco', '25409904', '2025-11-23 22:44:08', '2025-11-23 22:44:08'),
+(2, '78a8c4bd-9125-405d-aab6-d57edb27254b', 'efectivo', 87.38, 'dolar', 100, 87.38, NULL, NULL, NULL, '25409904', '2025-11-23 22:46:57', '2025-11-23 22:46:57'),
+(8, 'ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d', 'efectivo', 22.75, 'dolar', 100, 11.38, NULL, NULL, NULL, '25409904', '2025-11-24 00:54:45', '2025-11-24 00:54:45'),
+(9, 'ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d', 'efectivo', 5, 'euro', 200, 5, NULL, NULL, NULL, '25409904', '2025-11-24 00:55:31', '2025-11-24 00:55:31'),
+(14, 'ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d', 'efectivo', 6.2, 'euro', 200, 6.2, NULL, NULL, NULL, '25409904', '2025-11-24 01:00:49', '2025-11-24 01:00:49');
 
 -- --------------------------------------------------------
 
@@ -610,20 +617,22 @@ CREATE TABLE `ventas_productos` (
   `venta_key` varchar(100) NOT NULL,
   `producto_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precio` float NOT NULL,
-  `precio_con_iva` float NOT NULL,
-  `subtotal` float NOT NULL,
-  `total` float NOT NULL
+  `precio_unitario` float NOT NULL COMMENT 'En moneda de la venta',
+  `total` float NOT NULL COMMENT 'En moneda de la venta',
+  `moneda_producto` varchar(20) NOT NULL,
+  `tasa_moneda_producto` float NOT NULL,
+  `total_moneda_producto` float NOT NULL COMMENT 'En moneda del producto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ventas_productos`
 --
 
-INSERT INTO `ventas_productos` (`id`, `venta_key`, `producto_id`, `cantidad`, `precio`, `precio_con_iva`, `subtotal`, `total`) VALUES
-(1, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 5, 1, 36.67, 36.67, 36.67, 36.67),
-(2, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 6, 1, 34.48, 40, 34.48, 40),
-(3, '0e1a0410-7467-4502-a0e6-8f5060daffe6', 7, 1, 69.21, 69.21, 69.21, 69.21);
+INSERT INTO `ventas_productos` (`id`, `venta_key`, `producto_id`, `cantidad`, `precio_unitario`, `total`, `moneda_producto`, `tasa_moneda_producto`, `total_moneda_producto`) VALUES
+(1, '587e0345-769f-41c1-83ae-26cc0d98e19c', 5, 1, 10, 10, 'bolivar', 1, 1000),
+(2, '78a8c4bd-9125-405d-aab6-d57edb27254b', 5, 1, 10, 10, 'bolivar', 1, 1000),
+(3, '78a8c4bd-9125-405d-aab6-d57edb27254b', 6, 1, 23.2, 23.2, 'bolivar', 1, 2320),
+(5, 'ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d', 5, 1, 5, 5, 'bolivar', 1, 1000);
 
 --
 -- Índices para tablas volcadas
@@ -728,7 +737,14 @@ ALTER TABLE `ventas`
   ADD UNIQUE KEY `venta_key` (`venta_key`),
   ADD KEY `sede` (`sede`),
   ADD KEY `paciente_key` (`paciente_key`),
-  ADD KEY `created_by` (`created_by`);
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `created_at` (`created_at`),
+  ADD KEY `cliente_informacion_cedula` (`cliente_informacion_cedula`),
+  ADD KEY `asesor_id` (`asesor_id`),
+  ADD KEY `forma_pago` (`forma_pago`),
+  ADD KEY `estatus_venta` (`estatus_venta`),
+  ADD KEY `estatus_pago` (`estatus_pago`),
+  ADD KEY `fecha` (`fecha`);
 
 --
 -- Indices de la tabla `ventas_cashea`
@@ -749,7 +765,8 @@ ALTER TABLE `ventas_cashea_cuotas`
 --
 ALTER TABLE `ventas_pagos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `venta_key` (`venta_key`);
+  ADD KEY `venta_key` (`venta_key`),
+  ADD KEY `moneda_id` (`moneda_id`);
 
 --
 -- Indices de la tabla `ventas_productos`
@@ -772,7 +789,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `configuraciones`
 --
 ALTER TABLE `configuraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `historiales_medicos`
@@ -790,7 +807,7 @@ ALTER TABLE `historial_rastreo_bcv`
 -- AUTO_INCREMENT de la tabla `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `otps`
@@ -808,7 +825,7 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `tasas_historial`
@@ -826,31 +843,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas_cashea`
 --
 ALTER TABLE `ventas_cashea`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas_cashea_cuotas`
 --
 ALTER TABLE `ventas_cashea_cuotas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas_pagos`
 --
 ALTER TABLE `ventas_pagos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas_productos`
 --
 ALTER TABLE `ventas_productos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

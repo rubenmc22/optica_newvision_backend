@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db'); // Ajusta la ruta según tu estructura
+const Producto = require('./Producto');
 
 const VentaProducto = sequelize.define('VentaProducto', {
   id: {
@@ -20,25 +21,35 @@ const VentaProducto = sequelize.define('VentaProducto', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  precio: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  },
-  precio_con_iva: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  },
-  subtotal: {
+  precio_unitario: {
     type: DataTypes.FLOAT,
     allowNull: false
   },
   total: {
     type: DataTypes.FLOAT,
     allowNull: false
+  },
+  moneda_producto: {
+    type: DataTypes.STRING(20),
+    allowNull: false
+  },
+  tasa_moneda_producto: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  total_moneda_producto: {
+    type: DataTypes.FLOAT,
+    allowNull: false
   }
 }, {
   tableName: 'ventas_productos',
   timestamps: false
+});
+
+VentaProducto.belongsTo(Producto, {
+  foreignKey: 'producto_id',
+  targetKey: 'id',
+  as: 'datos_producto'
 });
 
 module.exports = VentaProducto;

@@ -21,9 +21,17 @@ const VentaCasheaCuota = sequelize.define('VentaCasheaCuota', {
     allowNull: false
   },
   fecha_vencimiento: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.STRING(50),
     allowNull: false
-  }
+  },
+  pagada: {
+    type: DataTypes.TINYINT,
+    allowNull: false
+  },
+  seleccionada: {
+    type: DataTypes.TINYINT,
+    allowNull: false
+  },
 }, {
   tableName: 'ventas_cashea_cuotas',
   timestamps: false

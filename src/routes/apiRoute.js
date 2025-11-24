@@ -97,5 +97,7 @@ router.put('/producto-remove-image/:id', authMiddleware, ProductoController.remo
 
 router.post('/ventas-add', authMiddleware, CatchGeneric(VentaController.add));
 router.get('/ventas-get', authMiddleware, CatchGeneric(VentaController.get));
+router.put('/ventas-anular/:venta_key', authMiddleware, CatchGeneric(VentaController.anular));
+router.put('/ventas-abonar/:venta_key', authMiddleware, CatchGeneric(VentaController.abonar));
 
 module.exports = router;

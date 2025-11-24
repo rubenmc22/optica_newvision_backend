@@ -1,4 +1,7 @@
 const { sequelize } = require('../config/db');
+const { Op } = require('sequelize');
+const Producto = require('../models/Producto');
+const Usuario = require('../models/Usuario');
 const VentaCashea = require('../models/VentaCashea');
 const VentaCasheaCuota = require('../models/VentaCasheaCuota');
 const VentaPago = require('../models/VentaPago');
@@ -9,70 +12,49 @@ const Venta = require('./../models/Venta');
 
 const VentaController = {
     add: async (req, res) => {
-        // const objVenta2 = await Venta.findOne({
-        //     include: [
-        //         { model: VentaPago, as: 'array_pagos' },
-        //         { model: VentaProducto, as: 'array_productos' },
-        //         { model: VentaCashea, as: 'datos_cashea' },
-        //         { model: VentaCasheaCuota, as: 'cuotas_cashea' },
-        //     ]
-        // });
-        // res.status(200).json({ message: 'ok', venta: objVenta2 });
-        // return;
-
-
-
-
         const {
-            sede, // Innecesario
-            asesor, // Innecesario
-            pagoCompleto, // Innecesario
-
-            fecha,
-            moneda,
+            venta,
+            totales,
+            cliente,
+            asesor,
+            productos,
+            metodosPago,
             formaPago,
-            descuento,
-            observaciones,
-            paciente: paciente_object,
-            productos: productos_array,
-            subtotal,
-            totalDescuento,
-            total,
-            metodosDePago: metodosDePago_array,
-            financiado,
-            nivelCashea,
-            montoInicial,
-            cantidadCuotas,
-            montoPorCuota,
-            cuotasAdelantadas: cuotasAdelantadas_array,
-            totalAdelantado,
-            historiaMedicaId,
+            auditoria,
         } = req.body;
 
-        const objPaciente = await VentaService.get_paciente(paciente_object.key);
-        const objTasa = await VentaService.get_tasa(moneda);
-        const objHistorial = await VentaService.get_historia_medica(historiaMedicaId);
-        VentaService.validate_forma_pago(formaPago);
-        VentaService.validate_fecha(fecha);
-        const productos_array_db = await VentaService.add_producto_db(productos_array);
+        const objTasa = await VentaService.get_tasa(venta.moneda);
+        const objPaciente = await VentaService.get_paciente(req.sede.id, cliente.informacion.cedula);
+        const objAsesor = await VentaService.get_usuario(asesor.id);
+        const productos_array_db = await VentaService.add_producto_db(productos);
 
-        const venta = {
+        VentaService.validate_forma_pago(venta.formaPago);
+        const fecha = VentaService.formatear_fecha(venta.fecha);
+        
+        const objVenta = {
             venta_key: await VentaService.generate_venta_key(),
             numero_control: await VentaService.get_numero_control(),
             sede: req.sede.id,
-            paciente_key: objPaciente.pkey,
+            paciente_key: (objPaciente) ? objPaciente.pkey : null,
+            cliente_tipo: cliente.tipo,
+            cliente_informacion_persona: cliente.informacion.tipoPersona,
+            cliente_informacion_nombre: cliente.informacion.nombreCompleto,
+            cliente_informacion_cedula: cliente.informacion.cedula,
+            cliente_informacion_telefono: cliente.informacion.telefono,
+            cliente_informacion_email: cliente.informacion.email,
             moneda: objTasa.id,
-            forma_pago: formaPago,
-            historia_medica_id: objHistorial.id,
-            descuento: FormatUtils.float(descuento),
-            subtotal: FormatUtils.float(subtotal),
-            total_descuento: FormatUtils.float(totalDescuento),
-            total: FormatUtils.float(total),
-            observaciones: observaciones,
+            tasa_moneda: objTasa.valor,
+            forma_pago: venta.formaPago,
+            iva_porcentaje: FormatUtils.float(venta.impuesto),
+            descuento: FormatUtils.float(totales.descuento),
+            subtotal: FormatUtils.float(totales.subtotal),
+            iva: FormatUtils.float(totales.iva),
+            total: FormatUtils.float(totales.total),
+            observaciones: venta.observaciones,
             fecha: fecha,
             pago_completo: null,
-            financiado: FormatUtils.boolean(financiado),
             created_by: req.user.cedula,
+            asesor_id: objAsesor.id,
             estatus_venta: null,
             estatus_pago: null,
             productos: [],
@@ -81,49 +63,51 @@ const VentaController = {
             cashea_cuotas: null,
         };
 
-        venta.productos = await VentaService.prepare_productos_array(productos_array_db);
-        venta.pagos = await VentaService.prepare_metodos_de_pago_array(metodosDePago_array);
+        objVenta.productos = await VentaService.prepare_productos_array(productos_array_db, objTasa);
+        objVenta.pagos = await VentaService.prepare_metodos_de_pago_array(metodosPago, objTasa);
         
-        if(venta.forma_pago === 'de_contado') {
-            venta.pago_completo = true;
-            venta.estatus_venta = 'completado';
-            venta.estatus_pago = 'completado';
+        if(objVenta.forma_pago === 'contado') {
+            objVenta.pago_completo = true;
+            objVenta.estatus_venta = 'completada';
+            objVenta.estatus_pago = 'completada';
         }
-        else if(venta.forma_pago === 'cashea') {
-            venta.pago_completo = true;
-            venta.estatus_venta = 'completado';
-            venta.estatus_pago = 'pagado_por_cashea';
-            venta.cashea = {
-                nivel_cashea: nivelCashea,
-                monto_inicial: montoInicial,
-                cantidad_cuotas: cantidadCuotas,
-                monto_por_cuota: montoPorCuota,
-                total_adelantado: totalAdelantado
+        else if(objVenta.forma_pago === 'cashea') {
+            objVenta.pago_completo = true;
+            objVenta.estatus_venta = 'completada';
+            objVenta.estatus_pago = 'pagado_por_cashea';
+            objVenta.cashea = {
+                nivel_cashea: formaPago.nivel,
+                monto_inicial: formaPago.montoInicial,
+                cantidad_cuotas: formaPago.cantidadCuotas,
+                monto_por_cuota: formaPago.montoPorCuota,
+                total_adelantado: formaPago.totalPagadoAhora
             };
-            venta.cashea_cuotas = [];
-            for(let cuota of cuotasAdelantadas_array) {
-                venta.cashea_cuotas.push({
+            objVenta.cashea_cuotas = [];
+            for(let cuota of formaPago.cuotas) {
+                objVenta.cashea_cuotas.push({
                     numero: cuota.numero,
                     monto: cuota.monto,
-                    fecha_vencimiento: cuota.fechaVencimiento
+                    fecha_vencimiento: cuota.fecha,
+                    pagada: cuota.pagada,
+                    seleccionada: cuota.seleccionada
                 });
             }
         }
-        else if(venta.forma_pago === 'por_abono') {
-            venta.pago_completo = false;
-            venta.estatus_venta = 'pendiente';
-            venta.estatus_pago = 'pendiente';
+        else if(objVenta.forma_pago === 'abono') {
+            objVenta.pago_completo = VentaService.VerificarPagoCompleto(objVenta.total, objVenta.pagos);
+            objVenta.estatus_venta = (objVenta.pago_completo) ? 'completada' : 'pendiente';
+            objVenta.estatus_pago = (objVenta.pago_completo) ? 'completada' : 'pendiente';
         }
         else {
-            throw { message: `La forma de pago es invalida: ${forma_pago}` };
+            throw { message: `La forma de pago es invalida: ${venta.formaPago}` };
         }
 
         const t = await sequelize.transaction();
 
         try {
-            await VentaService.guardar_venta(t, venta);
-            await VentaService.descontar_inventario(t, venta.productos);
-            await VentaService.actualizar_numero_control(t, venta.numero_control + 1);
+            await VentaService.guardar_venta(t, objVenta);
+            await VentaService.descontar_inventario(t, objVenta.productos);
+            await VentaService.actualizar_numero_control(t, objVenta.numero_control + 1, req.sede.id);
             await t.commit();
         }
         catch(error) {
@@ -131,33 +115,265 @@ const VentaController = {
             throw { message: error.message || error.toString() };
         }
 
-        const objVenta = await Venta.findOne({
-            where: { venta_key: venta.venta_key },
+        const ventaOutput = await Venta.findOne({
+            where: { venta_key: objVenta.venta_key },
             include: [
                 { model: VentaPago, as: 'array_pagos' },
-                { model: VentaProducto, as: 'array_productos' },
+                {
+                    model: VentaProducto,
+                    as: 'array_productos',
+                    include: [
+                        {
+                            model: Producto,
+                            as: 'datos_producto',
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                        }
+                    ]
+                },
                 { model: VentaCashea, as: 'datos_cashea' },
                 { model: VentaCasheaCuota, as: 'cuotas_cashea' },
+                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
             ]
         });
+
+        const ventaOutputFormateado = await VentaService.formatear_venta_output(ventaOutput);
         
-        res.status(200).json({ message: 'ok', venta: objVenta });
+        res.status(200).json({ message: 'ok', venta: ventaOutputFormateado });
     },
-    
+
     get: async (req, res) => {
-        res.status(200).json({ message: 'ok' });
+        const fecha_inicio = req.query.fecha_inicio;
+        const fecha_final = req.query.fecha_final;
+        const venta_key = req.query.key;
+        const cedula = req.query.cedula;
+        const asesor_id = req.query.asesor_id;
+        const forma_pago = req.query.forma_pago;
+        const estatus_venta = req.query.estatus_venta;
+        const estatus_pago = req.query.estatus_pago;
+
+        const where = {};
+        where.sede = req.sede.id;
+
+        if (fecha_inicio && fecha_final) {
+            where.fecha = { [Op.between]: [new Date(fecha_inicio), new Date(fecha_final)] };
+        }
+
+        if (cedula) {
+            where.cliente_informacion_cedula = { [Op.like]: `%${cedula}%` };
+        }
+
+        if (asesor_id) {
+            const ases = parseInt(asesor_id, 10);
+            if (!isNaN(ases)) where.asesor_id = ases;
+        }
+
+        if (venta_key) where.venta_key = venta_key;
+        if (forma_pago) where.forma_pago = forma_pago;
+        if (estatus_venta) where.estatus_venta = estatus_venta;
+        if (estatus_pago) where.estatus_pago = estatus_pago;
+
+        const page = parseInt(req.query.p, 10) || 1;
+        const limit = 10;
+        const offset = (page - 1) * limit;
+
+        const result = await Venta.findAndCountAll({
+            where,
+            include: [
+                { model: VentaPago, as: 'array_pagos' },
+                {
+                    model: VentaProducto,
+                    as: 'array_productos',
+                    include: [
+                        {
+                            model: Producto,
+                            as: 'datos_producto',
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                        }
+                    ]
+                },
+                { model: VentaCashea, as: 'datos_cashea' },
+                { model: VentaCasheaCuota, as: 'cuotas_cashea' },
+                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+            ],
+            order: [['fecha', 'DESC']],
+            limit,
+            offset
+        });
+
+        const total = await Venta.count();
+        const pages = Math.max(1, Math.ceil(total / limit));
+
+        const ventas_output = [];
+        for(let venta of result.rows) {
+            ventas_output.push(
+                await VentaService.formatear_venta_output(venta)
+            );
+        }
+
+        res.status(200).json({
+            message: 'ok',
+            ventas: ventas_output,
+            pagination: {
+                total: total,
+                page,
+                pages,
+                per_page: limit
+            }
+        });
     },
     
     anular: async (req, res) => {
-        res.status(200).json({ message: 'ok' });
+        const venta_key = req.params.venta_key;
+        const objVenta = await Venta.findOne({
+            where: { venta_key: venta_key },
+            include: [{ model: VentaProducto, as: 'array_productos' }]
+        });
+
+        if(!objVenta) {
+            throw { message: `La venta no existe: ${venta_id}.` };
+        }
+        if(objVenta.sede != req.sede.id) {
+            throw { message: `No se puede anular ventas de otra sede.` };
+        }
+        if(objVenta.estatus_venta == 'anulada') {
+            throw { message: `La venta ya esta anulada.` };
+        }
+
+        const t = await sequelize.transaction();
+
+        try {
+            objVenta.estatus_venta = 'anulada';
+            await objVenta.save({ transaction: t });
+            await VentaService.anular_descontada_inventario(t, objVenta.array_productos);
+            await t.commit();
+        }
+        catch(error) {
+            await t.rollback();
+            throw { message: error.message || error.toString() };
+        }
+        
+        const ventaOutput = await Venta.findOne({
+            where: { venta_key: objVenta.venta_key },
+            include: [
+                { model: VentaPago, as: 'array_pagos' },
+                {
+                    model: VentaProducto,
+                    as: 'array_productos',
+                    include: [
+                        {
+                            model: Producto,
+                            as: 'datos_producto',
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                        }
+                    ]
+                },
+                { model: VentaCashea, as: 'datos_cashea' },
+                { model: VentaCasheaCuota, as: 'cuotas_cashea' },
+                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+            ]
+        });
+
+        const venta_output = await VentaService.formatear_venta_output(ventaOutput);
+
+        res.status(200).json({ message: 'ok', venta: venta_output });
     },
     
     abonar: async (req, res) => {
-        res.status(200).json({ message: 'ok' });
-    },
-    
-    pago_cashea: async (req, res) => {
-        res.status(200).json({ message: 'ok' });
+        const venta_key = req.params.venta_key;
+        
+        const {
+            tipo,
+            monto,
+            moneda,
+            referencia,
+            bancoCodigo,
+            bancoNombre
+        } = req.body;
+
+        const objVenta = await Venta.findOne({
+            where: { venta_key: venta_key },
+            include: []
+        });
+
+        if(!objVenta) {
+            throw { message: `La venta no existe: ${venta_key}.` };
+        }
+        if(objVenta.sede != req.sede.id) {
+            throw { message: `No se puede modificar ventas de otra sede.` };
+        }
+
+        const objTasaPago = await VentaService.get_tasa(moneda);
+        const objTasaVenta = await VentaService.get_tasa(objVenta.moneda);
+
+        const monto_moneda_base = ((FormatUtils.float(monto) * objTasaPago.valor) / objTasaVenta.valor);
+        
+        const pagos = await VentaPago.findAll({ where: { venta_key: objVenta.venta_key } });
+        let total_pagado = monto_moneda_base;
+        for(const pago of pagos) {
+            total_pagado += pago.monto_moneda_base;
+        }
+        total_pagado = FormatUtils.float(total_pagado);
+
+        const t = await sequelize.transaction();
+        try {
+            // Registrar Venta
+            await VentaPago.create({
+                venta_key: objVenta.venta_key,
+                tipo: tipo,
+                monto: FormatUtils.float(monto),
+                moneda_id: objTasaPago.id,
+                tasa_moneda: objTasaPago.valor,
+                monto_moneda_base: FormatUtils.float(monto_moneda_base),
+                referencia: referencia,
+                bancoCodigo: bancoCodigo,
+                bancoNombre: bancoNombre,
+                created_by: req.user.cedula
+            }, { transaction: t });
+
+            // Modificar venta
+            console.error(total_pagado, objVenta.total, total_pagado >= objVenta.total);
+            if(total_pagado >= objVenta.total) {
+                objVenta.estatus_venta = 'completada';
+                objVenta.estatus_pago = 'completada';
+                objVenta.pago_completo = 1;
+                await objVenta.save({ transaction: t });
+            }
+
+            await t.commit();
+        }
+        catch(error) {
+            await t.rollback();
+            throw { message: error.message || error.toString() };
+        }
+
+        const ventaOutput = await Venta.findOne({
+            where: { venta_key: objVenta.venta_key },
+            include: [
+                { model: VentaPago, as: 'array_pagos' },
+                {
+                    model: VentaProducto,
+                    as: 'array_productos',
+                    include: [
+                        {
+                            model: Producto,
+                            as: 'datos_producto',
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                        }
+                    ]
+                },
+                { model: VentaCashea, as: 'datos_cashea' },
+                { model: VentaCasheaCuota, as: 'cuotas_cashea' },
+                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+            ]
+        });
+
+        const venta_output = await VentaService.formatear_venta_output(ventaOutput);
+
+        res.status(200).json({ message: 'ok', venta: venta_output });
     },
 };
 
