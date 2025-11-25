@@ -143,6 +143,38 @@ const VentaController = {
     },
 
     get: async (req, res) => {
+        const ventas = await Venta.findAll({
+            include: [
+                { model: VentaPago, as: 'array_pagos' },
+                {
+                    model: VentaProducto,
+                    as: 'array_productos',
+                    include: [
+                        {
+                            model: Producto,
+                            as: 'datos_producto',
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                        }
+                    ]
+                },
+                { model: VentaCashea, as: 'datos_cashea' },
+                { model: VentaCasheaCuota, as: 'cuotas_cashea' },
+                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+            ]
+        });
+
+        const ventas_output = [];
+        for(const venta of ventas) {
+            ventas_output.push(
+                await VentaService.formatear_venta_output(venta)
+            );
+        }
+        
+        res.status(200).json({ message: 'ok', ventas: ventas_output });
+    },
+
+    getOld: async (req, res) => {
         const fecha_inicio = req.query.fecha_inicio;
         const fecha_final = req.query.fecha_final;
         const venta_key = req.query.key;
