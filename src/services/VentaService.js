@@ -177,7 +177,8 @@ const VentaService = {
             created_by: venta_completa.created_by,
             asesor_id: venta_completa.asesor_id,
             estatus_venta: venta_completa.estatus_venta,
-            estatus_pago: venta_completa.estatus_pago
+            estatus_pago: venta_completa.estatus_pago,
+            motivo_cancelacion: null
         }, { transaction: t });
         
         for(let producto of venta_completa.productos) {
@@ -257,6 +258,19 @@ const VentaService = {
 
             objProducto.stock += producto.cantidad;
             await objProducto.save({ transaction: t });
+        }
+    },
+
+    extrear_numero_de_numero_control(numero_control) {
+        const match = numero_control.match(/[VR]\-([0-9]{3,})/);
+        return match ? parseInt(match[1], 10) : null;
+    },
+    
+    async BuscarTotalVenta(estatus_venta = false) {
+        if(estatus_venta) {
+            return await Venta.count({ where: { estatus_venta: estatus_venta } });
+        } else {
+            return await Venta.count();
         }
     },
 
@@ -357,13 +371,16 @@ const VentaService = {
         return {
             venta: {
                 key: objVenta.venta_key,
+                numero_venta: "V-" + String(objVenta.numero_control).padStart(6, "0"),
+                numero_recibo: "R-" + String(objVenta.numero_control).padStart(6, "0"),
                 fecha: objVenta.fecha,
                 estatus_venta: objVenta.estatus_venta,
                 estatus_pago: objVenta.estatus_pago,
                 formaPago: objVenta.forma_pago,
                 moneda: objVenta.moneda,
                 observaciones: objVenta.observaciones,
-                impuesto: objVenta.iva_porcentaje
+                impuesto: objVenta.iva_porcentaje,
+                motivo_cancelacion: objVenta.motivo_cancelacion
             },
             totales: {
                 descuento: objVenta.descuento,

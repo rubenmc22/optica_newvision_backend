@@ -60,7 +60,7 @@ const VentaController = {
             productos: [],
             pagos: [],
             cashea: null,
-            cashea_cuotas: null,
+            cashea_cuotas: null
         };
 
         objVenta.productos = await VentaService.prepare_productos_array(productos_array_db, objTasa);
@@ -143,56 +143,42 @@ const VentaController = {
     },
 
     get: async (req, res) => {
-        const ventas = await Venta.findAll({
-            include: [
-                { model: VentaPago, as: 'array_pagos' },
-                {
-                    model: VentaProducto,
-                    as: 'array_productos',
-                    include: [
-                        {
-                            model: Producto,
-                            as: 'datos_producto',
-                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
-                        }
-                    ]
-                },
-                { model: VentaCashea, as: 'datos_cashea' },
-                { model: VentaCasheaCuota, as: 'cuotas_cashea' },
-                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
-                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
-            ]
-        });
-
-        const ventas_output = [];
-        for(const venta of ventas) {
-            ventas_output.push(
-                await VentaService.formatear_venta_output(venta)
-            );
-        }
+        const fecha_inicio = req.query.fechaDesde;
+        const fecha_final = req.query.fechaHasta;
+        const busqueda_general = req.query.busquedaGeneral
+        const asesor_id = req.query.asesor
+        const especialista_id = req.query.especialista
+        const estatus_venta = req.query.estado
+        const forma_pago = req.query.formaPago
         
-        res.status(200).json({ message: 'ok', ventas: ventas_output });
-    },
-
-    getOld: async (req, res) => {
-        const fecha_inicio = req.query.fecha_inicio;
-        const fecha_final = req.query.fecha_final;
-        const venta_key = req.query.key;
-        const cedula = req.query.cedula;
-        const asesor_id = req.query.asesor_id;
-        const forma_pago = req.query.forma_pago;
-        const estatus_venta = req.query.estatus_venta;
-        const estatus_pago = req.query.estatus_pago;
-
         const where = {};
         where.sede = req.sede.id;
 
         if (fecha_inicio && fecha_final) {
             where.fecha = { [Op.between]: [new Date(fecha_inicio), new Date(fecha_final)] };
         }
+        
+        if (busqueda_general) {
+            const orConditions = [];
 
-        if (cedula) {
-            where.cliente_informacion_cedula = { [Op.like]: `%${cedula}%` };
+            // Buscar por cédula (coincidencia parcial)
+            orConditions.push({ cliente_informacion_cedula: { [Op.like]: `%${busqueda_general}%` } });
+
+            // Buscar por nombre (coincidencia parcial)
+            orConditions.push({ cliente_informacion_nombre: { [Op.like]: `%${busqueda_general}%` } });
+
+            // Buscar por número de control (si es número, coincidir exacto; si no, intentar like)
+            if(/[VR]\-([0-9]{3,})/.test(busqueda_general)) {
+                const numeroParsed = VentaService.extrear_numero_de_numero_control(busqueda_general);
+                orConditions.push({ numero_control: numeroParsed });
+            }
+
+            // Si ya existe una condición Op.or, combinar, sino asignar
+            if (where[Op.or]) {
+                where[Op.or] = where[Op.or].concat(orConditions);
+            } else {
+                where[Op.or] = orConditions;
+            }
         }
 
         if (asesor_id) {
@@ -200,13 +186,11 @@ const VentaController = {
             if (!isNaN(ases)) where.asesor_id = ases;
         }
 
-        if (venta_key) where.venta_key = venta_key;
-        if (forma_pago) where.forma_pago = forma_pago;
         if (estatus_venta) where.estatus_venta = estatus_venta;
-        if (estatus_pago) where.estatus_pago = estatus_pago;
+        if (forma_pago) where.forma_pago = forma_pago;
 
-        const page = parseInt(req.query.p, 10) || 1;
-        const limit = 10;
+        const page = parseInt(req.query.pagina, 10) || 1;
+        const limit = parseInt(req.query.itemsPorPagina, 10) || 10;
         const offset = (page - 1) * limit;
 
         const result = await Venta.findAndCountAll({
@@ -255,9 +239,25 @@ const VentaController = {
             }
         });
     },
+
+    get_total: async (req, res) => {
+        const ventas = await VentaService.BuscarTotalVenta();
+        const completadas = await VentaService.BuscarTotalVenta('completada');
+        const pendientes = await VentaService.BuscarTotalVenta('pendiente');
+        const canceladas = await VentaService.BuscarTotalVenta('anulada');
+
+        res.status(200).json({
+            message: "ok",
+            ventas,
+            completadas,
+            pendientes,
+            canceladas
+        });
+    },
     
     anular: async (req, res) => {
         const venta_key = req.params.venta_key;
+        const motivo_cancelacion = req.params.motivo_cancelacion;
         const objVenta = await Venta.findOne({
             where: { venta_key: venta_key },
             include: [{ model: VentaProducto, as: 'array_productos' }]
@@ -272,11 +272,15 @@ const VentaController = {
         if(objVenta.estatus_venta == 'anulada') {
             throw { message: `La venta ya esta anulada.` };
         }
+        if(motivo_cancelacion.trim() !== "") {
+            throw { message: `El motivo de la cancelacion no puede estar vacia.` };
+        }
 
         const t = await sequelize.transaction();
 
         try {
             objVenta.estatus_venta = 'anulada';
+            objVenta.motivo_cancelacion = motivo_cancelacion;
             await objVenta.save({ transaction: t });
             await VentaService.anular_descontada_inventario(t, objVenta.array_productos);
             await t.commit();

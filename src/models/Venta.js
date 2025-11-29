@@ -113,6 +113,10 @@ const Venta = sequelize.define('Venta', {
     type: DataTypes.STRING(50),
     allowNull: false
   },
+  motivo_cancelacion: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false

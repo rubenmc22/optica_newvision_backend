@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "189c24ee-c555-439a-b59d-719581bcbb38",
+		"_postman_id": "dc33d7f1-5701-4a56-88b6-24e177d8ab80",
 		"name": "optica",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13401550"
@@ -1546,7 +1546,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ0Mzk5MTIsImV4cCI6MTc2NDUyNjMxMn0.tUOzCDpqlLhs03gCfARUhgvfaUI8LY3FuBdWB_I_SvA",
 									"type": "string"
 								}
 							]
@@ -1564,59 +1564,75 @@
 							],
 							"query": [
 								{
-									"key": "p",
-									"value": "2",
-									"description": "Numero de pagina",
+									"key": "busquedaGeneral",
+									"value": "V-000042",
+									"description": "Busca en cedula, nombre y numero de venta o recibo\n\nR-00015\nRuben\n25409904\n",
 									"disabled": true
 								},
 								{
-									"key": "key",
-									"value": "ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d",
-									"description": "Key de la venta",
+									"key": "fechaDesde",
+									"value": "2025-11-28",
+									"description": "Fecha desde",
 									"disabled": true
 								},
 								{
-									"key": "fecha_inicio",
-									"value": "2025-11-01",
-									"description": "Rango fecha: fecha minima",
+									"key": "fechaHasta",
+									"value": "2025-11-29",
+									"description": "Fecha hasta",
 									"disabled": true
 								},
 								{
-									"key": "fecha_final",
-									"value": "2025-11-30",
-									"description": "Rango fecha: fecha maxima",
+									"key": "asesor",
+									"value": "27",
+									"description": "Asesor id (usuario)",
 									"disabled": true
 								},
 								{
-									"key": "cedula",
-									"value": "25409904",
-									"description": "Cedula del cliente",
+									"key": "especialista",
+									"value": "47",
+									"description": "No se",
 									"disabled": true
 								},
 								{
-									"key": "asesor_id",
-									"value": "1",
-									"description": "ID del usuario del asesor",
+									"key": "estado",
+									"value": "completada",
+									"description": "Estado de la venta",
 									"disabled": true
 								},
 								{
-									"key": "forma_pago",
+									"key": "formaPago",
 									"value": "cashea",
-									"description": "cashea | contado | abono",
-									"disabled": true
-								},
-								{
-									"key": "estatus_venta",
-									"value": "completada",
-									"description": "completada | pendiente | anulada",
-									"disabled": true
-								},
-								{
-									"key": "estatus_pago",
-									"value": "completada",
-									"description": "completada | pagado_por_cashea | pendiente",
+									"description": "Forma de pago",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get total",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ0Mzk5MTIsImV4cCI6MTc2NDUyNjMxMn0.tUOzCDpqlLhs03gCfARUhgvfaUI8LY3FuBdWB_I_SvA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ventas-get-total",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ventas-get-total"
 							]
 						}
 					},
@@ -1630,7 +1646,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ0Mzk5MTIsImV4cCI6MTc2NDUyNjMxMn0.tUOzCDpqlLhs03gCfARUhgvfaUI8LY3FuBdWB_I_SvA",
 									"type": "string"
 								}
 							]
@@ -1639,7 +1655,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"venta\": {\r\n        \"fecha\": \"2025-11-21T02:28:42.761Z\",\r\n        \"estado\": \"pendiente\",\r\n        \"formaPago\": \"abono\",\r\n        \"moneda\": \"euro\",\r\n        \"observaciones\": null,\r\n        \"impuesto\": 16\r\n    },\r\n    \"totales\": {\r\n        \"subtotal\": 25.09,\r\n        \"descuento\": 2.5090000000000003,\r\n        \"iva\": 0,\r\n        \"total\": 22.58,\r\n        \"totalPagado\": 20\r\n    },\r\n    \"cliente\": {\r\n        \"tipo\": \"cliente_general\",\r\n        \"informacion\": {\r\n            \"tipoPersona\": \"natural\",\r\n            \"nombreCompleto\": \"Ana\",\r\n            \"cedula\": \"Castro\",\r\n            \"telefono\": \"021235440511\",\r\n            \"email\": \"rubemm18@gmail.com\"\r\n        }\r\n    },\r\n    \"asesor\": {\r\n        \"id\": 24\r\n    },\r\n    \"productos\": [\r\n        {\r\n            \"productoId\": \"5\",\r\n            \"cantidad\": 1,\r\n            \"moneda\": \"euro\"\r\n        }\r\n    ],\r\n    \"metodosPago\": [\r\n        {\r\n            \"tipo\": \"efectivo\",\r\n            \"monto\": 22.75,\r\n            \"moneda\": \"dolar\",\r\n            \"referencia\": null,\r\n            \"bancoCodigo\": null,\r\n            \"bancoNombre\": null\r\n        }\r\n    ],\r\n    \"formaPago\": {\r\n        \"tipo\": \"abono\",\r\n        \"montoTotal\": 22.58,\r\n        \"montoInicial\": 20,\r\n        \"cantidadCuotas\": \"0\",\r\n        \"montoPorCuota\": 0,\r\n        \"cuotasAdelantadas\": 0,\r\n        \"montoAdelantado\": 0,\r\n        \"totalPagadoAhora\": 20,\r\n        \"deudaPendiente\": 2.5799999999999983,\r\n        \"cuotas\": []\r\n    },\r\n    \"auditoria\": {\r\n        \"usuarioCreacion\": 5,\r\n        \"fechaCreacion\": \"2025-11-21T02:28:42.761Z\"\r\n    }\r\n}",
+							"raw": "{\r\n   \"venta\":{\r\n      \"fecha\":\"2025-11-21T02:17:31.703Z\",\r\n      \"estado\":\"completada\",\r\n      \"formaPago\":\"cashea\",\r\n      \"moneda\":\"dolar\",\r\n      \"observaciones\":null,\r\n      \"impuesto\":16\r\n   },\r\n   \"totales\":{\r\n      \"subtotal\":713.36,\r\n      \"descuento\":71.336,\r\n      \"iva\":94.93,\r\n      \"total\":642.02,\r\n      \"totalPagado\":513.61\r\n   },\r\n   \"cliente\":{\r\n      \"tipo\":\"paciente\", //(Cuando es tipo paciente, debes buscar por cedula la ultima historia medica y retornarla en el api del get)\r\n      \"informacion\":{\r\n         \"tipoPersona\":\"natural\",\r\n         \"nombreCompleto\":\"Jesus Martinez\",\r\n         \"cedula\":\"267758784\",\r\n         \"telefono\":\"04142134565\",\r\n         \"email\":\"jesusmc@gmail.com\"\r\n      }\r\n   },\r\n   \"asesor\":{\r\n      \"id\":4\r\n   },\r\n   \"productos\":[\r\n      {\r\n         \"productoId\":\"5\",\r\n         \"cantidad\":1,\r\n         \"moneda\":\"euro\"\r\n      },\r\n      {\r\n         \"productoId\":\"6\",\r\n         \"cantidad\":1,\r\n         \"moneda\":\"euro\"\r\n      }\r\n   ],\r\n   \"metodosPago\":[\r\n      {\r\n         \"tipo\":\"efectivo\",\r\n         \"monto\":500,\r\n         \"moneda\":\"dolar\",\r\n         \"referencia\":null,\r\n         \"bancoCodigo\":null,\r\n         \"bancoNombre\":null\r\n      },\r\n      {\r\n         \"tipo\":\"debito\",\r\n         \"monto\":3287.88,\r\n         \"moneda\":\"bolivar\",\r\n         \"referencia\":null,\r\n         \"bancoCodigo\":null,\r\n         \"bancoNombre\":null\r\n      }\r\n   ],\r\n   \"formaPago\":{\r\n      \"tipo\":\"cashea\",\r\n      \"nivel\":\"nivel3\",\r\n      \"montoTotal\":642.02,\r\n      \"montoInicial\":256.81,\r\n      \"cantidadCuotas\":\"6\",\r\n      \"montoPorCuota\":64.2,\r\n      \"cuotasAdelantadas\":4,\r\n      \"montoAdelantado\":256.8,\r\n      \"totalPagadoAhora\":513.61,\r\n      \"deudaPendiente\":128.40999999999997,\r\n      \"cuotas\":[\r\n         {\r\n            \"numero\":1,\r\n            \"fecha\":\"jue, 04 de diciembre de 2025\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":2,\r\n            \"fecha\":\"jue, 18 de diciembre de 2025\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":3,\r\n            \"fecha\":\"jue, 01 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":4,\r\n            \"fecha\":\"jue, 15 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":5,\r\n            \"fecha\":\"jue, 29 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":false\r\n         },\r\n         {\r\n            \"numero\":6,\r\n            \"fecha\":\"jue, 12 de febrero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":false\r\n         }\r\n      ]\r\n   },\r\n   \"auditoria\":{\r\n      \"usuarioCreacion\":5,\r\n      \"fechaCreacion\":\"2025-11-21T02:17:31.703Z\"\r\n   }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1674,6 +1690,15 @@
 						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"motivo_cancelacion\": \"Prueba de sistema\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{baseURL}}/api/ventas-anular/587e0345-769f-41c1-83ae-26cc0d98e19c",
 							"host": [
@@ -1784,6 +1809,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -1794,6 +1820,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					""
 				]
