@@ -257,7 +257,11 @@ const VentaController = {
     
     anular: async (req, res) => {
         const venta_key = req.params.venta_key;
-        const motivo_cancelacion = req.params.motivo_cancelacion;
+
+        const {
+            motivo_cancelacion
+        } = req.body;
+
         const objVenta = await Venta.findOne({
             where: { venta_key: venta_key },
             include: [{ model: VentaProducto, as: 'array_productos' }]
@@ -272,7 +276,7 @@ const VentaController = {
         if(objVenta.estatus_venta == 'anulada') {
             throw { message: `La venta ya esta anulada.` };
         }
-        if(motivo_cancelacion.trim() !== "") {
+        if(motivo_cancelacion.trim() === "") {
             throw { message: `El motivo de la cancelacion no puede estar vacia.` };
         }
 
