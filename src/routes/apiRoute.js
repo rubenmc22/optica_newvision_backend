@@ -35,7 +35,7 @@ router.get('/send-email-test', async (req, res) => {
       'Prueba de envio de correo'
     );
     res.status(200).json({ message: 'ok' });
-  } catch(err) {
+  } catch (err) {
     console.error(err);
     res.status(400).json(err);
   }
@@ -100,5 +100,6 @@ router.get('/ventas-get', authMiddleware, CatchGeneric(VentaController.get));
 router.get('/ventas-get-total', authMiddleware, CatchGeneric(VentaController.get_total));
 router.put('/ventas-anular/:venta_key', authMiddleware, CatchGeneric(VentaController.anular));
 router.put('/ventas-abonar/:venta_key', authMiddleware, CatchGeneric(VentaController.abonar));
+router.get('/ventas/clientes', authMiddleware, CatchGeneric(VentaController.buscar_cliente));
 
 module.exports = router;

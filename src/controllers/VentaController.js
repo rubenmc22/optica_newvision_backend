@@ -9,6 +9,8 @@ const VentaProducto = require('../models/VentaProducto');
 const VentaService = require('../services/VentaService');
 const FormatUtils = require('../utils/FormatUtils');
 const Venta = require('./../models/Venta');
+const Cliente = require('../models/Cliente');
+const Paciente = require('../models/Paciente');
 
 const VentaController = {
     add: async (req, res) => {
@@ -30,7 +32,7 @@ const VentaController = {
 
         VentaService.validate_forma_pago(venta.formaPago);
         const fecha = VentaService.formatear_fecha(venta.fecha);
-        
+
         const objVenta = {
             venta_key: await VentaService.generate_venta_key(),
             numero_control: await VentaService.get_numero_control(),
@@ -65,13 +67,13 @@ const VentaController = {
 
         objVenta.productos = await VentaService.prepare_productos_array(productos_array_db, objTasa);
         objVenta.pagos = await VentaService.prepare_metodos_de_pago_array(metodosPago, objTasa);
-        
-        if(objVenta.forma_pago === 'contado') {
+
+        if (objVenta.forma_pago === 'contado') {
             objVenta.pago_completo = true;
             objVenta.estatus_venta = 'completada';
             objVenta.estatus_pago = 'completada';
         }
-        else if(objVenta.forma_pago === 'cashea') {
+        else if (objVenta.forma_pago === 'cashea') {
             objVenta.pago_completo = true;
             objVenta.estatus_venta = 'completada';
             objVenta.estatus_pago = 'pagado_por_cashea';
@@ -83,7 +85,7 @@ const VentaController = {
                 total_adelantado: formaPago.totalPagadoAhora
             };
             objVenta.cashea_cuotas = [];
-            for(let cuota of formaPago.cuotas) {
+            for (let cuota of formaPago.cuotas) {
                 objVenta.cashea_cuotas.push({
                     numero: cuota.numero,
                     monto: cuota.monto,
@@ -93,7 +95,7 @@ const VentaController = {
                 });
             }
         }
-        else if(objVenta.forma_pago === 'abono') {
+        else if (objVenta.forma_pago === 'abono') {
             objVenta.pago_completo = VentaService.VerificarPagoCompleto(objVenta.total, objVenta.pagos);
             objVenta.estatus_venta = (objVenta.pago_completo) ? 'completada' : 'pendiente';
             objVenta.estatus_pago = (objVenta.pago_completo) ? 'completada' : 'pendiente';
@@ -106,11 +108,12 @@ const VentaController = {
 
         try {
             await VentaService.guardar_venta(t, objVenta);
+            await VentaService.guardar_cliente(t, cliente, objVenta.sede);
             await VentaService.descontar_inventario(t, objVenta.productos);
             await VentaService.actualizar_numero_control(t, objVenta.numero_control + 1, req.sede.id);
             await t.commit();
         }
-        catch(error) {
+        catch (error) {
             await t.rollback();
             throw { message: error.message || error.toString() };
         }
@@ -126,19 +129,19 @@ const VentaController = {
                         {
                             model: Producto,
                             as: 'datos_producto',
-                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id', 'nombre', 'marca', 'color', 'codigo', 'material', 'categoria', 'modelo']
                         }
                     ]
                 },
                 { model: VentaCashea, as: 'datos_cashea' },
                 { model: VentaCasheaCuota, as: 'cuotas_cashea' },
-                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
-                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'creater_user', attributes: ['id', 'cedula', 'nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id', 'cedula', 'nombre'] },
             ]
         });
 
         const ventaOutputFormateado = await VentaService.formatear_venta_output(ventaOutput);
-        
+
         res.status(200).json({ message: 'ok', venta: ventaOutputFormateado });
     },
 
@@ -150,14 +153,14 @@ const VentaController = {
         const especialista_id = req.query.especialista
         const estatus_venta = req.query.estado
         const forma_pago = req.query.formaPago
-        
+
         const where = {};
         where.sede = req.sede.id;
 
         if (fecha_inicio && fecha_final) {
             where.fecha = { [Op.between]: [new Date(fecha_inicio), new Date(fecha_final)] };
         }
-        
+
         if (busqueda_general) {
             const orConditions = [];
 
@@ -168,7 +171,7 @@ const VentaController = {
             orConditions.push({ cliente_informacion_nombre: { [Op.like]: `%${busqueda_general}%` } });
 
             // Buscar por número de control (si es número, coincidir exacto; si no, intentar like)
-            if(/[VR]\-([0-9]{3,})/.test(busqueda_general)) {
+            if (/[VR]\-([0-9]{3,})/.test(busqueda_general)) {
                 const numeroParsed = VentaService.extrear_numero_de_numero_control(busqueda_general);
                 orConditions.push({ numero_control: numeroParsed });
             }
@@ -204,14 +207,14 @@ const VentaController = {
                         {
                             model: Producto,
                             as: 'datos_producto',
-                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id', 'nombre', 'marca', 'color', 'codigo', 'material', 'categoria', 'modelo']
                         }
                     ]
                 },
                 { model: VentaCashea, as: 'datos_cashea' },
                 { model: VentaCasheaCuota, as: 'cuotas_cashea' },
-                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
-                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'creater_user', attributes: ['id', 'cedula', 'nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id', 'cedula', 'nombre'] },
             ],
             order: [['fecha', 'DESC']],
             limit,
@@ -222,7 +225,7 @@ const VentaController = {
         const pages = Math.max(1, Math.ceil(total / limit));
 
         const ventas_output = [];
-        for(let venta of result.rows) {
+        for (let venta of result.rows) {
             ventas_output.push(
                 await VentaService.formatear_venta_output(venta)
             );
@@ -254,7 +257,7 @@ const VentaController = {
             canceladas
         });
     },
-    
+
     anular: async (req, res) => {
         const venta_key = req.params.venta_key;
 
@@ -267,16 +270,16 @@ const VentaController = {
             include: [{ model: VentaProducto, as: 'array_productos' }]
         });
 
-        if(!objVenta) {
+        if (!objVenta) {
             throw { message: `La venta no existe: ${venta_id}.` };
         }
-        if(objVenta.sede != req.sede.id) {
+        if (objVenta.sede != req.sede.id) {
             throw { message: `No se puede anular ventas de otra sede.` };
         }
-        if(objVenta.estatus_venta == 'anulada') {
+        if (objVenta.estatus_venta == 'anulada') {
             throw { message: `La venta ya esta anulada.` };
         }
-        if(motivo_cancelacion.trim() === "") {
+        if (motivo_cancelacion.trim() === "") {
             throw { message: `El motivo de la cancelacion no puede estar vacia.` };
         }
 
@@ -289,11 +292,11 @@ const VentaController = {
             await VentaService.anular_descontada_inventario(t, objVenta.array_productos);
             await t.commit();
         }
-        catch(error) {
+        catch (error) {
             await t.rollback();
             throw { message: error.message || error.toString() };
         }
-        
+
         const ventaOutput = await Venta.findOne({
             where: { venta_key: objVenta.venta_key },
             include: [
@@ -305,14 +308,14 @@ const VentaController = {
                         {
                             model: Producto,
                             as: 'datos_producto',
-                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id', 'nombre', 'marca', 'color', 'codigo', 'material', 'categoria', 'modelo']
                         }
                     ]
                 },
                 { model: VentaCashea, as: 'datos_cashea' },
                 { model: VentaCasheaCuota, as: 'cuotas_cashea' },
-                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
-                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'creater_user', attributes: ['id', 'cedula', 'nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id', 'cedula', 'nombre'] },
             ]
         });
 
@@ -320,10 +323,10 @@ const VentaController = {
 
         res.status(200).json({ message: 'ok', venta: venta_output });
     },
-    
+
     abonar: async (req, res) => {
         const venta_key = req.params.venta_key;
-        
+
         const {
             tipo,
             monto,
@@ -338,10 +341,10 @@ const VentaController = {
             include: []
         });
 
-        if(!objVenta) {
+        if (!objVenta) {
             throw { message: `La venta no existe: ${venta_key}.` };
         }
-        if(objVenta.sede != req.sede.id) {
+        if (objVenta.sede != req.sede.id) {
             throw { message: `No se puede modificar ventas de otra sede.` };
         }
 
@@ -349,10 +352,10 @@ const VentaController = {
         const objTasaVenta = await VentaService.get_tasa(objVenta.moneda);
 
         const monto_moneda_base = ((FormatUtils.float(monto) * objTasaPago.valor) / objTasaVenta.valor);
-        
+
         const pagos = await VentaPago.findAll({ where: { venta_key: objVenta.venta_key } });
         let total_pagado = monto_moneda_base;
-        for(const pago of pagos) {
+        for (const pago of pagos) {
             total_pagado += pago.monto_moneda_base;
         }
         total_pagado = FormatUtils.float(total_pagado);
@@ -375,7 +378,7 @@ const VentaController = {
 
             // Modificar venta
             console.error(total_pagado, objVenta.total, total_pagado >= objVenta.total);
-            if(total_pagado >= objVenta.total) {
+            if (total_pagado >= objVenta.total) {
                 objVenta.estatus_venta = 'completada';
                 objVenta.estatus_pago = 'completada';
                 objVenta.pago_completo = 1;
@@ -384,7 +387,7 @@ const VentaController = {
 
             await t.commit();
         }
-        catch(error) {
+        catch (error) {
             await t.rollback();
             throw { message: error.message || error.toString() };
         }
@@ -400,20 +403,65 @@ const VentaController = {
                         {
                             model: Producto,
                             as: 'datos_producto',
-                            attributes: ['id', 'nombre', 'precio'], attributes: ['id','nombre','marca','color','codigo','material','categoria','modelo']
+                            attributes: ['id', 'nombre', 'precio'], attributes: ['id', 'nombre', 'marca', 'color', 'codigo', 'material', 'categoria', 'modelo']
                         }
                     ]
                 },
                 { model: VentaCashea, as: 'datos_cashea' },
                 { model: VentaCasheaCuota, as: 'cuotas_cashea' },
-                { model: Usuario, as: 'creater_user', attributes: ['id','cedula','nombre'] },
-                { model: Usuario, as: 'asesor_user', attributes: ['id','cedula','nombre'] },
+                { model: Usuario, as: 'creater_user', attributes: ['id', 'cedula', 'nombre'] },
+                { model: Usuario, as: 'asesor_user', attributes: ['id', 'cedula', 'nombre'] },
             ]
         });
 
         const venta_output = await VentaService.formatear_venta_output(ventaOutput);
 
         res.status(200).json({ message: 'ok', venta: venta_output });
+    },
+
+    buscar_cliente: async (req, res) => {
+        const { cedula } = req.body;
+
+        if (!cedula) {
+            throw { message: 'La cédula es requerida.' };
+        }
+
+        let existen_datos = false;
+        const datos = {
+            cedula: null,
+            nombre: null,
+            telefono: null,
+            email: null
+        };
+
+        const cliente = await Cliente.findOne({
+            where: { cedula: cedula }
+        });
+
+        if (cliente) {
+            existen_datos = true;
+            datos.cedula = cliente.cedula;
+            datos.nombre = cliente.nombre;
+            datos.telefono = cliente.telefono;
+            datos.email = cliente.email;
+        } else {
+            const paciente = await Paciente.findOne({
+                where: { cedula: cedula }
+            });
+            if (paciente) {
+                existen_datos = true;
+                datos.cedula = paciente.cedula;
+                datos.nombre = paciente.nombre;
+                datos.telefono = paciente.telefono;
+                datos.email = paciente.email;
+            }
+        }
+
+        if (existen_datos) {
+            res.status(200).json({ message: 'ok', cedula: cedula, cliente: datos });
+        } else {
+            res.status(200).json({ message: 'ok', cedula: cedula, cliente: null });
+        }
     },
 };
 

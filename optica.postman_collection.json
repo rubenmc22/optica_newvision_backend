@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dc33d7f1-5701-4a56-88b6-24e177d8ab80",
+		"_postman_id": "e57dcb50-ae8d-4876-8412-b5e122bf8d4c",
 		"name": "optica",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13401550"
@@ -1546,7 +1546,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ0Mzk5MTIsImV4cCI6MTc2NDUyNjMxMn0.tUOzCDpqlLhs03gCfARUhgvfaUI8LY3FuBdWB_I_SvA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ4Njk3NzksImV4cCI6MTc2NDk1NjE3OX0.661FhheGsISKsNNi57AcbB8owESJfVYb7dFX3rWKkwo",
 									"type": "string"
 								}
 							]
@@ -1646,7 +1646,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ0Mzk5MTIsImV4cCI6MTc2NDUyNjMxMn0.tUOzCDpqlLhs03gCfARUhgvfaUI8LY3FuBdWB_I_SvA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjUyMzI4NTQsImV4cCI6MTc2NTMxOTI1NH0.U3tkcPnbGK--SeINNfdtRMKaAB9ME-o91AQRQ_zuq0o",
 									"type": "string"
 								}
 							]
@@ -1655,7 +1655,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"venta\":{\r\n      \"fecha\":\"2025-11-21T02:17:31.703Z\",\r\n      \"estado\":\"completada\",\r\n      \"formaPago\":\"cashea\",\r\n      \"moneda\":\"dolar\",\r\n      \"observaciones\":null,\r\n      \"impuesto\":16\r\n   },\r\n   \"totales\":{\r\n      \"subtotal\":713.36,\r\n      \"descuento\":71.336,\r\n      \"iva\":94.93,\r\n      \"total\":642.02,\r\n      \"totalPagado\":513.61\r\n   },\r\n   \"cliente\":{\r\n      \"tipo\":\"paciente\", //(Cuando es tipo paciente, debes buscar por cedula la ultima historia medica y retornarla en el api del get)\r\n      \"informacion\":{\r\n         \"tipoPersona\":\"natural\",\r\n         \"nombreCompleto\":\"Jesus Martinez\",\r\n         \"cedula\":\"267758784\",\r\n         \"telefono\":\"04142134565\",\r\n         \"email\":\"jesusmc@gmail.com\"\r\n      }\r\n   },\r\n   \"asesor\":{\r\n      \"id\":4\r\n   },\r\n   \"productos\":[\r\n      {\r\n         \"productoId\":\"5\",\r\n         \"cantidad\":1,\r\n         \"moneda\":\"euro\"\r\n      },\r\n      {\r\n         \"productoId\":\"6\",\r\n         \"cantidad\":1,\r\n         \"moneda\":\"euro\"\r\n      }\r\n   ],\r\n   \"metodosPago\":[\r\n      {\r\n         \"tipo\":\"efectivo\",\r\n         \"monto\":500,\r\n         \"moneda\":\"dolar\",\r\n         \"referencia\":null,\r\n         \"bancoCodigo\":null,\r\n         \"bancoNombre\":null\r\n      },\r\n      {\r\n         \"tipo\":\"debito\",\r\n         \"monto\":3287.88,\r\n         \"moneda\":\"bolivar\",\r\n         \"referencia\":null,\r\n         \"bancoCodigo\":null,\r\n         \"bancoNombre\":null\r\n      }\r\n   ],\r\n   \"formaPago\":{\r\n      \"tipo\":\"cashea\",\r\n      \"nivel\":\"nivel3\",\r\n      \"montoTotal\":642.02,\r\n      \"montoInicial\":256.81,\r\n      \"cantidadCuotas\":\"6\",\r\n      \"montoPorCuota\":64.2,\r\n      \"cuotasAdelantadas\":4,\r\n      \"montoAdelantado\":256.8,\r\n      \"totalPagadoAhora\":513.61,\r\n      \"deudaPendiente\":128.40999999999997,\r\n      \"cuotas\":[\r\n         {\r\n            \"numero\":1,\r\n            \"fecha\":\"jue, 04 de diciembre de 2025\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":2,\r\n            \"fecha\":\"jue, 18 de diciembre de 2025\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":3,\r\n            \"fecha\":\"jue, 01 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":4,\r\n            \"fecha\":\"jue, 15 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":5,\r\n            \"fecha\":\"jue, 29 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":false\r\n         },\r\n         {\r\n            \"numero\":6,\r\n            \"fecha\":\"jue, 12 de febrero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":false\r\n         }\r\n      ]\r\n   },\r\n   \"auditoria\":{\r\n      \"usuarioCreacion\":5,\r\n      \"fechaCreacion\":\"2025-11-21T02:17:31.703Z\"\r\n   }\r\n}",
+							"raw": "{\r\n   \"venta\":{\r\n      \"fecha\":\"2025-11-21T02:17:31.703Z\",\r\n      \"estado\":\"completada\",\r\n      \"formaPago\":\"cashea\",\r\n      \"moneda\":\"dolar\",\r\n      \"observaciones\":null,\r\n      \"impuesto\":16\r\n   },\r\n   \"totales\":{\r\n      \"subtotal\":713.36,\r\n      \"descuento\":71.336,\r\n      \"iva\":94.93,\r\n      \"total\":642.02,\r\n      \"totalPagado\":513.61\r\n   },\r\n   \"cliente\":{\r\n      \"tipo\":\"paciente\", //(Cuando es tipo paciente, debes buscar por cedula la ultima historia medica y retornarla en el api del get)\r\n      \"informacion\":{\r\n         \"tipoPersona\":\"natural\",\r\n         \"nombreCompleto\":\"Papita\",\r\n         \"cedula\":\"9999999\",\r\n         \"telefono\":\"04142134565\",\r\n         \"email\":\"papita@gmail.com\"\r\n      }\r\n   },\r\n   \"asesor\":{\r\n      \"id\":4\r\n   },\r\n   \"productos\":[\r\n      {\r\n         \"productoId\":\"5\",\r\n         \"cantidad\":1,\r\n         \"moneda\":\"euro\"\r\n      },\r\n      {\r\n         \"productoId\":\"6\",\r\n         \"cantidad\":1,\r\n         \"moneda\":\"euro\"\r\n      }\r\n   ],\r\n   \"metodosPago\":[\r\n      {\r\n         \"tipo\":\"efectivo\",\r\n         \"monto\":500,\r\n         \"moneda\":\"dolar\",\r\n         \"referencia\":null,\r\n         \"bancoCodigo\":null,\r\n         \"bancoNombre\":null\r\n      },\r\n      {\r\n         \"tipo\":\"debito\",\r\n         \"monto\":3287.88,\r\n         \"moneda\":\"bolivar\",\r\n         \"referencia\":null,\r\n         \"bancoCodigo\":null,\r\n         \"bancoNombre\":null\r\n      }\r\n   ],\r\n   \"formaPago\":{\r\n      \"tipo\":\"cashea\",\r\n      \"nivel\":\"nivel3\",\r\n      \"montoTotal\":642.02,\r\n      \"montoInicial\":256.81,\r\n      \"cantidadCuotas\":\"6\",\r\n      \"montoPorCuota\":64.2,\r\n      \"cuotasAdelantadas\":4,\r\n      \"montoAdelantado\":256.8,\r\n      \"totalPagadoAhora\":513.61,\r\n      \"deudaPendiente\":128.40999999999997,\r\n      \"cuotas\":[\r\n         {\r\n            \"numero\":1,\r\n            \"fecha\":\"jue, 04 de diciembre de 2025\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":2,\r\n            \"fecha\":\"jue, 18 de diciembre de 2025\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":3,\r\n            \"fecha\":\"jue, 01 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":4,\r\n            \"fecha\":\"jue, 15 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":true\r\n         },\r\n         {\r\n            \"numero\":5,\r\n            \"fecha\":\"jue, 29 de enero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":false\r\n         },\r\n         {\r\n            \"numero\":6,\r\n            \"fecha\":\"jue, 12 de febrero de 2026\",\r\n            \"monto\":64.2,\r\n            \"pagada\":false,\r\n            \"seleccionada\":false\r\n         }\r\n      ]\r\n   },\r\n   \"auditoria\":{\r\n      \"usuarioCreacion\":5,\r\n      \"fechaCreacion\":\"2025-11-21T02:17:31.703Z\"\r\n   }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1683,7 +1683,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjM5Mjg3OTgsImV4cCI6MTc2NDAxNTE5OH0.u69d1h5j2WvXDBuypMlsdmuI2gWhvLj-ch19sT_IDUU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjQ4Njk3NzksImV4cCI6MTc2NDk1NjE3OX0.661FhheGsISKsNNi57AcbB8owESJfVYb7dFX3rWKkwo",
 									"type": "string"
 								}
 							]
@@ -1700,14 +1700,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/ventas-anular/587e0345-769f-41c1-83ae-26cc0d98e19c",
+							"raw": "{{baseURL}}/api/ventas-anular/b9627580-abb8-4474-b449-ed976ca4ecf1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"api",
 								"ventas-anular",
-								"587e0345-769f-41c1-83ae-26cc0d98e19c"
+								"b9627580-abb8-4474-b449-ed976ca4ecf1"
 							]
 						}
 					},
@@ -1746,6 +1746,47 @@
 								"api",
 								"ventas-abonar",
 								"ec1a0e90-70f1-4de0-b089-0fb3ff6a6c2d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Cliente",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWRlX2lkIjoiZ3VhcmVuYXMiLCJ1c2VyQ2VkdWxhIjoiMjU0MDk5MDQiLCJpYXQiOjE3NjUyMzI4NTQsImV4cCI6MTc2NTMxOTI1NH0.U3tkcPnbGK--SeINNfdtRMKaAB9ME-o91AQRQ_zuq0o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\": \"9999999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ventas/clientes",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ventas",
+								"clientes"
 							]
 						}
 					},

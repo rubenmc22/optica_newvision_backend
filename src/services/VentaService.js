@@ -12,6 +12,7 @@ const VentaCasheaCuota = require("../models/VentaCasheaCuota");
 const VentaCashea = require("../models/VentaCashea");
 const VerificationUtils = require("../utils/VerificationUtils");
 const FormatUtils = require("../utils/FormatUtils");
+const Cliente = require("../models/Cliente");
 
 const VentaService = {
     async get_numero_control() {
@@ -24,7 +25,7 @@ const VentaService = {
         do {
             const venta_key = uuidv4();
             const count = await Venta.count({ where: { venta_key: venta_key } });
-            if(count < 1) {
+            if (count < 1) {
                 output = venta_key;
             }
         } while (output === null);
@@ -46,7 +47,7 @@ const VentaService = {
         }
         return objPaciente;
     },
-    
+
     async get_usuario(usuario_id) {
         const objUsuario = await Usuario.findOne({ where: { id: usuario_id } });
         if (!objUsuario) {
@@ -56,7 +57,7 @@ const VentaService = {
     },
 
     validate_forma_pago(forma_pago) {
-        if(['cashea', 'contado', 'abono'].includes(forma_pago) === false) {
+        if (['cashea', 'contado', 'abono'].includes(forma_pago) === false) {
             throw { message: `La forma de pago es invalida: ${forma_pago}` };
         }
     },
@@ -65,14 +66,14 @@ const VentaService = {
         const fecha = new Date(fecha_par);
 
         const opciones = {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-        timeZone: "UTC" // importante para mantener la hora original
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+            timeZone: "UTC" // importante para mantener la hora original
         };
 
         const formato = new Intl.DateTimeFormat("sv-SE", opciones).format(fecha).replace(" ", " ");
@@ -89,7 +90,7 @@ const VentaService = {
 
     async add_producto_db(productos_array) {
         const output = [];
-        for(let producto of productos_array) {
+        for (let producto of productos_array) {
             const objProducto = await Producto.findOne({ where: { id: producto.productoId } });
             if (!objProducto) {
                 throw { message: `El ID del producto es invalido: ${producto.productoId}` };
@@ -101,13 +102,13 @@ const VentaService = {
 
     async prepare_productos_array(productos_array, objTasaVenta) {
         const output = [];
-        for(let producto of productos_array) {
+        for (let producto of productos_array) {
             const objTasaProducto = await Tasa.findOne({ where: { id: producto.objeto.moneda } });
 
             const total_moneda_producto = (producto.objeto.precio_con_iva * producto.cantidad);
             const precio_unitario = (producto.objeto.precio_con_iva * objTasaProducto.valor) / objTasaVenta.valor;
             const total = (precio_unitario * producto.cantidad);
-            
+
             output.push({
                 producto_id: producto.productoId,
                 cantidad: producto.cantidad,
@@ -124,7 +125,7 @@ const VentaService = {
 
     async prepare_metodos_de_pago_array(metodosPago, objTasaVenta) {
         const output = [];
-        for(let metodoDePago of metodosPago) {
+        for (let metodoDePago of metodosPago) {
             const objTasaPago = await Tasa.findOne({ where: { id: metodoDePago.moneda } });
 
             output.push({
@@ -144,10 +145,10 @@ const VentaService = {
     VerificarPagoCompleto(total, array_pagos) {
         let total_pagos = 0;
 
-        for(let objPago of array_pagos) {
+        for (let objPago of array_pagos) {
             total_pagos += objPago.monto_moneda_base;
         }
-        
+
         return (total_pagos >= total);
     },
 
@@ -180,8 +181,8 @@ const VentaService = {
             estatus_pago: venta_completa.estatus_pago,
             motivo_cancelacion: null
         }, { transaction: t });
-        
-        for(let producto of venta_completa.productos) {
+
+        for (let producto of venta_completa.productos) {
             await VentaProducto.create({
                 venta_key: venta_completa.venta_key,
                 producto_id: producto.producto_id,
@@ -194,7 +195,7 @@ const VentaService = {
             }, { transaction: t });
         }
 
-        for(let pago of venta_completa.pagos) {
+        for (let pago of venta_completa.pagos) {
             await VentaPago.create({
                 venta_key: venta_completa.venta_key,
                 tipo: pago.tipo,
@@ -208,8 +209,8 @@ const VentaService = {
                 created_by: venta_completa.created_by
             }, { transaction: t });
         }
-        
-        if(venta_completa.forma_pago === 'cashea') {
+
+        if (venta_completa.forma_pago === 'cashea') {
             await VentaCashea.create({
                 venta_key: venta_completa.venta_key,
                 nivel_cashea: venta_completa.cashea.nivel_cashea,
@@ -219,7 +220,7 @@ const VentaService = {
                 total_adelantado: venta_completa.cashea.total_adelantado
             }, { transaction: t });
 
-            for(let cuota of venta_completa.cashea_cuotas) {
+            for (let cuota of venta_completa.cashea_cuotas) {
                 await VentaCasheaCuota.create({
                     venta_key: venta_completa.venta_key,
                     numero: cuota.numero,
@@ -232,8 +233,30 @@ const VentaService = {
         }
     },
 
+    async guardar_cliente(t, objCliente, sede_id) {
+        let cliente = await Cliente.findOne({
+            where: { cedula: objCliente.informacion.cedula }
+        });
+
+        if (cliente) {
+            cliente.cedula = objCliente.informacion.cedula;
+            cliente.nombre = objCliente.informacion.nombreCompleto;
+            cliente.telefono = objCliente.informacion.telefono;
+            cliente.email = objCliente.informacion.email;
+            await cliente.save({ transaction: t });
+        } else {
+            await Cliente.create({
+                sede_id: sede_id,
+                cedula: objCliente.informacion.cedula,
+                nombre: objCliente.informacion.nombreCompleto,
+                telefono: objCliente.informacion.telefono,
+                email: objCliente.informacion.email
+            }, { transaction: t });
+        }
+    },
+
     async descontar_inventario(t, productos) {
-        for(const producto of productos) {
+        for (const producto of productos) {
             producto.objeto.stock -= producto.cantidad;
             await producto.objeto.save({ transaction: t });
         }
@@ -250,7 +273,7 @@ const VentaService = {
     },
 
     async anular_descontada_inventario(t, array_productos) {
-        for(let producto of array_productos) {
+        for (let producto of array_productos) {
             const objProducto = await Producto.findOne({ where: { id: producto.producto_id } });
             if (!objProducto) {
                 throw { message: `El ID del producto es invalido: ${producto.producto_id}` };
@@ -265,9 +288,9 @@ const VentaService = {
         const match = numero_control.match(/[VR]\-([0-9]{3,})/);
         return match ? parseInt(match[1], 10) : null;
     },
-    
+
     async BuscarTotalVenta(estatus_venta = false) {
-        if(estatus_venta) {
+        if (estatus_venta) {
             return await Venta.count({ where: { estatus_venta: estatus_venta } });
         } else {
             return await Venta.count();
@@ -277,7 +300,7 @@ const VentaService = {
     async formatear_venta_output(objVenta) {
         let total_pagado = 0;
         const pagos = [];
-        for(const pago of objVenta.array_pagos) {
+        for (const pago of objVenta.array_pagos) {
             total_pagado += pago.monto_moneda_base;
             pagos.push({
                 tipo: pago.tipo,
@@ -289,9 +312,9 @@ const VentaService = {
                 monto_en_moneda_de_venta: pago.monto_moneda_base
             });
         }
-        
+
         const productos = [];
-        for(let producto of objVenta.array_productos) {
+        for (let producto of objVenta.array_productos) {
             productos.push({
                 cantidad: producto.cantidad,
                 precio_unitario: producto.precio_unitario,
@@ -308,11 +331,11 @@ const VentaService = {
                 }
             });
         }
-        
+
         let ultima_historia_medica = null;
-        if(objVenta.cliente_tipo == 'paciente') {
+        if (objVenta.cliente_tipo == 'paciente') {
             const objPaciente = await Paciente.findOne({ where: { sede_id: objVenta.sede, cedula: objVenta.cliente_informacion_cedula } });
-            if(objPaciente) {
+            if (objPaciente) {
                 ultima_historia_medica = await HistorialMedico.findOne({ where: { paciente_id: objPaciente.id }, order: [['created_at', 'DESC']] });
             }
         }
@@ -331,11 +354,11 @@ const VentaService = {
             cuotas: []
         };
 
-        if(objVenta.forma_pago == "cashea") {
+        if (objVenta.forma_pago == "cashea") {
             let cuotasAdelantadas = 0;
             let montoAdelantado = 0;
-            for(let cuota of objVenta.cuotas_cashea) {
-                if(cuota.seleccionada) {
+            for (let cuota of objVenta.cuotas_cashea) {
+                if (cuota.seleccionada) {
                     cuotasAdelantadas += 1;
                     montoAdelantado += cuota.monto;
                 }
@@ -353,16 +376,16 @@ const VentaService = {
 
             formaPago.cuotas = objVenta.cuotas_cashea;
         }
-        else if(objVenta.forma_pago == "abono") {
+        else if (objVenta.forma_pago == "abono") {
             let monto_inicial = 0;
             let monto_pagado = 0;
-            for(const pago of objVenta.array_pagos) {
-                if(pago.created_at.toISOString() == objVenta.created_at.toISOString()) {
+            for (const pago of objVenta.array_pagos) {
+                if (pago.created_at.toISOString() == objVenta.created_at.toISOString()) {
                     monto_inicial += pago.monto_moneda_base;
                 }
                 monto_pagado += pago.monto_moneda_base;
             }
-            
+
             formaPago.montoInicial = FormatUtils.float(monto_inicial);
             formaPago.totalPagadoAhora = FormatUtils.float(monto_pagado);
             formaPago.deudaPendiente = FormatUtils.float(formaPago.montoTotal - formaPago.totalPagadoAhora);
