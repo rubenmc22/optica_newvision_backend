@@ -12,6 +12,7 @@ const TasasController = require('../controllers/TasasController');
 const SedesController = require('../controllers/SedesController');
 const PacienteController = require('../controllers/PacienteController');
 const HistorialMedicoController = require('../controllers/HistorialMedicoController');
+const ClienteController = require('../controllers/ClienteController');
 const ProductoController = require('../controllers/ProductoController');
 const EnvioCorreo = require('./../config/correo');
 const CatchGeneric = require('../utils/CatchGeneric');
@@ -101,6 +102,9 @@ router.get('/ventas-get-total', authMiddleware, CatchGeneric(VentaController.get
 router.put('/ventas-anular/:venta_key', authMiddleware, CatchGeneric(VentaController.anular));
 router.put('/ventas-abonar/:venta_key', authMiddleware, CatchGeneric(VentaController.abonar));
 
-router.get('/clientes-get', authMiddleware, CatchGeneric(VentaController.buscar_cliente));
+router.get('/clientes-get', authMiddleware, CatchGeneric(ClienteController.get));
+router.post('/clientes-add', authMiddleware, CatchGeneric(ClienteController.add));
+router.put('/clientes-update/:cedula', authMiddleware, CatchGeneric(ClienteController.update));
+router.delete('/clientes-delete/:cedula', authMiddleware, CatchGeneric(ClienteController.delete));
 
 module.exports = router;
