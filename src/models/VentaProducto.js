@@ -21,6 +21,14 @@ const VentaProducto = sequelize.define('VentaProducto', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
+  precio_unitario_sin_iva: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  tiene_iva: {
+    type: DataTypes.TINYINT,
+    allowNull: false
+  },
   precio_unitario: {
     type: DataTypes.FLOAT,
     allowNull: false

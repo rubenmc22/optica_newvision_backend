@@ -418,51 +418,6 @@ const VentaController = {
 
         res.status(200).json({ message: 'ok', venta: venta_output });
     },
-
-    buscar_cliente: async (req, res) => {
-        const cedula = req.query.cedula;
-
-        if (!cedula) {
-            throw { message: 'La cédula es requerida.' };
-        }
-
-        let existen_datos = false;
-        const datos = {
-            cedula: null,
-            nombre: null,
-            telefono: null,
-            email: null
-        };
-
-        const cliente = await Cliente.findOne({
-            where: { cedula: cedula }
-        });
-
-        if (cliente) {
-            existen_datos = true;
-            datos.cedula = cliente.cedula;
-            datos.nombre = cliente.nombre;
-            datos.telefono = cliente.telefono;
-            datos.email = cliente.email;
-        } else {
-            const paciente = await Paciente.findOne({
-                where: { cedula: cedula }
-            });
-            if (paciente) {
-                existen_datos = true;
-                datos.cedula = paciente.cedula;
-                datos.nombre = paciente.nombre;
-                datos.telefono = paciente.telefono;
-                datos.email = paciente.email;
-            }
-        }
-
-        if (existen_datos) {
-            res.status(200).json({ message: 'ok', cedula: cedula, cliente: datos });
-        } else {
-            res.status(200).json({ message: 'ok', cedula: cedula, cliente: null });
-        }
-    },
 };
 
 module.exports = VentaController;

@@ -108,6 +108,7 @@ const VentaService = {
             const total_moneda_producto = (producto.objeto.precio_con_iva * producto.cantidad);
             const precio_unitario = (producto.objeto.precio_con_iva * objTasaProducto.valor) / objTasaVenta.valor;
             const total = (precio_unitario * producto.cantidad);
+            const precio_unitario_sin_iva = (producto.objeto.aplica_iva) ? ((100 / 116) * precio_unitario) : (precio_unitario);
 
             output.push({
                 producto_id: producto.productoId,
@@ -115,6 +116,8 @@ const VentaService = {
                 moneda_producto: objTasaProducto.id,
                 tasa_moneda_producto: FormatUtils.float(objTasaProducto.valor),
                 total_moneda_producto: FormatUtils.float(total_moneda_producto),
+                precio_unitario_sin_iva: FormatUtils.float(precio_unitario_sin_iva),
+                tiene_iva: producto.objeto.aplica_iva,
                 precio_unitario: FormatUtils.float(precio_unitario),
                 total: FormatUtils.float(total),
                 objeto: producto.objeto
@@ -187,6 +190,8 @@ const VentaService = {
                 venta_key: venta_completa.venta_key,
                 producto_id: producto.producto_id,
                 cantidad: producto.cantidad,
+                precio_unitario_sin_iva: producto.precio_unitario_sin_iva,
+                tiene_iva: producto.tiene_iva,
                 precio_unitario: producto.precio_unitario,
                 total: producto.total,
                 moneda_producto: producto.moneda_producto,
@@ -317,6 +322,8 @@ const VentaService = {
         for (let producto of objVenta.array_productos) {
             productos.push({
                 cantidad: producto.cantidad,
+                precio_unitario_sin_iva: producto.precio_unitario_sin_iva,
+                tiene_iva: producto.tiene_iva,
                 precio_unitario: producto.precio_unitario,
                 total: producto.total,
                 datos: {
