@@ -420,7 +420,7 @@ const VentaController = {
     },
 
     buscar_cliente: async (req, res) => {
-        const { cedula } = req.body;
+        const cedula = req.query.cedula;
 
         if (!cedula) {
             throw { message: 'La cédula es requerida.' };

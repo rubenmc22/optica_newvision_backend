@@ -1750,9 +1750,14 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
 				{
-					"name": "Buscar Cliente",
+					"name": "Get",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1779,14 +1784,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/ventas/clientes",
+							"raw": "{{baseURL}}/api/clientes-get",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"api",
-								"ventas",
-								"clientes"
+								"clientes-get"
 							]
 						}
 					},

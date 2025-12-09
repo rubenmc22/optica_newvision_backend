@@ -100,6 +100,7 @@ router.get('/ventas-get', authMiddleware, CatchGeneric(VentaController.get));
 router.get('/ventas-get-total', authMiddleware, CatchGeneric(VentaController.get_total));
 router.put('/ventas-anular/:venta_key', authMiddleware, CatchGeneric(VentaController.anular));
 router.put('/ventas-abonar/:venta_key', authMiddleware, CatchGeneric(VentaController.abonar));
-router.get('/ventas/clientes', authMiddleware, CatchGeneric(VentaController.buscar_cliente));
+
+router.get('/clientes-get', authMiddleware, CatchGeneric(VentaController.buscar_cliente));
 
 module.exports = router;
