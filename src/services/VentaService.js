@@ -15,8 +15,8 @@ const FormatUtils = require("../utils/FormatUtils");
 const Cliente = require("../models/Cliente");
 
 const VentaService = {
-    async get_numero_control() {
-        const objConf = await Configuracion.findOne({ where: { clave: "numero_control" } });
+    async get_numero_control(sede_id) {
+        const objConf = await Configuracion.findOne({ where: { clave: "numero_control", sede: sede_id } });
         return parseInt(objConf.valor);
     },
 
